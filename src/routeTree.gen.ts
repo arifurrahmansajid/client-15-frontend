@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as ListBusinessRouteImport } from './routes/list-business'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CategoriesRouteImport } from './routes/categories'
@@ -27,6 +29,16 @@ import { Route as AdminBusinessesRouteImport } from './routes/admin.businesses'
 import { Route as AdminApprovalsRouteImport } from './routes/admin.approvals'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ListBusinessRoute = ListBusinessRouteImport.update({
   id: '/list-business',
   path: '/list-business',
@@ -120,6 +132,8 @@ export interface FileRoutesByFullPath {
   '/categories': typeof CategoriesRoute
   '/contact': typeof ContactRoute
   '/list-business': typeof ListBusinessRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/businesses': typeof AdminBusinessesRoute
@@ -138,6 +152,8 @@ export interface FileRoutesByTo {
   '/categories': typeof CategoriesRoute
   '/contact': typeof ContactRoute
   '/list-business': typeof ListBusinessRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/businesses': typeof AdminBusinessesRoute
@@ -158,6 +174,8 @@ export interface FileRoutesById {
   '/categories': typeof CategoriesRoute
   '/contact': typeof ContactRoute
   '/list-business': typeof ListBusinessRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/businesses': typeof AdminBusinessesRoute
@@ -179,6 +197,8 @@ export interface FileRouteTypes {
     | '/categories'
     | '/contact'
     | '/list-business'
+    | '/login'
+    | '/register'
     | '/admin/analytics'
     | '/admin/approvals'
     | '/admin/businesses'
@@ -197,6 +217,8 @@ export interface FileRouteTypes {
     | '/categories'
     | '/contact'
     | '/list-business'
+    | '/login'
+    | '/register'
     | '/admin/analytics'
     | '/admin/approvals'
     | '/admin/businesses'
@@ -216,6 +238,8 @@ export interface FileRouteTypes {
     | '/categories'
     | '/contact'
     | '/list-business'
+    | '/login'
+    | '/register'
     | '/admin/analytics'
     | '/admin/approvals'
     | '/admin/businesses'
@@ -236,10 +260,26 @@ export interface RootRouteChildren {
   CategoriesRoute: typeof CategoriesRoute
   ContactRoute: typeof ContactRoute
   ListBusinessRoute: typeof ListBusinessRoute
+  LoginRoute: typeof LoginRoute
+  RegisterRoute: typeof RegisterRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/list-business': {
       id: '/list-business'
       path: '/list-business'
@@ -409,6 +449,8 @@ const rootRouteChildren: RootRouteChildren = {
   CategoriesRoute: CategoriesRoute,
   ContactRoute: ContactRoute,
   ListBusinessRoute: ListBusinessRoute,
+  LoginRoute: LoginRoute,
+  RegisterRoute: RegisterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

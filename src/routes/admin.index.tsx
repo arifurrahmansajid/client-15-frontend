@@ -51,9 +51,10 @@ const ACTIVITY_ICONS = {
 function AdminOverview() {
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Dashboard Overview</h1>
-        <p className="text-sm text-muted-foreground">Welcome back — here's what's happening today.</p>
+      <div className="mb-8">
+        <p className="text-primary text-[10px] font-black uppercase tracking-[0.3em] mb-2">Access Granted</p>
+        <h1 className="text-3xl font-black text-slate-900 tracking-tight leading-tight">Super Admin Dashboard</h1>
+        <p className="text-slate-500 text-xs font-medium uppercase tracking-widest mt-1">Welcome back — Overview of the Tasmania Tradie Network</p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">

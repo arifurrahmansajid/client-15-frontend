@@ -47,15 +47,15 @@ export function AdminSidebar() {
 
   return (
     <Sidebar collapsible="icon" className="border-r">
-      <SidebarHeader className="border-b border-sidebar-border">
-        <Link to="/admin" className="flex items-center gap-2 px-2 py-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground font-bold">
+      <SidebarHeader className="border-b border-sidebar-border/50 p-4">
+        <Link to="/admin" className="flex items-center gap-3 px-2 group">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white font-black text-xl shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
             M
           </div>
           {!collapsed && (
             <div className="flex flex-col leading-tight">
-              <span className="text-sm font-semibold">MyLocalPro</span>
-              <span className="text-xs text-muted-foreground">Admin</span>
+              <span className="text-sm font-black uppercase tracking-widest text-slate-900">MyLocalPro</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Super Admin</span>
             </div>
           )}
         </Link>

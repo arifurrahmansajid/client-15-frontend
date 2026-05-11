@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { ArrowRight, CheckCircle2, MapPin, Search, Shield, Sparkles, Star, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import heroImg from "@/assets/hero-tradie.jpg";
 import { BUSINESSES, CATEGORIES, LOCATIONS, STATS, TESTIMONIALS } from "@/lib/mock-data";
 import { CategoryCard } from "@/components/cards/CategoryCard";
@@ -165,43 +166,49 @@ function SearchSection() {
   };
 
   return (
-    <div className="relative group max-w-4xl mx-auto">
-      <div className="absolute -inset-1 bg-primary/20 rounded-[2.5rem] blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
-      <section className="relative rounded-[2.5rem] bg-white p-3 md:p-5 shadow-2xl">
-        <form onSubmit={submit} className="grid gap-4 md:grid-cols-[1fr_1fr_auto] items-center">
-          <label className="relative flex items-center gap-3 rounded-2xl bg-slate-50 border border-slate-100 px-6 py-5 focus-within:border-primary/30 transition-all cursor-pointer">
-            <Search className="h-6 w-6 text-primary shrink-0" />
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="w-full bg-transparent text-lg font-bold outline-none appearance-none pr-8 text-slate-800"
-            >
-              <option value="">What service do you need?</option>
-              {CATEGORIES.map((c) => (
-                <option key={c.slug} value={c.slug}>{c.name}</option>
-              ))}
-            </select>
-            <ChevronDown className="absolute right-6 h-5 w-5 text-slate-400 pointer-events-none" />
+    <div className="relative group max-w-5xl mx-auto">
+      <div className="absolute -inset-1 bg-primary/20 rounded-[2.5rem] blur-2xl opacity-10 group-hover:opacity-30 transition duration-1000"></div>
+      <section className="relative rounded-[2.5rem] bg-white p-3 md:p-5 shadow-[0_30px_100px_rgba(0,0,0,0.25)] border border-slate-100">
+        <form onSubmit={submit} className="grid gap-4 md:grid-cols-[1.2fr_1fr_auto] items-center">
+          <label className="relative flex items-center gap-4 rounded-3xl bg-slate-50 border border-slate-100 px-8 py-6 focus-within:border-primary/30 transition-all cursor-pointer group/field">
+            <Search className="h-7 w-7 text-primary shrink-0 transition-transform group-focus-within/field:scale-110" />
+            <div className="flex flex-col flex-1 items-start">
+              <span className="text-[10px] font-[1000] uppercase tracking-widest text-slate-400 mb-1">Service</span>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="w-full bg-transparent text-xl font-black outline-none appearance-none pr-8 text-slate-900"
+              >
+                <option value="">What do you need?</option>
+                {CATEGORIES.map((c) => (
+                  <option key={c.slug} value={c.slug}>{c.name}</option>
+                ))}
+              </select>
+            </div>
+            <ChevronDown className="absolute right-8 h-6 w-6 text-slate-400 pointer-events-none group-hover/field:text-primary transition-colors" />
           </label>
-          <label className="relative flex items-center gap-3 rounded-2xl bg-slate-50 border border-slate-100 px-6 py-5 focus-within:border-primary/30 transition-all cursor-pointer">
-            <MapPin className="h-6 w-6 text-primary shrink-0" />
-            <select
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              className="w-full bg-transparent text-lg font-bold outline-none appearance-none pr-8 text-slate-800"
-            >
-              <option value="">Choose your location</option>
-              {LOCATIONS.map((l) => (
-                <option key={l} value={l}>{l}</option>
-              ))}
-            </select>
-            <ChevronDown className="absolute right-6 h-5 w-5 text-slate-400 pointer-events-none" />
+          <label className="relative flex items-center gap-4 rounded-3xl bg-slate-50 border border-slate-100 px-8 py-6 focus-within:border-primary/30 transition-all cursor-pointer group/field">
+            <MapPin className="h-7 w-7 text-primary shrink-0 transition-transform group-focus-within/field:scale-110" />
+            <div className="flex flex-col flex-1 items-start">
+              <span className="text-[10px] font-[1000] uppercase tracking-widest text-slate-400 mb-1">Location</span>
+              <select
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="w-full bg-transparent text-xl font-black outline-none appearance-none pr-8 text-slate-900"
+              >
+                <option value="">Choose location</option>
+                {LOCATIONS.map((l) => (
+                  <option key={l} value={l}>{l}</option>
+                ))}
+              </select>
+            </div>
+            <ChevronDown className="absolute right-8 h-6 w-6 text-slate-400 pointer-events-none group-hover/field:text-primary transition-colors" />
           </label>
           <button
             type="submit"
-            className="rounded-2xl bg-primary text-white font-bold px-10 py-5 hover:opacity-90 transition-all active:scale-95 shadow-xl shadow-primary/20 flex items-center justify-center gap-3 text-lg"
+            className="rounded-3xl bg-primary text-white font-black px-12 py-7 hover:opacity-95 transition-all active:scale-95 shadow-2xl shadow-primary/30 flex items-center justify-center gap-4 text-xl group/btn"
           >
-            <Search className="h-5 w-5" /> Search
+            Search <ArrowRight className="h-6 w-6 group-hover/btn:translate-x-1 transition-transform" />
           </button>
         </form>
       </section>
