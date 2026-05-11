@@ -25,7 +25,7 @@ export function HowItWorks() {
   ];
 
   return (
-    <section className="relative py-12 md:py-16 overflow-hidden bg-white">
+    <section className="relative pb-24 md:pb-32 overflow-hidden bg-white">
       <div className="container-app relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6">How It Works</h2>

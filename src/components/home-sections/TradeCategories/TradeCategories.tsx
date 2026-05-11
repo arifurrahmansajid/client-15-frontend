@@ -32,7 +32,7 @@ export function TradeCategories() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-6xl font-black tracking-tight text-slate-900 leading-[1.1]"
           >
-            Find the <span className="text-primary italic">Right Jobs</span> <br />
+            Find the <span className="text-primary">Right Jobs</span> <br />
             As Per Your Needs
           </motion.h2>
         </div>
