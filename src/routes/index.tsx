@@ -48,7 +48,7 @@ function Hero() {
     <section className="relative h-screen min-h-[700px] w-full overflow-hidden bg-[#0A121E]">
       {/* Background Slides */}
       <div className="absolute inset-0 z-0">
-        <div 
+        <div
           className="flex h-full w-full transition-transform duration-1000 ease-in-out"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
@@ -75,9 +75,9 @@ function Hero() {
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] tracking-tight uppercase animate-fade-up delay-200">
               {currentSlide === 0 ? (
-                <>Find a <span className="text-primary italic">trusted local pro</span> in minutes</>
+                <>Find a <span className="text-primary">trusted local pro</span> in minutes</>
               ) : (
-                <>Your go-to platform for hiring <span className="text-primary italic">skilled tradies</span></>
+                <>Your go-to platform for hiring <span className="text-primary">skilled tradies</span></>
               )}
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed animate-fade-up delay-300">
@@ -122,7 +122,7 @@ function Hero() {
 
       {/* Navigation Arrows */}
       <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-20 container-app flex justify-between pointer-events-none px-4">
-        <button
+        {/* <button
           onClick={prevSlide}
           className="pointer-events-auto h-12 w-12 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white flex items-center justify-center hover:bg-primary transition-all group shadow-2xl"
         >
@@ -133,7 +133,7 @@ function Hero() {
           className="pointer-events-auto h-12 w-12 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white flex items-center justify-center hover:bg-primary transition-all group shadow-2xl"
         >
           <ChevronRight className="h-6 w-6 group-hover:translate-x-1 transition-transform" />
-        </button>
+        </button> */}
       </div>
 
       {/* Slide Indicators */}
@@ -142,9 +142,8 @@ function Hero() {
           <button
             key={i}
             onClick={() => setCurrentSlide(i)}
-            className={`h-1 transition-all duration-500 rounded-full ${
-              i === currentSlide ? 'w-16 bg-primary' : 'w-8 bg-white/20 hover:bg-white/40'
-            }`}
+            className={`h-1 transition-all duration-500 rounded-full ${i === currentSlide ? 'w-16 bg-primary' : 'w-8 bg-white/20 hover:bg-white/40'
+              }`}
           />
         ))}
       </div>
