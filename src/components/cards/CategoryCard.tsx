@@ -1,22 +1,37 @@
 import { Link } from "@tanstack/react-router";
-import * as Icons from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import type { Category } from "@/lib/mock-data";
+import { motion } from "framer-motion";
 
 export function CategoryCard({ category }: { category: Category }) {
-  const Icon = (Icons as unknown as Record<string, Icons.LucideIcon>)[category.icon] ?? Icons.Wrench;
   return (
     <Link
       to="/businesses"
       search={{ category: category.slug } as never}
-      className="group rounded-2xl border border-border bg-card p-5 shadow-soft hover:shadow-card hover:border-primary/30 hover:-translate-y-0.5 transition-all"
+      className="group relative block aspect-[4/5] overflow-hidden rounded-[2rem] bg-slate-100 shadow-xl"
     >
-      <div className="flex items-start gap-4">
-        <div className="grid h-12 w-12 place-items-center rounded-xl bg-primary-soft text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-          <Icon className="h-5 w-5" />
-        </div>
-        <div className="min-w-0">
-          <h3 className="font-semibold text-base leading-tight">{category.name}</h3>
-          <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{category.blurb}</p>
+      {/* Background Image */}
+      <motion.img
+        src={category.image}
+        alt={category.name}
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+      />
+
+      {/* Dark Overlay Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+
+      {/* Content */}
+      <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col justify-end h-1/2">
+        <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-white/70 mb-1">
+          {category.name}
+        </h3>
+        <div className="flex items-end justify-between gap-4">
+          <p className="text-sm font-medium text-white line-clamp-2 leading-snug">
+            {category.blurb}
+          </p>
+          <div className="shrink-0 h-8 w-8 rounded-full border border-white/30 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition-all duration-300">
+            <ArrowRight className="h-4 w-4" />
+          </div>
         </div>
       </div>
     </Link>

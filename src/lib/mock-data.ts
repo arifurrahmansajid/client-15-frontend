@@ -4,6 +4,9 @@ export type Location =
   | "Greater Devonport"
   | "Greater Burnie";
 
+const img = (seed: string, w = 800, h = 600) =>
+  `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
+
 export const LOCATIONS: Location[] = [
   "Greater Hobart",
   "Greater Launceston",
@@ -16,28 +19,23 @@ export type Category = {
   name: string;
   icon: string; // lucide icon name
   blurb: string;
+  image: string;
 };
 
 export const CATEGORIES: Category[] = [
-  { slug: "dog-walking", name: "Dog Walking", icon: "Dog", blurb: "Trusted local dog walkers." },
-  { slug: "baby-sitting", name: "Baby Sitting", icon: "Baby", blurb: "Caring, vetted sitters." },
-  { slug: "ironing-services", name: "Ironing Services", icon: "Shirt", blurb: "Crisp, ready in hours." },
-  { slug: "handyman-services", name: "Handyman Services", icon: "Wrench", blurb: "Fixes big and small." },
-  { slug: "lawn-mowing-gardening", name: "Lawn Mowing & Gardening", icon: "Trees", blurb: "Lawns and gardens, sorted." },
-  { slug: "domestic-cleaning", name: "Domestic Cleaning", icon: "Sparkles", blurb: "A spotless home." },
-  { slug: "car-detailing", name: "Car Detailing", icon: "Car", blurb: "Showroom-fresh finish." },
-  { slug: "pressure-washing", name: "Pressure Washing", icon: "Droplets", blurb: "Driveways like new." },
-  { slug: "carpet-cleaning", name: "Carpet Cleaning", icon: "Brush", blurb: "Deep clean carpets." },
-  { slug: "plumbing", name: "Plumbing", icon: "Pipette", blurb: "Licensed local plumbers." },
-  { slug: "electrical", name: "Electrical", icon: "Zap", blurb: "Safe and certified." },
-  { slug: "builders", name: "Builders", icon: "HardHat", blurb: "Renos and new builds." },
-  { slug: "painters", name: "Painters", icon: "PaintRoller", blurb: "Interior and exterior." },
-  { slug: "roofers", name: "Roofers", icon: "Home", blurb: "Repair and replace." },
-  { slug: "concreters", name: "Concreters", icon: "Square", blurb: "Driveways and slabs." },
-  { slug: "plasterers", name: "Plasterers", icon: "Layers", blurb: "Smooth walls and ceilings." },
-  { slug: "landscapers", name: "Landscapers", icon: "Flower2", blurb: "Outdoor transformations." },
-  { slug: "photographers", name: "Photographers", icon: "Camera", blurb: "Capture your moments." },
-  { slug: "fencing-contractors", name: "Fencing Contractors", icon: "Fence", blurb: "Built to last." },
+  { slug: "builders", name: "Builders", icon: "HardHat", blurb: "Renos and new builds.", image: img("1503387762-592deb58ef4e") },
+  { slug: "plumbing", name: "Plumbing", icon: "Pipette", blurb: "Licensed local plumbers.", image: img("1581094794329-c8112a89af12") },
+  { slug: "domestic-cleaning", name: "Domestic Cleaning", icon: "Sparkles", blurb: "A spotless home.", image: img("1581578731548-c64695cc6952") },
+  { slug: "painters", name: "Painters", icon: "PaintRoller", blurb: "Interior and exterior.", image: img("1562259949-e8e7689d7828") },
+  { slug: "electrical", name: "Electrical", icon: "Zap", blurb: "Safe and certified.", image: img("1621905251189-08b45d6a269e") },
+  { slug: "lawn-mowing-gardening", name: "Lawn Mowing & Gardening", icon: "Trees", blurb: "Lawns and gardens, sorted.", image: img("1558904541-efa843a96f01") },
+  { slug: "handyman-services", name: "Handyman Services", icon: "Wrench", blurb: "Fixes big and small.", image: img("1581092918056-0c4c3acd3789") },
+  { slug: "bricklayer", name: "Bricklayer", icon: "Layout", blurb: "Lays bricks to construct walls.", image: img("1589939705384-5185137a7f0f") },
+  { slug: "cabinet-maker", name: "Cabinet Maker", icon: "Hammer", blurb: "Designs and builds custom cabinetry.", image: img("1556909172-89c4d6dee6ec") },
+  { slug: "carpenter", name: "Carpenter", icon: "Axe", blurb: "Skilled in crafting and repairing.", image: img("1600585154340-be6161a56a0c") },
+  { slug: "dog-walking", name: "Dog Walking", icon: "Dog", blurb: "Trusted local dog walkers.", image: img("1516733725897-1aa73b87c8e8") },
+  { slug: "baby-sitting", name: "Baby Sitting", icon: "Baby", blurb: "Caring, vetted sitters.", image: img("1581578731548-c64695cc6952") },
+  { slug: "ironing-services", name: "Ironing Services", icon: "Shirt", blurb: "Crisp, ready in hours.", image: img("1521737604897-418d9fb00e82") },
 ];
 
 export type Business = {
@@ -58,8 +56,6 @@ export type Business = {
   gallery: string[];
 };
 
-const img = (seed: string, w = 800, h = 600) =>
-  `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
 
 export const BUSINESSES: Business[] = [
   {
