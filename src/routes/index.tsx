@@ -23,6 +23,7 @@ function HomePage() {
       <Hero />
       <TradeCategories />
       <HowItWorks />
+      <MostRequestedServices />
       <FeaturedBusinesses />
       <Statistics />
       <Testimonials />
@@ -365,38 +366,171 @@ function TradeCategories() {
   );
 }
 
-function HowItWorks() {
-  const steps = [
-    { n: "1", title: "Search", desc: "Pick a service and your area in seconds." },
-    { n: "2", title: "Compare", desc: "Browse profiles, photos and real reviews." },
-    { n: "3", title: "Connect", desc: "Contact the pro directly — no middleman." },
+function MostRequestedServices() {
+  const services = [
+    { name: "Electrician", image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80", featured: true },
+    { name: "Electrician", image: "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&q=80" },
+    { name: "Fencing", image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&q=80" },
+    { name: "Locksmith", image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&q=80" },
   ];
+
   return (
-    <section className="bg-surface py-20 md:py-28">
+    <section className="bg-[#FFF0E5] py-24 md:py-32">
       <div className="container-app">
-        <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold">So simple, anyone can use it</h2>
-          <p className="mt-3 text-muted-foreground">Three steps. No sign-up needed for customers.</p>
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+          <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight">
+            Our Most Requested <br /> House Services
+          </h2>
+          <Link
+            to="/list-business"
+            className="inline-flex items-center justify-center rounded-full bg-[#4A5568] px-10 py-5 text-sm font-black text-white hover:bg-slate-700 transition-all shadow-xl"
+          >
+            Post a Job
+          </Link>
         </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {steps.map((s) => (
-            <div key={s.n} className="rounded-2xl bg-card border border-border p-8 shadow-soft hover:shadow-card transition">
-              <div className="grid h-12 w-12 place-items-center rounded-full bg-primary text-primary-foreground text-lg font-bold">
-                {s.n}
-              </div>
-              <h3 className="mt-5 text-xl font-semibold">{s.title}</h3>
-              <p className="mt-2 text-muted-foreground">{s.desc}</p>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Main Featured Card */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="lg:col-span-8 relative group overflow-hidden rounded-[2.5rem] aspect-[16/10] lg:aspect-auto lg:h-[600px] shadow-2xl"
+          >
+            <img
+              src={services[0].image}
+              alt={services[0].name}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            <div className="absolute bottom-10 left-10">
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/90 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
+                {services[0].name}
+              </span>
             </div>
-          ))}
+          </motion.div>
+
+          {/* Side Cards Stack */}
+          <div className="lg:col-span-4 flex flex-col gap-6">
+            {services.slice(1).map((service, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="relative group overflow-hidden rounded-[2rem] flex-1 min-h-[180px] shadow-xl hover:-translate-y-1 transition-all duration-300"
+              >
+                <img
+                  src={service.image}
+                  alt={service.name}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors" />
+                <div className="absolute bottom-6 left-6">
+                  <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white">
+                    {service.name}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
+function HowItWorks() {
+  const steps = [
+    {
+      title: "Enter your location and find skilled experts near you.",
+      icon: <MapPin className="h-10 w-10 text-orange-500" />,
+      color: "bg-[#FFF8F0]",
+      rotation: "-rotate-2"
+    },
+    {
+      title: "Browse verified profiles, read reviews, and compare options.",
+      icon: <Search className="h-10 w-10 text-blue-500" />,
+      color: "bg-[#F0F7FF]",
+      rotation: "rotate-2",
+      offset: "mt-12"
+    },
+    {
+      title: "Connect directly and get the job done with confidence.",
+      icon: <CheckCircle2 className="h-10 w-10 text-emerald-500" />,
+      color: "bg-[#F0FFF4]",
+      rotation: "-rotate-1"
+    },
+  ];
+
+  return (
+    <section className="relative py-24 md:py-32 overflow-hidden bg-white">
+      <div className="container-app relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6">How It Works</h2>
+          <p className="text-slate-500 text-sm md:text-base leading-relaxed font-medium">
+            Trusted Tradie Network connects users with skilled trades in Australia, making it easy to find a tradie,
+            book a tradie, or hire tradies for any job. For tradies, it's a platform to secure quality tradie
+            jobs and grow their business. Simple, reliable, and efficient!
+          </p>
+        </div>
+
+        {/* Dashed Path (Desktop only) */}
+        <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-40 pointer-events-none">
+          <svg className="w-full h-full" viewBox="0 0 1000 200" fill="none">
+            <path
+              d="M0,100 C150,100 250,180 400,180 C550,180 650,20 800,20 C900,20 1000,100 1000,100"
+              stroke="#CBD5E1"
+              strokeWidth="2"
+              strokeDasharray="8 8"
+              className="animate-[dash_20s_linear_infinite]"
+            />
+          </svg>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 relative">
+          {steps.map((step, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.2 }}
+              className={`flex flex-col items-center text-center ${step.offset || ''}`}
+            >
+              <div className={`relative w-full max-w-[320px] p-10 rounded-[2.5rem] ${step.color} ${step.rotation} border border-slate-100 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-500 group cursor-default`}>
+                <div className="mb-8 flex justify-center">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-white rounded-full blur-xl opacity-50 group-hover:opacity-100 transition-opacity" />
+                    <div className="relative h-20 w-20 bg-white rounded-3xl shadow-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-500">
+                      {step.icon}
+                    </div>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-slate-800 leading-snug">
+                  {step.title}
+                </h3>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes dash {
+          to {
+            stroke-dashoffset: -1000;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}
+
 function FeaturedBusinesses() {
   return (
-    <section className="container-app py-20 md:py-28">
+    <section className="container-app py-24 md:py-32">
       <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
         <div className="max-w-xl">
           <h2 className="text-3xl md:text-4xl font-bold">Featured local pros</h2>
@@ -417,7 +551,7 @@ function FeaturedBusinesses() {
 
 function Statistics() {
   return (
-    <section className="container-app">
+    <section className="container-app py-24 md:py-32">
       <div className="rounded-3xl bg-foreground text-background py-12 px-6 md:px-12 grid grid-cols-2 md:grid-cols-4 gap-6">
         {STATS.map((s) => (
           <div key={s.label} className="text-center">
@@ -432,7 +566,7 @@ function Statistics() {
 
 function Testimonials() {
   return (
-    <section className="container-app py-20 md:py-28">
+    <section className="container-app py-24 md:py-32">
       <div className="text-center max-w-2xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold">Loved by locals</h2>
         <p className="mt-3 text-muted-foreground">What Tasmanians are saying about MyLocalPro.</p>
@@ -458,7 +592,7 @@ function Testimonials() {
 
 function CTASection() {
   return (
-    <section className="container-app pb-8">
+    <section className="container-app py-24 md:py-32">
       <div className="rounded-3xl bg-primary text-primary-foreground p-10 md:p-16 text-center">
         <h2 className="text-3xl md:text-4xl font-bold max-w-2xl mx-auto">
           Are you a local tradie? Get found by more customers.
