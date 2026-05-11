@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { ArrowRight, CheckCircle2, MapPin, Search, Shield, Sparkles, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, CheckCircle2, MapPin, Search, Shield, Sparkles, Star, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import heroImg from "@/assets/hero-tradie.jpg";
 import { BUSINESSES, CATEGORIES, LOCATIONS, STATS, TESTIMONIALS } from "@/lib/mock-data";
 import { CategoryCard } from "@/components/cards/CategoryCard";
@@ -32,11 +32,11 @@ function HomePage() {
 
 function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % 2);
-    }, 5000);
+    }, 10000);
     return () => clearInterval(timer);
   }, []);
 
@@ -44,153 +44,108 @@ function Hero() {
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + 2) % 2);
 
   return (
-    <section className="relative overflow-hidden bg-surface">
-      <div className="absolute inset-x-0 top-0 h-[400px] bg-primary/10 blur-3xl" aria-hidden />
-      
-      {/* Carousel Container */}
-      <div className="relative overflow-hidden">
+    <section className="relative h-screen min-h-[700px] w-full overflow-hidden bg-[#0A121E]">
+      {/* Background Slides */}
+      <div className="absolute inset-0 z-0">
         <div 
-          className="flex transition-transform duration-700 ease-out"
+          className="flex h-full w-full transition-transform duration-1000 ease-in-out"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
-          {/* Slide 1: Classic Design */}
-          <div className="w-full flex-shrink-0">
-            <div className="container-app grid lg:grid-cols-2 gap-12 items-center py-16 md:py-24">
-              <div className="animate-fade-up">
-                <span className="inline-flex items-center gap-2 rounded-full bg-primary-soft text-primary px-3 py-1 text-xs font-semibold">
-                  <Sparkles className="h-3.5 w-3.5" /> Tasmania's local pros directory
-                </span>
-                <h1 className="mt-5 text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.05]">
-                  Find a trusted local pro in <span className="text-primary">minutes.</span>
-                </h1>
-                <p className="mt-5 text-lg text-muted-foreground max-w-xl">
-                  Plumbers, cleaners, gardeners, sparkies and more — all genuinely local to Tasmania. No accounts. No fuss.
-                </p>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <Link
-                    to="/businesses"
-                    className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-base font-semibold text-primary-foreground shadow-elevated hover:opacity-90 transition"
-                  >
-                    Find a Local Pro <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <Link
-                    to="/list-business"
-                    className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-6 py-3.5 text-base font-semibold hover:border-primary hover:text-primary transition"
-                  >
-                    List Your Business
-                  </Link>
-                </div>
-                <div className="mt-8 flex items-center gap-5 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1.5"><Shield className="h-4 w-4 text-primary" /> Verified locals</div>
-                  <div className="flex items-center gap-1.5"><Star className="h-4 w-4 text-amber-500 fill-current" /> Real reviews</div>
-                  <div className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-primary" /> Free to use</div>
-                </div>
-              </div>
-              <div className="relative animate-fade-in">
-                <div className="absolute -inset-6 bg-primary/10 rounded-[2rem] blur-2xl" aria-hidden />
-                <img
-                  src={heroImg}
-                  alt="Smiling local Australian tradesperson"
-                  width={1280}
-                  height={960}
-                  className="relative w-full h-auto rounded-3xl object-cover shadow-elevated"
-                />
-                <div className="absolute -bottom-5 -left-5 hidden md:block rounded-2xl bg-card border border-border shadow-card p-4 w-56">
-                  <div className="flex items-center gap-2 text-sm font-semibold">
-                    <Star className="h-4 w-4 text-amber-500 fill-current" /> 4.9 average rating
-                  </div>
-                  <p className="mt-1 text-xs text-muted-foreground">From 12,400+ verified reviews</p>
-                </div>
-              </div>
+          {/* Slide 1 */}
+          <div className="relative h-full w-full flex-shrink-0">
+            <img src={heroImg} className="absolute inset-0 h-full w-full object-cover" alt="Background" />
+            <div className="absolute inset-0 bg-black/35" />
+          </div>
+          {/* Slide 2 */}
+          <div className="relative h-full w-full flex-shrink-0">
+            <div className="absolute inset-0 bg-[#0A121E]" />
+            <img src={heroImg} className="absolute inset-0 h-full w-full object-cover opacity-40" alt="Background" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          </div>
+        </div>
+      </div>
+
+      {/* Content Container */}
+      <div className="relative z-10 container-app h-full flex flex-col items-center justify-center text-center px-4">
+        <div key={currentSlide} className="animate-fade-up space-y-8 max-w-4xl">
+          <div className="space-y-6">
+            <span className="inline-flex items-center gap-2 rounded-full bg-primary text-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] shadow-lg animate-fade-in delay-100">
+              <Sparkles className="h-3 w-3" /> Tasmania's #1 Tradie Network
+            </span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] tracking-tight uppercase animate-fade-up delay-200">
+              {currentSlide === 0 ? (
+                <>Find a <span className="text-primary italic">trusted local pro</span> in minutes</>
+              ) : (
+                <>Your go-to platform for hiring <span className="text-primary italic">skilled tradies</span></>
+              )}
+            </h1>
+            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed animate-fade-up delay-300">
+              Plumbers, cleaners, gardeners, sparkies and more — all genuinely local to Tasmania. No accounts. No fuss.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center gap-8 animate-fade-up delay-500">
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <Link
+                to="/businesses"
+                className="group relative inline-flex items-center gap-3 rounded-md bg-primary px-8 py-4 text-sm font-black uppercase tracking-widest text-white shadow-[0_15px_40px_rgba(0,87,225,0.3)] hover:opacity-90 transition-all duration-300 hover:scale-105"
+              >
+                Get Started <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link
+                to="/list-business"
+                className="inline-flex items-center gap-3 rounded-md bg-white/10 backdrop-blur-md border border-white/20 px-8 py-4 text-sm font-black uppercase tracking-widest text-white hover:bg-white/20 transition-all duration-300"
+              >
+                Join as a Pro
+              </Link>
+            </div>
+
+            <div className="w-full max-w-4xl transform">
+              <SearchSection />
             </div>
           </div>
 
-          {/* Slide 2: Circular Cluster Design */}
-          <div className="w-full flex-shrink-0">
-            <div className="container-app grid lg:grid-cols-[1.15fr_0.85fr] gap-12 items-center py-16 md:py-24">
-              <div className="animate-fade-up space-y-8">
-                <span className="inline-flex items-center gap-2 rounded-full bg-primary-soft text-primary px-3 py-1 text-xs font-semibold">
-                  <Sparkles className="h-3.5 w-3.5" /> Tasmania's local pros directory
-                </span>
-                <div>
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.02]">
-                    Your go-to platform for hiring <span className="text-primary">skilled tradies</span>
-                  </h1>
-                  <p className="mt-5 text-lg text-muted-foreground max-w-2xl">
-                    Find the right professionals for your projects with ease. Hire skilled tradies in Australia, ensuring quality and confidence every step of the way.
-                  </p>
-                </div>
-                <div className="inline-flex flex-wrap items-center gap-3 rounded-full border border-border bg-background p-1 shadow-soft">
-                  <button type="button" className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm">
-                    Find Tradies
-                  </button>
-                  <button type="button" className="rounded-full px-4 py-2 text-sm font-semibold text-muted-foreground">
-                    Find Jobs
-                  </button>
-                </div>
-                <SearchSection />
-                <div className="flex flex-wrap items-center gap-5 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1.5"><Shield className="h-4 w-4 text-primary" /> Verified locals</div>
-                  <div className="flex items-center gap-1.5"><Star className="h-4 w-4 text-amber-500 fill-current" /> Real reviews</div>
-                  <div className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-primary" /> Free to use</div>
-                </div>
-              </div>
-              <div className="relative animate-fade-in">
-                <div className="absolute inset-0 rounded-[2.5rem] bg-primary/10 shadow-elevated" aria-hidden />
-                <div className="relative h-[560px] w-full max-w-[560px]">
-                  <svg className="absolute inset-0 h-full w-full" viewBox="0 0 560 560" fill="none" aria-hidden>
-                    <path d="M100 80 C180 20 350 20 430 100 S520 210 430 280 S320 380 220 470" stroke="rgba(0,87,225,0.28)" strokeWidth="6" strokeLinecap="round" />
-                  </svg>
-                  <div className="absolute left-0 top-1/4 w-44 h-44 overflow-hidden rounded-full border-4 border-white bg-white shadow-card">
-                    <img src={heroImg} alt="Tradie at work" className="h-full w-full object-cover" />
-                  </div>
-                  <div className="absolute left-12 top-[58%] w-56 h-56 overflow-hidden rounded-full border-4 border-white bg-white shadow-card">
-                    <img src={heroImg} alt="Tradie at work" className="h-full w-full object-cover" />
-                  </div>
-                  <div className="absolute right-0 top-0 w-36 h-36 overflow-hidden rounded-full border-4 border-white bg-white shadow-card">
-                    <img src={heroImg} alt="Tradie at work" className="h-full w-full object-cover" />
-                  </div>
-                  <div className="absolute right-4 top-[62%] w-40 h-40 overflow-hidden rounded-full border-4 border-white bg-white shadow-card">
-                    <img src={heroImg} alt="Tradie at work" className="h-full w-full object-cover" />
-                  </div>
-                  <div className="absolute inset-x-0 top-[30%] mx-auto h-32 w-32 overflow-hidden rounded-full border-4 border-white bg-white shadow-card">
-                    <img src={heroImg} alt="Tradie at work" className="h-full w-full object-cover" />
-                  </div>
-                </div>
-              </div>
+          <div className="flex flex-wrap items-center justify-center gap-8 pt-4 text-white/60 animate-fade-in delay-700">
+            <div className="flex items-center gap-2 font-bold uppercase tracking-widest text-[10px]">
+              <Shield className="h-4 w-4 text-primary" /> Verified locals
+            </div>
+            <div className="flex items-center gap-2 font-bold uppercase tracking-widest text-[10px]">
+              <Star className="h-4 w-4 text-primary fill-primary" /> Real reviews
+            </div>
+            <div className="flex items-center gap-2 font-bold uppercase tracking-widest text-[10px]">
+              <CheckCircle2 className="h-4 w-4 text-primary" /> Free to use
             </div>
           </div>
         </div>
       </div>
 
-      {/* Carousel Controls */}
-      <div className="container-app flex items-center justify-center gap-3 py-6 relative z-20">
+      {/* Navigation Arrows */}
+      <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-20 container-app flex justify-between pointer-events-none px-4">
         <button
           onClick={prevSlide}
-          className="rounded-full bg-background border border-border p-2.5 text-foreground hover:border-primary hover:text-primary transition shadow-card"
-          aria-label="Previous slide"
+          className="pointer-events-auto h-12 w-12 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white flex items-center justify-center hover:bg-primary transition-all group shadow-2xl"
         >
-          <ChevronLeft className="h-5 w-5" />
+          <ChevronLeft className="h-6 w-6 group-hover:-translate-x-1 transition-transform" />
         </button>
-        <div className="flex gap-2">
-          {[0, 1].map((i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentSlide(i)}
-              className={`h-2 w-8 rounded-full transition ${
-                i === currentSlide ? 'bg-primary' : 'bg-border'
-              }`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
-        </div>
         <button
           onClick={nextSlide}
-          className="rounded-full bg-background border border-border p-2.5 text-foreground hover:border-primary hover:text-primary transition shadow-card"
-          aria-label="Next slide"
+          className="pointer-events-auto h-12 w-12 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 text-white flex items-center justify-center hover:bg-primary transition-all group shadow-2xl"
         >
-          <ChevronRight className="h-5 w-5" />
+          <ChevronRight className="h-6 w-6 group-hover:translate-x-1 transition-transform" />
         </button>
+      </div>
+
+      {/* Slide Indicators */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+        {[0, 1].map((i) => (
+          <button
+            key={i}
+            onClick={() => setCurrentSlide(i)}
+            className={`h-1 transition-all duration-500 rounded-full ${
+              i === currentSlide ? 'w-16 bg-primary' : 'w-8 bg-white/20 hover:bg-white/40'
+            }`}
+          />
+        ))}
       </div>
     </section>
   );
@@ -210,42 +165,47 @@ function SearchSection() {
   };
 
   return (
-    <section className="rounded-[2rem] bg-card border border-border shadow-card p-4 md:p-6 max-w-3xl">
-      <form onSubmit={submit} className="grid gap-3 md:grid-cols-[1fr_1fr_auto] md:gap-3 items-center">
-        <label className="flex items-center gap-3 rounded-3xl border border-border bg-surface px-4 py-3">
-          <Search className="h-5 w-5 text-primary shrink-0" />
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="w-full bg-transparent text-base font-medium outline-none"
+    <div className="relative group max-w-4xl mx-auto">
+      <div className="absolute -inset-1 bg-primary/20 rounded-[2.5rem] blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
+      <section className="relative rounded-[2.5rem] bg-white p-3 md:p-5 shadow-2xl">
+        <form onSubmit={submit} className="grid gap-4 md:grid-cols-[1fr_1fr_auto] items-center">
+          <label className="relative flex items-center gap-3 rounded-2xl bg-slate-50 border border-slate-100 px-6 py-5 focus-within:border-primary/30 transition-all cursor-pointer">
+            <Search className="h-6 w-6 text-primary shrink-0" />
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="w-full bg-transparent text-lg font-bold outline-none appearance-none pr-8 text-slate-800"
+            >
+              <option value="">What service do you need?</option>
+              {CATEGORIES.map((c) => (
+                <option key={c.slug} value={c.slug}>{c.name}</option>
+              ))}
+            </select>
+            <ChevronDown className="absolute right-6 h-5 w-5 text-slate-400 pointer-events-none" />
+          </label>
+          <label className="relative flex items-center gap-3 rounded-2xl bg-slate-50 border border-slate-100 px-6 py-5 focus-within:border-primary/30 transition-all cursor-pointer">
+            <MapPin className="h-6 w-6 text-primary shrink-0" />
+            <select
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="w-full bg-transparent text-lg font-bold outline-none appearance-none pr-8 text-slate-800"
+            >
+              <option value="">Choose your location</option>
+              {LOCATIONS.map((l) => (
+                <option key={l} value={l}>{l}</option>
+              ))}
+            </select>
+            <ChevronDown className="absolute right-6 h-5 w-5 text-slate-400 pointer-events-none" />
+          </label>
+          <button
+            type="submit"
+            className="rounded-2xl bg-primary text-white font-bold px-10 py-5 hover:opacity-90 transition-all active:scale-95 shadow-xl shadow-primary/20 flex items-center justify-center gap-3 text-lg"
           >
-            <option value="">What service do you need?</option>
-            {CATEGORIES.map((c) => (
-              <option key={c.slug} value={c.slug}>{c.name}</option>
-            ))}
-          </select>
-        </label>
-        <label className="flex items-center gap-3 rounded-3xl border border-border bg-surface px-4 py-3">
-          <MapPin className="h-5 w-5 text-primary shrink-0" />
-          <select
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            className="w-full bg-transparent text-base font-medium outline-none"
-          >
-            <option value="">Choose your location</option>
-            {LOCATIONS.map((l) => (
-              <option key={l} value={l}>{l}</option>
-            ))}
-          </select>
-        </label>
-        <button
-          type="submit"
-          className="rounded-full bg-primary text-primary-foreground font-semibold px-6 py-3.5 hover:opacity-90 transition flex items-center justify-center gap-2"
-        >
-          <Search className="h-4 w-4" /> Search
-        </button>
-      </form>
-    </section>
+            <Search className="h-5 w-5" /> Search
+          </button>
+        </form>
+      </section>
+    </div>
   );
 }
 

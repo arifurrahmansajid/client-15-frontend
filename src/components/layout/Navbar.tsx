@@ -15,7 +15,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -23,71 +23,72 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
-          ? "bg-background/85 backdrop-blur-md border-b border-border shadow-soft"
-          : "bg-background border-b border-transparent"
+      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl transition-all duration-300 ${
+        scrolled ? "top-3" : "top-6"
       }`}
     >
-      <div className="container-app flex h-16 items-center justify-between md:h-20">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary text-primary-foreground font-bold">
-            M
-          </span>
-          <span className="text-base md:text-lg font-semibold tracking-tight">
-            MyLocalPro <span className="text-muted-foreground font-normal">Australia</span>
-          </span>
+      <div className="bg-white border border-slate-200 rounded-2xl md:rounded-[2rem] shadow-xl px-8 md:px-12 py-5 md:py-6 flex items-center justify-between">
+        <Link to="/" className="flex items-center gap-2 group">
+          <div className="flex items-center gap-3">
+            <div className="h-7 w-7 bg-primary rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+              <span className="text-white font-black text-lg">M</span>
+            </div>
+            <span className="text-slate-900 text-sm font-black tracking-[0.2em] uppercase">
+              MyLocalPro
+            </span>
+          </div>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-8">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
               activeOptions={{ exact: l.to === "/" }}
-              activeProps={{ className: "text-primary bg-primary-soft" }}
-              className="rounded-full px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted transition-colors"
+              activeProps={{ className: "text-primary" }}
+              className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500 hover:text-primary transition-all relative group"
             >
               {l.label}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
             </Link>
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-2">
+        <div className="hidden lg:flex items-center gap-6">
           <Link
             to="/admin"
-            className="rounded-full px-4 py-2.5 text-sm font-medium text-foreground hover:bg-muted transition"
+            className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 hover:text-slate-900 transition"
           >
             Admin
           </Link>
           <Link
             to="/list-business"
-            className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-elevated hover:opacity-90 transition"
+            className="rounded-xl bg-primary px-7 py-3.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-lg shadow-primary/20 hover:opacity-90 transition-all active:scale-95"
           >
-            List Your Business
+            List Business
           </Link>
         </div>
 
         <button
           onClick={() => setOpen((s) => !s)}
           aria-label="Toggle menu"
-          className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg hover:bg-muted"
+          className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl text-slate-900 hover:bg-slate-100"
         >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-border bg-background">
-          <nav className="container-app py-3 flex flex-col gap-1">
+        <div className="mt-3 lg:hidden rounded-2xl bg-white border border-slate-200 shadow-2xl overflow-hidden animate-fade-in">
+          <nav className="flex flex-col p-4">
             {links.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
                 onClick={() => setOpen(false)}
                 activeOptions={{ exact: l.to === "/" }}
-                activeProps={{ className: "text-primary bg-primary-soft" }}
-                className="rounded-lg px-4 py-3 text-base font-medium text-foreground/90 hover:bg-muted"
+                activeProps={{ className: "text-primary bg-primary/5" }}
+                className="rounded-xl px-4 py-3.5 text-[11px] font-bold uppercase tracking-widest text-slate-600 hover:bg-slate-50"
               >
                 {l.label}
               </Link>
