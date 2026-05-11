@@ -142,7 +142,7 @@ function Hero() {
           <button
             key={i}
             onClick={() => setCurrentSlide(i)}
-            className={`h-1 transition-all duration-500 rounded-full ${i === currentSlide ? 'w-16 bg-primary' : 'w-8 bg-white/20 hover:bg-white/40'
+            className={`h-1 transition-all duration-500 rounded-full ${i === currentSlide ? 'w-16 ' : 'w-8 hover:bg-white/40'
               }`}
           />
         ))}
@@ -165,18 +165,70 @@ function SearchSection() {
   };
 
   return (
-    <div className="relative group max-w-5xl mx-auto">
-      <div className="absolute -inset-1 bg-primary/20 rounded-[2.5rem] blur-2xl opacity-10 group-hover:opacity-30 transition duration-1000"></div>
-      <section className="relative rounded-[2.5rem] bg-white p-3 md:p-5 shadow-[0_30px_100px_rgba(0,0,0,0.25)] border border-slate-100">
-        <form onSubmit={submit} className="grid gap-4 md:grid-cols-[1.2fr_1fr_auto] items-center">
-          <label className="relative flex items-center gap-4 rounded-3xl bg-slate-50 border border-slate-100 px-8 py-6 focus-within:border-primary/30 transition-all cursor-pointer group/field">
-            <Search className="h-7 w-7 text-primary shrink-0 transition-transform group-focus-within/field:scale-110" />
-            <div className="flex flex-col flex-1 items-start">
-              <span className="text-[10px] font-[1000] uppercase tracking-widest text-slate-400 mb-1">Service</span>
+    // <div className="relative group max-w-5xl mx-auto">
+    //   <div className="absolute -inset-1 bg-primary/20 rounded-[2.5rem] blur-2xl opacity-10 group-hover:opacity-30 transition duration-1000"></div>
+    //   <section className="relative rounded-[2.5rem] bg-white p-3 md:p-5 shadow-[0_30px_100px_rgba(0,0,0,0.25)] border border-slate-100">
+    //     <form onSubmit={submit} className="grid gap-4 md:grid-cols-[1.2fr_1fr_auto] items-center">
+    //       <label className="relative flex items-center gap-4 rounded-3xl bg-slate-50 border border-slate-100 px-8 py-6 focus-within:border-primary/30 transition-all cursor-pointer group/field">
+    //         <Search className="h-7 w-7 text-primary shrink-0 transition-transform group-focus-within/field:scale-110" />
+    //         <div className="flex flex-col flex-1 items-start">
+    //           <span className="text-[10px] font-[1000] uppercase tracking-widest text-slate-400 mb-1">Service</span>
+    //           <select
+    //             value={category}
+    //             onChange={(e) => setCategory(e.target.value)}
+    //             className="w-full bg-transparent text-xl font-black outline-none appearance-none pr-8 text-slate-900"
+    //           >
+    //             <option value="">What do you need?</option>
+    //             {CATEGORIES.map((c) => (
+    //               <option key={c.slug} value={c.slug}>{c.name}</option>
+    //             ))}
+    //           </select>
+    //         </div>
+    //         <ChevronDown className="absolute right-8 h-6 w-6 text-slate-400 pointer-events-none group-hover/field:text-primary transition-colors" />
+    //       </label>
+    //       <label className="relative flex items-center gap-4 rounded-3xl bg-slate-50 border border-slate-100 px-8 py-6 focus-within:border-primary/30 transition-all cursor-pointer group/field">
+    //         <MapPin className="h-7 w-7 text-primary shrink-0 transition-transform group-focus-within/field:scale-110" />
+    //         <div className="flex flex-col flex-1 items-start">
+    //           <span className="text-[10px] font-[1000] uppercase tracking-widest text-slate-400 mb-1">Location</span>
+    //           <select
+    //             value={location}
+    //             onChange={(e) => setLocation(e.target.value)}
+    //             className="w-full bg-transparent text-xl font-black outline-none appearance-none pr-8 text-slate-900"
+    //           >
+    //             <option value="">Choose location</option>
+    //             {LOCATIONS.map((l) => (
+    //               <option key={l} value={l}>{l}</option>
+    //             ))}
+    //           </select>
+    //         </div>
+    //         <ChevronDown className="absolute right-8 h-6 w-6 text-slate-400 pointer-events-none group-hover/field:text-primary transition-colors" />
+    //       </label>
+    //       <button
+    //         type="submit"
+    //         className="rounded-3xl bg-primary text-white font-black px-12 py-7 hover:opacity-95 transition-all active:scale-95 shadow-2xl shadow-primary/30 flex items-center justify-center gap-4 text-xl group/btn"
+    //       >
+    //         Search <ArrowRight className="h-6 w-6 group-hover/btn:translate-x-1 transition-transform" />
+    //       </button>
+    //     </form>
+    //   </section>
+    // </div>
+
+    <div className="relative group w-full max-w-5xl mx-auto px-4">
+      {/* Glow effect behind the bar */}
+      <div className="absolute -inset-1 bg-primary/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+
+      <section className="relative rounded-2xl md:rounded-full bg-white p-2 shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100">
+        <form onSubmit={submit} className="flex flex-col md:flex-row items-stretch md:items-center gap-1">
+
+          {/* Service Selection */}
+          <label className="relative flex flex-[1.2] items-center gap-3 rounded-xl md:rounded-full px-6 py-3 hover:bg-slate-50 transition-all cursor-pointer group/field">
+            <Search className="h-5 w-5 text-primary shrink-0 transition-transform group-focus-within/field:scale-110" />
+            <div className="flex flex-col flex-1 items-start text-left overflow-hidden">
+              <span className="text-[9px] font-black uppercase tracking-[0.15em] text-slate-400 mb-0.5">Service</span>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full bg-transparent text-xl font-black outline-none appearance-none pr-8 text-slate-900"
+                className="w-full bg-transparent text-base font-bold outline-none appearance-none pr-6 text-slate-900 cursor-pointer truncate"
               >
                 <option value="">What do you need?</option>
                 {CATEGORIES.map((c) => (
@@ -184,16 +236,21 @@ function SearchSection() {
                 ))}
               </select>
             </div>
-            <ChevronDown className="absolute right-8 h-6 w-6 text-slate-400 pointer-events-none group-hover/field:text-primary transition-colors" />
+            <ChevronDown className="absolute right-5 h-4 w-4 text-slate-300 pointer-events-none group-hover/field:text-primary transition-colors" />
           </label>
-          <label className="relative flex items-center gap-4 rounded-3xl bg-slate-50 border border-slate-100 px-8 py-6 focus-within:border-primary/30 transition-all cursor-pointer group/field">
-            <MapPin className="h-7 w-7 text-primary shrink-0 transition-transform group-focus-within/field:scale-110" />
-            <div className="flex flex-col flex-1 items-start">
-              <span className="text-[10px] font-[1000] uppercase tracking-widest text-slate-400 mb-1">Location</span>
+
+          {/* Subtle Desktop Divider */}
+          <div className="hidden md:block w-px h-10 bg-slate-100 mx-1" />
+
+          {/* Location Selection */}
+          <label className="relative flex flex-1 items-center gap-3 rounded-xl md:rounded-full px-6 py-3 hover:bg-slate-50 transition-all cursor-pointer group/field">
+            <MapPin className="h-5 w-5 text-primary shrink-0 transition-transform group-focus-within/field:scale-110" />
+            <div className="flex flex-col flex-1 items-start text-left overflow-hidden">
+              <span className="text-[9px] font-black uppercase tracking-[0.15em] text-slate-400 mb-0.5">Location</span>
               <select
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="w-full bg-transparent text-xl font-black outline-none appearance-none pr-8 text-slate-900"
+                className="w-full bg-transparent text-base font-bold outline-none appearance-none pr-6 text-slate-900 cursor-pointer truncate"
               >
                 <option value="">Choose location</option>
                 {LOCATIONS.map((l) => (
@@ -201,14 +258,18 @@ function SearchSection() {
                 ))}
               </select>
             </div>
-            <ChevronDown className="absolute right-8 h-6 w-6 text-slate-400 pointer-events-none group-hover/field:text-primary transition-colors" />
+            <ChevronDown className="absolute right-5 h-4 w-4 text-slate-300 pointer-events-none group-hover/field:text-primary transition-colors" />
           </label>
+
+          {/* Search Button */}
           <button
             type="submit"
-            className="rounded-3xl bg-primary text-white font-black px-12 py-7 hover:opacity-95 transition-all active:scale-95 shadow-2xl shadow-primary/30 flex items-center justify-center gap-4 text-xl group/btn"
+            className="md:ml-2 rounded-xl md:rounded-full bg-primary text-white font-black px-10 py-4 hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/25 flex items-center justify-center gap-3 text-base group/btn"
           >
-            Search <ArrowRight className="h-6 w-6 group-hover/btn:translate-x-1 transition-transform" />
+            Search
+            <ArrowRight className="h-5 w-5 group-hover/btn:translate-x-1 transition-transform" />
           </button>
+
         </form>
       </section>
     </div>
