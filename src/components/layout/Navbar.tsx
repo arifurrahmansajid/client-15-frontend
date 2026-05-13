@@ -48,7 +48,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [locationQuery, setLocationQuery] = useState("");
-  const [selectedLocation, setSelectedLocation] = useState("Australia");
+  const [selectedLocation, setSelectedLocation] = useState("");
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isHomePage = pathname === "/";
 
@@ -115,7 +115,9 @@ export function Navbar() {
                 }`}>
                   Location
                 </span>
-                <span className="text-sm font-semibold">{selectedLocation}</span>
+                <span className={`text-sm font-semibold ${selectedLocation ? "text-slate-900" : "text-slate-400"}`}>
+                  {selectedLocation || "Select Location"}
+                </span>
               </div>
             </button>
           </DialogTrigger>
