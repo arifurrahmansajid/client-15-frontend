@@ -1,6 +1,16 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
+import { MapPin, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const links = [
   { to: "/", label: "Home" },
@@ -10,12 +20,41 @@ const links = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
+const AUSTRALIA_LOCATIONS = [
+  "Australia",
+  "Perth",
+  "Melbourne",
+  "Sydney",
+  "Brisbane",
+  "Adelaide",
+  "Hobart",
+  "Northern Rivers",
+  "Albury, Wodonga & Surrounds",
+  "Tasmania",
+  "Townsville",
+  "Northern Territory",
+  "Illawarra & Surrounds",
+  "Gippsland",
+  "Dubbo & Surrounds",
+  "Portland, Port Fairy, Warrnambool & Surrounds",
+  "Sunshine Coast",
+  "Melbourne Peninsula",
+  "Bendigo, Ballarat, Echuca & Surrounds",
+  "Western Suburbs Melbourne",
+] as const;
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [locationQuery, setLocationQuery] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("Australia");
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isHomePage = pathname === "/";
+
+  const filteredLocations = AUSTRALIA_LOCATIONS.filter((loc) =>
+    loc.toLowerCase().includes(locationQuery.toLowerCase()),
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -56,6 +95,80 @@ export function Navbar() {
             </span>
           </div>
         </Link>
+
+        <Dialog>
+          <DialogTrigger asChild>
+            <button
+              type="button"
+              className={`hidden xl:flex items-center gap-3 rounded-full px-4 py-2 border transition-colors ${
+                !scrolled
+                  ? isHomePage
+                    ? "border-white/30 bg-white/10 text-white"
+                    : "border-slate-200 bg-white text-slate-900"
+                  : "border-slate-200 bg-white text-slate-900"
+              }`}
+            >
+              <MapPin className="h-4 w-4" />
+              <div className="flex flex-col leading-tight text-left">
+                <span className={`text-[9px] uppercase tracking-[0.2em] ${
+                  !scrolled ? (isHomePage ? "text-white" : "text-black") : "text-black"
+                }`}>
+                  Location
+                </span>
+                <span className="text-sm font-semibold">{selectedLocation}</span>
+              </div>
+            </button>
+          </DialogTrigger>
+          <DialogContent className="max-w-3xl">
+            <DialogHeader>
+              <DialogTitle>Choose Location</DialogTitle>
+              <DialogDescription>
+                All locations are in Australia. Search or pick a region to update the site filter.
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="space-y-4">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
+                <input
+                  value={locationQuery}
+                  onChange={(e) => setLocationQuery(e.target.value)}
+                  placeholder="Write here"
+                  className="w-full bg-transparent text-sm text-slate-900 outline-none placeholder:text-slate-400"
+                />
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setSelectedLocation("Australia")}
+                className="inline-flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/5 px-4 py-2 text-sm font-semibold text-primary hover:bg-primary/10 transition"
+              >
+                Detect my location
+              </button>
+
+              <div className="grid gap-3 grid-cols-2 sm:grid-cols-3">
+                {filteredLocations.map((loc) => (
+                  <button
+                    key={loc}
+                    type="button"
+                    onClick={() => {
+                      setSelectedLocation(loc);
+                      setLocationQuery("");
+                    }}
+                    className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-left text-sm font-medium text-slate-900 hover:border-primary hover:bg-primary/5 transition"
+                  >
+                    {loc}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <DialogFooter>
+              <DialogClose className="rounded-xl bg-primary px-5 py-2 text-sm font-semibold text-white hover:bg-primary/90 transition">
+                Done
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
 
         <nav className="hidden xl:flex items-center gap-10 shrink-0">
           {links.map((l) => (
