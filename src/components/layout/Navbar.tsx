@@ -76,7 +76,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-7xl transition-all duration-300 ${
+      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[98%] max-w-7xl transition-all duration-300 ${
         scrolled ? "top-3" : "top-6"
       }`}
     >
