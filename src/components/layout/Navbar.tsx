@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -14,6 +14,8 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isHomePage = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -39,13 +41,17 @@ export function Navbar() {
         scrolled ? "top-3" : "top-6"
       }`}
     >
-      <div className="bg-white border border-slate-200 rounded-2xl md:rounded-[2rem] shadow-xl px-10 md:px-14 py-5 md:py-6 flex items-center justify-between gap-8">
+      <div className={`rounded-2xl md:rounded-[2rem] px-10 md:px-14 py-5 md:py-6 flex items-center justify-between gap-8 transition-all duration-300 ${
+        isHomePage && !scrolled 
+          ? "bg-transparent border-transparent shadow-none" 
+          : "bg-white border border-slate-200 shadow-xl"
+      }`}>
         <Link to="/" className="flex items-center gap-2 group shrink-0">
           <div className="flex items-center gap-3">
             <div className="h-7 w-7 bg-primary rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
               <span className="text-white font-black text-lg">M</span>
             </div>
-            <span className="text-slate-900 text-sm font-black tracking-[0.2em] uppercase whitespace-nowrap">
+            <span className={`${isHomePage && !scrolled ? "text-white" : "text-slate-900"} text-sm font-black tracking-[0.2em] uppercase whitespace-nowrap transition-colors duration-300`}>
               MyLocalPro
             </span>
           </div>
@@ -58,7 +64,11 @@ export function Navbar() {
               to={l.to}
               activeOptions={{ exact: l.to === "/" }}
               activeProps={{ className: "text-primary" }}
-              className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500 hover:text-primary transition-all relative group whitespace-nowrap"
+              className={`text-[11px] font-bold uppercase tracking-[0.2em] transition-all relative group whitespace-nowrap ${
+                isHomePage && !scrolled 
+                  ? "text-white hover:text-white/80" 
+                  : "text-slate-500 hover:text-primary"
+              }`}
             >
               {l.label}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
@@ -71,13 +81,21 @@ export function Navbar() {
             <>
               <Link
                 to="/admin"
-                className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 hover:text-slate-900 transition whitespace-nowrap"
+                className={`text-[10px] font-bold uppercase tracking-[0.2em] transition whitespace-nowrap ${
+                  isHomePage && !scrolled 
+                    ? "text-white/80 hover:text-white" 
+                    : "text-slate-400 hover:text-slate-900"
+                }`}
               >
                 Super Admin
               </Link>
               <button
                 onClick={handleLogout}
-                className="text-[10px] font-bold uppercase tracking-[0.2em] text-red-500 hover:text-red-600 transition whitespace-nowrap"
+                className={`text-[10px] font-bold uppercase tracking-[0.2em] transition whitespace-nowrap ${
+                  isHomePage && !scrolled 
+                    ? "text-red-300 hover:text-red-200" 
+                    : "text-red-500 hover:text-red-600"
+                }`}
               >
                 Logout
               </button>
@@ -86,7 +104,11 @@ export function Navbar() {
             <>
               <Link
                 to="/login"
-                className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 hover:text-slate-900 transition whitespace-nowrap"
+                className={`text-[10px] font-bold uppercase tracking-[0.2em] transition whitespace-nowrap ${
+                  isHomePage && !scrolled 
+                    ? "text-white/80 hover:text-white" 
+                    : "text-slate-400 hover:text-slate-900"
+                }`}
               >
                 Login
               </Link>
@@ -103,7 +125,11 @@ export function Navbar() {
         <button
           onClick={() => setOpen((s) => !s)}
           aria-label="Toggle menu"
-          className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl text-slate-900 hover:bg-slate-100"
+          className={`lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
+                isHomePage && !scrolled 
+                  ? "text-white hover:bg-white/10" 
+                  : "text-slate-900 hover:bg-slate-100"
+              }`}
         >
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
