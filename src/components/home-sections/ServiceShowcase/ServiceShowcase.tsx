@@ -21,7 +21,7 @@ const SERVICE_FEATURES: { label: string; Icon: LucideIcon }[] = [
 
 export function ServiceShowcase() {
   return (
-    <section className="bg-[#f0f4ff] py-16 md:py-24 px-4">
+    <section className="bg-white py-16 md:py-24 px-4">
       <div className="mx-auto max-w-4xl text-center">
         <h2 className="text-4xl md:text-5xl font-medium tracking-tight text-slate-900">
           Popular Services
@@ -37,10 +37,12 @@ export function ServiceShowcase() {
           <button
             key={label}
             type="button"
-            className="group flex items-center gap-3 rounded-full border border-violet-200 bg-white px-6 py-3 transition-all duration-300 hover:border-violet-400 hover:shadow-lg hover:shadow-violet-200/50"
+            className="group flex items-center gap-3 rounded-full bg-gradient-to-r from-orange-500 via-orange-500 to-orange-600 px-6 py-3 text-white shadow-[0_18px_50px_rgba(249,115,22,0.18)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_60px_rgba(249,115,22,0.24)]"
           >
-            <Icon className="h-5 w-5 text-slate-900" strokeWidth={2.5} />
-            <span className="text-[15px] font-medium text-slate-800">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white shadow-sm shadow-orange-500/20">
+              <Icon className="h-5 w-5" strokeWidth={2.5} />
+            </span>
+            <span className="whitespace-nowrap text-sm font-semibold tracking-tight text-white">
               {label}
             </span>
           </button>
