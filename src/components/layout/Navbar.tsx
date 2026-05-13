@@ -42,7 +42,7 @@ export function Navbar() {
       }`}
     >
       <div className={`rounded-2xl md:rounded-[2rem] px-10 md:px-14 py-5 md:py-6 flex items-center justify-between gap-8 transition-all duration-300 ${
-        isHomePage && !scrolled 
+        !scrolled 
           ? "bg-transparent border-transparent shadow-none" 
           : "bg-white border border-slate-200 shadow-xl"
       }`}>
@@ -51,7 +51,7 @@ export function Navbar() {
             <div className="h-7 w-7 bg-primary rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
               <span className="text-white font-black text-lg">M</span>
             </div>
-            <span className={`${isHomePage && !scrolled ? "text-white" : "text-slate-900"} text-sm font-black tracking-[0.2em] uppercase whitespace-nowrap transition-colors duration-300`}>
+            <span className={`${!scrolled ? (isHomePage ? "text-white" : "text-black") : "text-slate-900"} text-sm font-black tracking-[0.2em] uppercase whitespace-nowrap transition-colors duration-300`}>
               MyLocalPro
             </span>
           </div>
@@ -65,8 +65,8 @@ export function Navbar() {
               activeOptions={{ exact: l.to === "/" }}
               activeProps={{ className: "text-primary" }}
               className={`text-[11px] font-bold uppercase tracking-[0.2em] transition-all relative group whitespace-nowrap ${
-                isHomePage && !scrolled 
-                  ? "text-white hover:text-white/80" 
+                !scrolled 
+                  ? isHomePage ? "text-white hover:text-white/80" : "text-black hover:text-black/70"
                   : "text-slate-500 hover:text-primary"
               }`}
             >
@@ -82,8 +82,8 @@ export function Navbar() {
               <Link
                 to="/admin"
                 className={`text-[10px] font-bold uppercase tracking-[0.2em] transition whitespace-nowrap ${
-                  isHomePage && !scrolled 
-                    ? "text-white/80 hover:text-white" 
+                  !scrolled 
+                    ? isHomePage ? "text-white/80 hover:text-white" : "text-black/70 hover:text-black"
                     : "text-slate-400 hover:text-slate-900"
                 }`}
               >
@@ -92,8 +92,8 @@ export function Navbar() {
               <button
                 onClick={handleLogout}
                 className={`text-[10px] font-bold uppercase tracking-[0.2em] transition whitespace-nowrap ${
-                  isHomePage && !scrolled 
-                    ? "text-red-300 hover:text-red-200" 
+                  !scrolled 
+                    ? isHomePage ? "text-red-300 hover:text-red-200" : "text-red-600 hover:text-red-700"
                     : "text-red-500 hover:text-red-600"
                 }`}
               >
@@ -105,8 +105,8 @@ export function Navbar() {
               <Link
                 to="/login"
                 className={`text-[10px] font-bold uppercase tracking-[0.2em] transition whitespace-nowrap ${
-                  isHomePage && !scrolled 
-                    ? "text-white/80 hover:text-white" 
+                  !scrolled 
+                    ? isHomePage ? "text-white/80 hover:text-white" : "text-black/70 hover:text-black"
                     : "text-slate-400 hover:text-slate-900"
                 }`}
               >
@@ -126,8 +126,8 @@ export function Navbar() {
           onClick={() => setOpen((s) => !s)}
           aria-label="Toggle menu"
           className={`lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
-                isHomePage && !scrolled 
-                  ? "text-white hover:bg-white/10" 
+                !scrolled 
+                  ? isHomePage ? "text-white hover:bg-white/10" : "text-black hover:bg-black/10"
                   : "text-slate-900 hover:bg-slate-100"
               }`}
         >
