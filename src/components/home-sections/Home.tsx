@@ -1,4 +1,5 @@
 import { Hero } from "./Hero/Hero";
+import { ServiceShowcase } from "./ServiceShowcase/ServiceShowcase";
 import { TradeCategories } from "./TradeCategories/TradeCategories";
 import { HowItWorks } from "./HowItWorks/HowItWorks";
 import { MostRequestedServices } from "./MostRequestedServices/MostRequestedServices";
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <ServiceShowcase />
       <TradeCategories />
       <HowItWorks />
       {/* <MostRequestedServices /> */}
