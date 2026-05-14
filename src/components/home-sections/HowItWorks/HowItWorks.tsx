@@ -36,9 +36,9 @@ export function HowItWorks() {
   return (
     <section className="relative py-[70px] md:py-[100px] bg-[#E4EAF1] overflow-hidden">
       {/* Decorative top wave */}
-      <div className="absolute top-0 left-0 right-0 -mt-1">
+      <div className="absolute top-0 left-0 right-0 -mt-1 z-0 pointer-events-none">
         <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full rotate-180">
-          <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="white" />
+          <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#f8fafc" />
         </svg>
       </div>
 
