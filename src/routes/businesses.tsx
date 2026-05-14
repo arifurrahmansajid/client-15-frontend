@@ -108,9 +108,15 @@ function BusinessesPage() {
 
           <div className="flex items-center gap-3">
             <button
+              className="shine-btn flex items-center justify-center gap-2 rounded-xl bg-[#097DDD] px-6 py-3.5 text-[11px] font-black uppercase tracking-widest text-white shadow-[0_4px_20px_rgb(9,125,221,0.4)] hover:bg-[#0a8ef0] transition-all"
+            >
+              <Search className="h-3.5 w-3.5" />
+              Search
+            </button>
+            <button
               disabled={!hasFilters}
               onClick={() => { setCategory(""); setLocation(""); }}
-              className="flex items-center gap-2 px-6 py-4 text-[10px] font-black uppercase tracking-widest text-[#5a7089] hover:text-[#0A1830] disabled:opacity-30 transition-colors"
+              className="flex items-center gap-2 px-4 py-3.5 text-[10px] font-black uppercase tracking-widest text-[#5a7089] hover:text-[#0A1830] disabled:opacity-30 transition-colors"
             >
               Reset
             </button>

@@ -159,7 +159,7 @@ export function Navbar() {
                 to={l.to}
                 activeOptions={{ exact: l.to === "/" }}
                 activeProps={{ className: "text-[#097DDD]" }}
-                className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/65 hover:text-white transition-colors duration-200 relative group whitespace-nowrap"
+                className="text-[13px] font-bold uppercase tracking-[0.15em] text-white/70 hover:text-white transition-colors duration-200 relative group whitespace-nowrap"
               >
                 {l.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-[#097DDD] transition-all duration-300 group-hover:w-full rounded-full" />
@@ -168,18 +168,18 @@ export function Navbar() {
           </nav>
 
           {/* ── Auth Buttons ── */}
-          <div className="hidden lg:flex items-center gap-4 shrink-0">
+          <div className="hidden lg:flex items-center gap-5 shrink-0">
             {isLoggedIn ? (
               <>
                 <Link
                   to="/admin"
-                  className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 hover:text-white transition-colors"
+                  className="text-[12px] font-bold uppercase tracking-[0.15em] text-white/60 hover:text-white transition-colors"
                 >
                   Super Admin
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="text-[10px] font-bold uppercase tracking-[0.2em] text-rose-400 hover:text-rose-300 transition-colors"
+                  className="text-[12px] font-bold uppercase tracking-[0.15em] text-rose-400 hover:text-rose-300 transition-colors"
                 >
                   Logout
                 </button>
@@ -188,13 +188,13 @@ export function Navbar() {
               <>
                 <Link
                   to="/login"
-                  className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 hover:text-white transition-colors whitespace-nowrap"
+                  className="text-[12px] font-bold uppercase tracking-[0.15em] text-white/70 hover:text-white transition-colors whitespace-nowrap"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="shine-btn rounded-xl bg-[#097DDD] px-6 py-2.5 text-[10px] font-black uppercase tracking-[0.18em] text-white shadow-[0_4px_20px_rgb(9,125,221,0.4)] hover:shadow-[0_6px_28px_rgb(9,125,221,0.55)] hover:bg-[#0a8ef0] transition-all duration-300 whitespace-nowrap"
+                  className="shine-btn rounded-xl bg-[#097DDD] px-6 py-3 text-[12px] font-black uppercase tracking-[0.15em] text-white shadow-[0_4px_20px_rgb(9,125,221,0.4)] hover:shadow-[0_6px_28px_rgb(9,125,221,0.55)] hover:bg-[#0a8ef0] transition-all duration-300 whitespace-nowrap"
                 >
                   Join Now
                 </Link>
