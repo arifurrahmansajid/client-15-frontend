@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: mylocalpro
-    env: node
-    buildCommand: npm install && npm run build
-    startCommand: node .output/server/index.mjs
-    envVars:
-      - key: NODE_VERSION
-        value: 20.0.0
