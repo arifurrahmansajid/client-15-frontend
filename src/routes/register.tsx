@@ -1,7 +1,8 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { User, HardHat, ArrowLeft, ChevronRight, Mail, Lock, Phone, Upload, Eye, EyeOff } from "lucide-react";
+import { User, HardHat, ArrowLeft, ChevronRight, Mail, Lock, Phone, Upload, Eye, EyeOff, MapPin, CheckCircle2 } from "lucide-react";
 import heroImg from "@/assets/hero-tradie.jpg";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const Route = createFileRoute("/register")({
   component: RegisterPage,
@@ -27,258 +28,244 @@ function RegisterPage() {
 
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
-      {/* Left Column: Content */}
-      <div className="relative flex flex-col bg-white p-6 pt-32 md:p-12 md:pt-36 lg:p-16 lg:pt-40 overflow-y-auto max-h-screen">
-        <button 
+      {/* ── Left Column: Form Panel ── */}
+      <div className="relative flex flex-col bg-white p-6 pt-24 md:p-12 md:pt-24 lg:p-16 lg:pt-20 overflow-y-auto max-h-screen scrollbar-hide">
+        <button
           onClick={() => step !== "selection" ? setStep("selection") : navigate({ to: "/" })}
-          className="absolute top-8 left-8 flex items-center gap-2 text-slate-400 hover:text-slate-900 transition-colors text-[10px] font-bold uppercase tracking-widest"
+          className="absolute top-6 left-6 flex items-center gap-1.5 text-[#5a7089] hover:text-[#0A1830] transition-colors text-[9px] font-black uppercase tracking-widest"
         >
-          <ArrowLeft className="h-4 w-4" /> Back
+          <ArrowLeft className="h-3.5 w-3.5" /> {step === "selection" ? "Back to Home" : "Back"}
         </button>
 
-        <div className="flex-1 flex flex-col items-center justify-center max-w-2xl mx-auto w-full py-12">
-          <div className="text-center mb-10">
-            <h1 className="text-3xl font-black text-slate-900 tracking-tight leading-tight mb-3">
-              Welcome to <br />
-              <span className="text-primary">Trusted Tradie Network</span>
+        <div className="flex-1 flex flex-col items-center justify-center max-w-2xl mx-auto w-full py-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-10"
+          >
+            {/* Logo */}
+            <Link to="/" className="inline-flex items-center gap-3 mb-6 group mx-auto">
+              <div className="relative h-10 w-10">
+                <div className="absolute inset-0 bg-[#097DDD] rounded-xl rotate-12 group-hover:rotate-6 transition-transform duration-300" />
+                <div className="absolute inset-0 bg-[#0A1830] border-2 border-[#097DDD]/60 rounded-xl flex items-center justify-center">
+                  <MapPin className="h-4.5 w-4.5 text-[#097DDD]" />
+                </div>
+              </div>
+              <div className="flex flex-col leading-none text-left">
+                <span className="text-[#0A1830] font-black text-[17px] tracking-tight">
+                  My<span className="text-[#097DDD]">Local</span>Pro
+                </span>
+                <span className="text-[#5a7089] text-[9px] tracking-[0.18em] uppercase font-semibold">
+                  Local Services Made Easy
+                </span>
+              </div>
+            </Link>
+
+            <h1 className="text-3xl font-black text-[#0A1830] tracking-tight leading-tight mb-2">
+              Join the Network
             </h1>
-            <p className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em]">
-              {step === "selection" ? "Select your account type" : "Complete your profile details"}
+            <p className="text-[#5a7089] text-[9px] font-black uppercase tracking-[0.2em]">
+              {step === "selection" ? "Choose your account type" : "Complete your profile details"}
             </p>
-          </div>
+          </motion.div>
 
-          {step === "selection" ? (
-            <div className="w-full space-y-10">
-              <div className="grid grid-cols-2 gap-6 w-full">
+          <AnimatePresence mode="wait">
+            {step === "selection" ? (
+              <motion.div
+                key="selection"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                className="w-full space-y-8"
+              >
+                <div className="grid grid-cols-2 gap-4 md:gap-6 w-full">
+                  <button
+                    onClick={() => setRole("user")}
+                    className={`group relative flex flex-col items-center justify-center p-6 md:p-8 rounded-[2rem] border-2 transition-all duration-400 ${
+                      role === "user"
+                      ? "bg-[#0A1830] border-[#097DDD] text-white shadow-[0_12px_40px_rgb(10,24,48,0.25)] scale-[1.02]"
+                      : "bg-white border-[#E4EAF1] text-[#0A1830] hover:border-[#097DDD]/30 hover:shadow-[0_4px_24px_rgb(10,24,48,0.08)]"
+                    }`}
+                  >
+                    <div className={`h-14 w-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-400 ${
+                      role === "user" ? "bg-[#097DDD]" : "bg-[#E4EAF1]"
+                    }`}>
+                      <User className={`h-6 w-6 ${role === "user" ? "text-white" : "text-[#097DDD]"}`} />
+                    </div>
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] mb-2">As Customer</span>
+                    <p className={`text-[9px] text-center font-bold leading-relaxed uppercase opacity-50 ${role === "user" ? "text-white/80" : "text-[#5a7089]"}`}>
+                      Find trusted local pros for any job.
+                    </p>
+                    {role === "user" && <CheckCircle2 className="absolute top-4 right-4 h-4 w-4 text-[#097DDD]" />}
+                  </button>
+
+                  <button
+                    onClick={() => setRole("tradie")}
+                    className={`group relative flex flex-col items-center justify-center p-6 md:p-8 rounded-[2rem] border-2 transition-all duration-400 ${
+                      role === "tradie"
+                      ? "bg-[#0A1830] border-[#097DDD] text-white shadow-[0_12px_40px_rgb(10,24,48,0.25)] scale-[1.02]"
+                      : "bg-white border-[#E4EAF1] text-[#0A1830] hover:border-[#097DDD]/30 hover:shadow-[0_4px_24px_rgb(10,24,48,0.08)]"
+                    }`}
+                  >
+                    <div className={`h-14 w-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-400 ${
+                      role === "tradie" ? "bg-[#097DDD]" : "bg-[#E4EAF1]"
+                    }`}>
+                      <HardHat className={`h-6 w-6 ${role === "tradie" ? "text-white" : "text-[#097DDD]"}`} />
+                    </div>
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] mb-2">As Tradie</span>
+                    <p className={`text-[9px] text-center font-bold leading-relaxed uppercase opacity-50 ${role === "tradie" ? "text-white/80" : "text-[#5a7089]"}`}>
+                      List your business & get more work.
+                    </p>
+                    {role === "tradie" && <CheckCircle2 className="absolute top-4 right-4 h-4 w-4 text-[#097DDD]" />}
+                  </button>
+                </div>
+
                 <button
-                  onClick={() => setRole("user")}
-                  className={`group relative flex flex-col items-center justify-center p-8 rounded-3xl border-2 transition-all duration-300 ${
-                    role === "user" 
-                    ? "bg-primary border-primary text-white shadow-2xl shadow-primary/30 scale-[1.02]" 
-                    : "bg-white border-slate-100 text-slate-900 hover:border-primary/30"
+                  onClick={handleContinue}
+                  disabled={!role}
+                  className={`shine-btn w-full py-4.5 rounded-xl text-[11px] font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2.5 ${
+                    role
+                    ? "bg-[#097DDD] text-white shadow-[0_4px_24px_rgb(9,125,221,0.4)] hover:bg-[#0a8ef0] active:scale-[0.98]"
+                    : "bg-[#E4EAF1] text-[#5a7089]/50 cursor-not-allowed"
                   }`}
                 >
-                  <div className={`h-16 w-16 rounded-2xl flex items-center justify-center mb-6 transition-colors ${
-                    role === "user" ? "bg-white/20" : "bg-slate-50"
-                  }`}>
-                    <User className={`h-8 w-8 ${role === "user" ? "text-white" : "text-primary"}`} />
-                  </div>
-                  <span className="text-[11px] font-black uppercase tracking-[0.2em] mb-2">As User</span>
-                  <p className="text-[10px] text-center font-bold leading-relaxed uppercase opacity-60">
-                    Find trusted tradies and get your jobs done easily.
-                  </p>
+                  Continue <ChevronRight className="h-4 w-4" />
                 </button>
-
-                <button
-                  onClick={() => setRole("tradie")}
-                  className={`group relative flex flex-col items-center justify-center p-8 rounded-3xl border-2 transition-all duration-300 ${
-                    role === "tradie" 
-                    ? "bg-primary border-primary text-white shadow-2xl shadow-primary/30 scale-[1.02]" 
-                    : "bg-white border-slate-100 text-slate-900 hover:border-primary/30"
-                  }`}
-                >
-                  <div className={`h-16 w-16 rounded-2xl flex items-center justify-center mb-6 transition-colors ${
-                    role === "tradie" ? "bg-white/20" : "bg-slate-50"
-                  }`}>
-                    <HardHat className={`h-8 w-8 ${role === "tradie" ? "text-white" : "text-primary"}`} />
-                  </div>
-                  <span className="text-[11px] font-black uppercase tracking-[0.2em] mb-2">As Tradie</span>
-                  <p className="text-[10px] text-center font-bold leading-relaxed uppercase opacity-60">
-                    Get more jobs and grow your business today.
+              </motion.div>
+            ) : (
+              <motion.form
+                key="form"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                onSubmit={handleCreateAccount}
+                className="w-full space-y-6"
+              >
+                <div className="rounded-3xl bg-white border border-[#cdd6e3] shadow-[0_8px_40px_rgb(10,24,48,0.10)] p-8">
+                  <p className="text-[10px] font-bold text-[#5a7089]/60 uppercase tracking-widest mb-6">
+                    Mandatory fields are marked with <span className="text-red-500">*</span>
                   </p>
-                </button>
-              </div>
 
-              <button
-                onClick={handleContinue}
-                disabled={!role}
-                className={`w-full py-5 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 ${
-                  role 
-                  ? "bg-primary text-white shadow-xl shadow-primary/20 hover:opacity-90 active:scale-[0.98]" 
-                  : "bg-slate-100 text-slate-400 cursor-not-allowed"
-                }`}
-              >
-                Continue <ChevronRight className="h-5 w-5" />
-              </button>
-            </div>
-          ) : step === "user_form" ? (
-            <form onSubmit={handleCreateAccount} className="w-full space-y-6">
-              <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Fields marked with <span className="text-red-500">*</span> are mandatory.</p>
-              
-              <div className="grid md:grid-cols-2 gap-5">
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Full Name <span className="text-red-500">*</span></label>
-                  <input type="text" required placeholder="Enter full name" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 px-5 outline-none focus:border-primary/30 focus:bg-white transition-all text-sm font-medium" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Email Address <span className="text-red-500">*</span></label>
-                  <input type="email" required placeholder="Email" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 px-5 outline-none focus:border-primary/30 focus:bg-white transition-all text-sm font-medium" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Phone</label>
-                  <div className="relative">
-                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                    <input type="tel" placeholder="+61" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 pl-12 pr-5 outline-none focus:border-primary/30 focus:bg-white transition-all text-sm font-medium" />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Password <span className="text-red-500">*</span></label>
-                  <div className="relative">
-                    <input type={showPass ? "text" : "password"} required placeholder="Password" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 px-5 pr-12 outline-none focus:border-primary/30 focus:bg-white transition-all text-sm font-medium" />
-                    <button type="button" onClick={() => setShowPass(!showPass)} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary">
-                      {showPass ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                    </button>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Confirm Password <span className="text-red-500">*</span></label>
-                  <div className="relative">
-                    <input type={showPass ? "text" : "password"} required placeholder="Password" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 px-5 pr-12 outline-none focus:border-primary/30 focus:bg-white transition-all text-sm font-medium" />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Profile Picture</label>
-                  <label className="flex items-center justify-between w-full bg-slate-50 border border-slate-100 border-dashed rounded-xl py-4 px-5 cursor-pointer hover:bg-slate-100 transition-all">
-                    <span className="text-slate-400 text-sm">Upload</span>
-                    <Upload className="h-5 w-5 text-slate-400" />
-                    <input type="file" className="hidden" />
-                  </label>
-                </div>
-              </div>
+                  <div className="grid md:grid-cols-2 gap-5">
+                    {/* Common fields */}
+                    <div className="space-y-1.5">
+                      <label className={labelCls}>Full Name <span className="text-[#097DDD]">*</span></label>
+                      <input type="text" required placeholder="John Smith" className={inputCls} />
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className={labelCls}>Email Address <span className="text-[#097DDD]">*</span></label>
+                      <div className="relative">
+                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#097DDD]/40" />
+                        <input type="email" required placeholder="john@example.com" className={inputCls + " pl-11"} />
+                      </div>
+                    </div>
 
-              <label className="flex items-start gap-3 group cursor-pointer pt-2">
-                <input type="checkbox" required className="mt-1 rounded border-slate-300 text-primary focus:ring-primary h-4 w-4" />
-                <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest leading-relaxed">
-                  I agree to the <span className="text-primary hover:underline">Terms & Conditions</span> and <span className="text-primary hover:underline">Privacy Policy</span>
-                </span>
-              </label>
+                    {step === "tradie_form" && (
+                      <>
+                        <div className="space-y-1.5">
+                          <label className={labelCls}>Business Name</label>
+                          <input type="text" placeholder="e.g. Smith Plumbing" className={inputCls} />
+                        </div>
+                        <div className="space-y-1.5">
+                          <label className={labelCls}>Primary Trade <span className="text-[#097DDD]">*</span></label>
+                          <select required className={inputCls}>
+                            <option value="">Select...</option>
+                            <option>Plumbing</option>
+                            <option>Electrical</option>
+                            <option>Landscaping</option>
+                            <option>Carpentry</option>
+                          </select>
+                        </div>
+                      </>
+                    )}
 
-              <button
-                type="submit"
-                className="w-full bg-primary text-white py-5 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] shadow-xl shadow-primary/20 hover:opacity-90 active:scale-[0.98] transition-all"
-              >
-                Create Account
-              </button>
-            </form>
-          ) : (
-            <form onSubmit={handleCreateAccount} className="w-full space-y-6">
-              <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Fields marked with <span className="text-red-500">*</span> are mandatory.</p>
-              
-              <div className="grid md:grid-cols-2 gap-5">
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Full Name <span className="text-red-500">*</span></label>
-                  <input type="text" required placeholder="Enter full name" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 px-5 outline-none focus:border-primary/30 focus:bg-white transition-all text-sm font-medium" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Gender <span className="text-red-500">*</span></label>
-                  <div className="flex items-center gap-6 py-4">
-                    {["Male", "Female", "Other"].map((g) => (
-                      <label key={g} className="flex items-center gap-2 cursor-pointer group">
-                        <input type="radio" name="gender" required className="h-4 w-4 border-slate-300 text-primary focus:ring-primary" />
-                        <span className="text-xs font-bold text-slate-600 group-hover:text-primary transition-colors uppercase tracking-widest">{g}</span>
+                    <div className="space-y-1.5">
+                      <label className={labelCls}>Phone</label>
+                      <div className="relative">
+                        <Phone className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#097DDD]/40" />
+                        <input type="tel" placeholder="+61" className={inputCls + " pl-11"} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className={labelCls}>Password <span className="text-[#097DDD]">*</span></label>
+                      <div className="relative">
+                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#097DDD]/40" />
+                        <input type={showPass ? "text" : "password"} required placeholder="••••••••" className={inputCls + " pl-11 pr-12"} />
+                        <button type="button" onClick={() => setShowPass(!showPass)} className="absolute right-4 top-1/2 -translate-y-1/2 text-[#5a7089]/40 hover:text-[#097DDD]">
+                          {showPass ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="space-y-1.5 md:col-span-2">
+                      <label className={labelCls}>Profile Picture</label>
+                      <label className="flex items-center justify-between w-full bg-[#E4EAF1]/30 border border-[#cdd6e3] border-dashed rounded-xl py-3 px-5 cursor-pointer hover:bg-[#097DDD]/5 hover:border-[#097DDD]/30 transition-all group">
+                        <span className="text-[#5a7089]/60 text-xs font-medium">Choose an image...</span>
+                        <Upload className="h-4 w-4 text-[#097DDD]/60 group-hover:text-[#097DDD]" />
+                        <input type="file" className="hidden" />
                       </label>
-                    ))}
+                    </div>
                   </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Email Address <span className="text-red-500">*</span></label>
-                  <input type="email" required placeholder="Email" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 px-5 outline-none focus:border-primary/30 focus:bg-white transition-all text-sm font-medium" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Professional Experience (Years) <span className="text-red-500">*</span></label>
-                  <input type="number" required placeholder="Only numeric allowed" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 px-5 outline-none focus:border-primary/30 focus:bg-white transition-all text-sm font-medium" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Password <span className="text-red-500">*</span></label>
-                  <div className="relative">
-                    <input type={showPass ? "text" : "password"} required placeholder="Password" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 px-5 outline-none focus:border-primary/30 focus:bg-white transition-all text-sm font-medium" />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Confirm Password <span className="text-red-500">*</span></label>
-                  <div className="relative">
-                    <input type={showPass ? "text" : "password"} required placeholder="Password" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 px-5 outline-none focus:border-primary/30 focus:bg-white transition-all text-sm font-medium" />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Add your Service locations <span className="text-red-500">*</span></label>
-                  <select required className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 px-5 outline-none focus:border-primary/30 focus:bg-white transition-all text-sm font-medium text-slate-400">
-                    <option value="">Select...</option>
-                    <option>Hobart</option>
-                    <option>Launceston</option>
-                    <option>Devonport</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Select Categories <span className="text-red-500">*</span></label>
-                  <select required className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 px-5 outline-none focus:border-primary/30 focus:bg-white transition-all text-sm font-medium text-slate-400">
-                    <option value="">Select...</option>
-                    <option>Plumbing</option>
-                    <option>Electrical</option>
-                    <option>Gardening</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Phone</label>
-                  <div className="relative">
-                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                    <input type="tel" placeholder="+61" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 pl-12 pr-5 outline-none focus:border-primary/30 focus:bg-white transition-all text-sm font-medium" />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Business Name (If Available)</label>
-                  <input type="text" placeholder="Business name" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 px-5 outline-none focus:border-primary/30 focus:bg-white transition-all text-sm font-medium" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Website link (If Available)</label>
-                  <input type="url" placeholder="Website link" className="w-full bg-slate-50 border border-slate-100 rounded-xl py-4 px-5 outline-none focus:border-primary/30 focus:bg-white transition-all text-sm font-medium" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-500 ml-1">Profile Picture</label>
-                  <label className="flex items-center justify-between w-full bg-slate-50 border border-slate-100 border-dashed rounded-xl py-4 px-5 cursor-pointer hover:bg-slate-100 transition-all">
-                    <span className="text-slate-400 text-sm">Upload</span>
-                    <Upload className="h-5 w-5 text-slate-400" />
-                    <input type="file" className="hidden" />
+
+                  <label className="flex items-start gap-3 group cursor-pointer mt-8">
+                    <input type="checkbox" required className="mt-0.5 rounded border-[#cdd6e3] text-[#097DDD] focus:ring-[#097DDD]/20 h-4 w-4" />
+                    <span className="text-[10px] font-bold text-[#5a7089] uppercase tracking-widest leading-relaxed">
+                      I agree to the <span className="text-[#097DDD] hover:underline">Terms</span> and <span className="text-[#097DDD] hover:underline">Privacy Policy</span>
+                    </span>
                   </label>
+
+                  <button
+                    type="submit"
+                    className="shine-btn w-full bg-[#097DDD] text-white py-4.5 rounded-xl text-[11px] font-black uppercase tracking-[0.2em] shadow-[0_4px_24px_rgb(9,125,221,0.4)] hover:bg-[#0a8ef0] active:scale-[0.98] transition-all mt-8"
+                  >
+                    Create Account
+                  </button>
                 </div>
-              </div>
+              </motion.form>
+            )}
+          </AnimatePresence>
 
-              <label className="flex items-start gap-3 group cursor-pointer pt-2">
-                <input type="checkbox" required className="mt-1 rounded border-slate-300 text-primary focus:ring-primary h-4 w-4" />
-                <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest leading-relaxed">
-                  I agree to the <span className="text-primary hover:underline">Terms & Conditions</span> and <span className="text-primary hover:underline">Privacy Policy</span>
-                </span>
-              </label>
-
-              <button
-                type="submit"
-                className="w-full bg-primary text-white py-5 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] shadow-xl shadow-primary/20 hover:opacity-90 active:scale-[0.98] transition-all"
-              >
-                Next
-              </button>
-            </form>
-          )}
-
-          <p className="mt-8 text-center text-[10px] font-bold uppercase tracking-widest text-slate-400">
-            Already have an account? <Link to="/login" className="text-primary hover:underline">Sign In</Link>
+          <p className="mt-8 text-center text-[10px] font-black uppercase tracking-widest text-[#5a7089]/60">
+            Already have an account? <Link to="/login" className="text-[#097DDD] hover:underline">Sign In</Link>
           </p>
         </div>
       </div>
 
-      {/* Right Column: Image */}
+      {/* ── Right Column: Image Panel ── */}
       <div className="hidden lg:block relative overflow-hidden h-screen sticky top-0">
-        <img 
-          src={heroImg} 
-          alt="Tradie working" 
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-10000 hover:scale-110"
+        <img
+          src={heroImg}
+          alt="Tradie working"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-10000 hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-l from-black/20 to-transparent" />
-        
-        <div className="absolute bottom-12 right-12 bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-3xl animate-fade-up">
-          <p className="text-white text-3xl font-black mb-1">2,400+</p>
-          <p className="text-white/70 text-[10px] font-bold uppercase tracking-widest">Verified Tradies in Tasmania</p>
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-l from-[#0A1830]/80 via-[#0A1830]/30 to-transparent" />
+
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle, #E4EAF1 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="absolute bottom-12 right-12 glass-dark border border-white/15 p-8 rounded-[2.5rem] max-w-sm"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-10 w-10 rounded-xl bg-[#097DDD] flex items-center justify-center">
+              <CheckCircle2 className="h-5 w-5 text-white" />
+            </div>
+            <div>
+              <p className="text-white text-3xl font-black tracking-tight leading-none">2,400+</p>
+              <p className="text-[#E4EAF1]/50 text-[8px] font-black uppercase tracking-widest mt-0.5">Verified Professionals</p>
+            </div>
+          </div>
+          <p className="text-white/60 text-sm leading-relaxed font-medium">
+            Join Australia's fastest growing network of trusted local trades and services.
+          </p>
+        </motion.div>
       </div>
     </div>
   );
 }
+
+const labelCls = "text-[9px] font-black uppercase tracking-[0.22em] text-[#5a7089] ml-1";
+const inputCls = "w-full bg-[#E4EAF1]/30 border border-[#cdd6e3] rounded-xl py-3.5 px-4 outline-none focus:border-[#097DDD] focus:bg-white transition-all text-[#0A1830] font-medium text-sm placeholder:text-[#5a7089]/40";

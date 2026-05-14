@@ -1,89 +1,155 @@
 import { motion } from "framer-motion";
 import { MapPin, Search, CheckCircle2 } from "lucide-react";
 
+const steps = [
+  {
+    number: "01",
+    title: "Enter your location and find skilled experts near you.",
+    description: "Simply type your suburb or city and we'll show you verified local professionals ready to help.",
+    icon: <MapPin className="h-7 w-7 text-white" />,
+    iconBg: "bg-[#097DDD]",
+    cardBg: "bg-white",
+    accentColor: "#097DDD",
+  },
+  {
+    number: "02",
+    title: "Browse verified profiles, read reviews, and compare options.",
+    description: "Every pro is verified. Read real customer reviews and compare quotes to make the right choice.",
+    icon: <Search className="h-7 w-7 text-white" />,
+    iconBg: "bg-[#0A1830]",
+    cardBg: "bg-[#E4EAF1]",
+    accentColor: "#0A1830",
+    offset: "md:mt-12",
+  },
+  {
+    number: "03",
+    title: "Connect directly and get the job done with confidence.",
+    description: "Contact your chosen pro directly — no middlemen, no hidden fees. Just results.",
+    icon: <CheckCircle2 className="h-7 w-7 text-white" />,
+    iconBg: "bg-[#097DDD]",
+    cardBg: "bg-white",
+    accentColor: "#097DDD",
+  },
+];
+
 export function HowItWorks() {
-  const steps = [
-    {
-      title: "Enter your location and find skilled experts near you.",
-      icon: <MapPin className="h-10 w-10 text-orange-500" />,
-      color: "bg-[#FFF8F0]",
-      rotation: "-rotate-2"
-    },
-    {
-      title: "Browse verified profiles, read reviews, and compare options.",
-      icon: <Search className="h-10 w-10 text-blue-500" />,
-      color: "bg-[#F0F7FF]",
-      rotation: "rotate-2",
-      offset: "mt-12"
-    },
-    {
-      title: "Connect directly and get the job done with confidence.",
-      icon: <CheckCircle2 className="h-10 w-10 text-emerald-500" />,
-      color: "bg-[#F0FFF4]",
-      rotation: "-rotate-1"
-    },
-  ];
-
   return (
-    <section className="relative py-[50px] md:py-[50px] overflow-hidden bg-white">
+    <section className="relative py-[70px] md:py-[100px] bg-[#E4EAF1] overflow-hidden">
+      {/* Decorative top wave */}
+      <div className="absolute top-0 left-0 right-0 -mt-1">
+        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full rotate-180">
+          <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="white" />
+        </svg>
+      </div>
+
+      {/* Background grid dots */}
+      <div
+        className="absolute inset-0 opacity-[0.06]"
+        style={{
+          backgroundImage: "radial-gradient(circle, #097DDD 1px, transparent 1px)",
+          backgroundSize: "36px 36px",
+        }}
+      />
+
       <div className="container-app relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6">How It Works</h2>
-          <p className="text-slate-500 text-sm md:text-base leading-relaxed font-medium">
-            Trusted Tradie Network connects users with skilled trades in Australia, making it easy to find a tradie,
-            book a tradie, or hire tradies for any job. For tradies, it's a platform to secure quality tradie
-            jobs and grow their business. Simple, reliable, and efficient!
-          </p>
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <motion.span
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="section-label mb-5 block w-fit mx-auto"
+          >
+            Simple Process
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-3xl md:text-5xl font-black text-[#0A1830] mb-5"
+          >
+            How It{" "}
+            <span className="text-[#097DDD]">Works</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.18 }}
+            className="text-[#5a7089] text-sm md:text-base leading-relaxed"
+          >
+            MyLocalPro connects customers with trusted local trades across Australia —
+            making it simple to find, book, and hire the right pro for any job.
+          </motion.p>
         </div>
 
-        {/* Dashed Path (Desktop only) */}
-        <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-40 pointer-events-none">
-          <svg className="w-full h-full" viewBox="0 0 1000 200" fill="none">
-            <path
-              d="M0,100 C150,100 250,180 400,180 C550,180 650,20 800,20 C900,20 1000,100 1000,100"
-              stroke="#CBD5E1"
-              strokeWidth="2"
-              strokeDasharray="8 8"
-              className="animate-[dash_20s_linear_infinite]"
-            />
-          </svg>
-        </div>
+        {/* Steps */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 relative">
+          {/* Connecting dashed line (desktop) */}
+          <div className="hidden md:block absolute top-16 left-[16.7%] right-[16.7%] h-[2px] pointer-events-none">
+            <svg width="100%" height="2" xmlns="http://www.w3.org/2000/svg">
+              <line
+                x1="0" y1="1" x2="100%" y2="1"
+                stroke="#097DDD"
+                strokeWidth="2"
+                strokeDasharray="8 8"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 relative">
           {steps.map((step, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.2 }}
-              className={`flex flex-col items-center text-center ${step.offset || ''}`}
+              transition={{ delay: idx * 0.18 }}
+              className={`${step.offset || ''}`}
             >
-              <div className={`relative w-full max-w-[320px] p-10 rounded-[2.5rem] ${step.color} ${step.rotation} border border-slate-100 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-500 group cursor-default`}>
-                <div className="mb-8 flex justify-center">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-white rounded-full blur-xl opacity-50 group-hover:opacity-100 transition-opacity" />
-                    <div className="relative h-20 w-20 bg-white rounded-3xl shadow-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-500">
-                      {step.icon}
-                    </div>
-                  </div>
+              <div
+                className={`group relative ${step.cardBg} rounded-3xl p-8 border border-[#cdd6e3] shadow-[0_2px_24px_rgb(10,24,48,0.07)] hover:shadow-[0_8px_40px_rgb(10,24,48,0.13)] hover:-translate-y-2 transition-all duration-400 cursor-default overflow-hidden`}
+              >
+                {/* Step number watermark */}
+                <span
+                  className="absolute top-4 right-6 text-6xl font-black opacity-[0.05] select-none"
+                  style={{ color: step.accentColor }}
+                >
+                  {step.number}
+                </span>
+
+                {/* Icon */}
+                <div className={`mb-6 inline-flex h-14 w-14 rounded-2xl ${step.iconBg} items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                  {step.icon}
                 </div>
-                <h3 className="text-xl font-bold text-slate-800 leading-snug">
+
+                {/* Step badge */}
+                <div
+                  className="mb-3 inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.2em]"
+                  style={{ background: `${step.accentColor}18`, color: step.accentColor }}
+                >
+                  Step {step.number}
+                </div>
+
+                <h3 className="text-[15px] font-bold text-[#0A1830] leading-snug mb-3">
                   {step.title}
                 </h3>
+                <p className="text-sm text-[#5a7089] leading-relaxed">
+                  {step.description}
+                </p>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
 
-      <style>{`
-        @keyframes dash {
-          to {
-            stroke-dashoffset: -1000;
-          }
-        }
-      `}</style>
+      {/* Decorative bottom wave */}
+      <div className="absolute bottom-0 left-0 right-0 -mb-1">
+        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+          <path d="M0,40 C360,0 1080,80 1440,40 L1440,80 L0,80 Z" fill="white" />
+        </svg>
+      </div>
     </section>
   );
 }

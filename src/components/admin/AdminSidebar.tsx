@@ -46,32 +46,48 @@ export function AdminSidebar() {
     exact ? pathname === url : pathname === url || pathname.startsWith(url + "/");
 
   return (
-    <Sidebar collapsible="icon" className="border-r">
-      <SidebarHeader className="border-b border-sidebar-border/50 p-4">
+    <Sidebar collapsible="icon" className="border-r border-[#E4EAF1] bg-[#0A1830] text-white">
+      <SidebarHeader className="border-b border-white/10 p-4">
         <Link to="/admin" className="flex items-center gap-3 px-2 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white font-black text-xl shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform">
-            M
+          <div className="relative h-9 w-9">
+            <div className="absolute inset-0 bg-[#097DDD] rounded-xl rotate-12 group-hover:rotate-6 transition-transform duration-300" />
+            <div className="absolute inset-0 bg-[#0A1830] border border-[#097DDD]/60 rounded-xl flex items-center justify-center">
+              <MapPin className="h-4 w-4 text-[#097DDD]" />
+            </div>
           </div>
           {!collapsed && (
             <div className="flex flex-col leading-tight">
-              <span className="text-sm font-black uppercase tracking-widest text-slate-900">MyLocalPro</span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Super Admin</span>
+              <span className="text-[14px] font-black tracking-tight text-white">
+                My<span className="text-[#097DDD]">Local</span>Pro
+              </span>
+              <span className="text-[9px] font-black uppercase tracking-[0.2em] text-[#097DDD]">Super Admin</span>
             </div>
           )}
         </Link>
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className="bg-[#0A1830]">
         <SidebarGroup>
-          <SidebarGroupLabel>Management</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-white/40 text-[9px] font-black uppercase tracking-[0.22em] px-4 py-2">
+            Management
+          </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="px-2 space-y-1">
               {items.map((item) => (
                 <SidebarMenuItem key={item.url}>
-                  <SidebarMenuButton asChild isActive={isActive(item.url, item.exact)}>
-                    <Link to={item.url} className="flex items-center gap-2">
-                      <item.icon className="h-4 w-4" />
-                      {!collapsed && <span>{item.title}</span>}
+                  <SidebarMenuButton
+                    asChild
+                    isActive={isActive(item.url, item.exact)}
+                    className={`
+                      flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-300
+                      ${isActive(item.url, item.exact)
+                        ? "bg-[#097DDD] text-white shadow-[0_4px_16px_rgb(9,125,221,0.3)]"
+                        : "text-white/60 hover:text-white hover:bg-white/5"}
+                    `}
+                  >
+                    <Link to={item.url}>
+                      <item.icon className={`h-4.5 w-4.5 ${isActive(item.url, item.exact) ? "text-white" : "text-[#097DDD]/70"}`} />
+                      {!collapsed && <span className="text-sm font-bold tracking-tight">{item.title}</span>}
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -80,6 +96,19 @@ export function AdminSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+
+      {/* Sidebar Footer */}
+      {!collapsed && (
+        <div className="p-4 border-t border-white/10 bg-[#0A1830]">
+          <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
+            <div className="text-[9px] font-black uppercase tracking-widest text-white/30 mb-2">Cloud Status</div>
+            <div className="flex items-center gap-2">
+              <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[11px] font-bold text-white/80">All Systems Operational</span>
+            </div>
+          </div>
+        </div>
+      )}
     </Sidebar>
   );
 }

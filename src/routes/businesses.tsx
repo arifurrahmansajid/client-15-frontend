@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { Search, MapPin, SlidersHorizontal } from "lucide-react";
+import { Search, MapPin, SlidersHorizontal, X } from "lucide-react";
 import { BUSINESSES, CATEGORIES, LOCATIONS } from "@/lib/mock-data";
 import { BusinessCard } from "@/components/cards/BusinessCard";
+import { motion } from "framer-motion";
 
 type Search = { category?: string; location?: string };
 
@@ -14,7 +15,7 @@ export const Route = createFileRoute("/businesses")({
   head: () => ({
     meta: [
       { title: "Find a Local Pro — MyLocalPro Australia" },
-      { name: "description", content: "Browse trusted local tradespeople and service providers across Tasmania." },
+      { name: "description", content: "Browse trusted local tradespeople and service providers across Australia." },
     ],
   }),
   component: BusinessesPage,
@@ -35,65 +36,148 @@ function BusinessesPage() {
     });
   }, [category, location, query]);
 
+  const hasFilters = category || location || query;
+
   return (
     <>
-      <section className="bg-surface border-b border-border">
-        <div className="container-app py-[50px] md:py-[50px]">
-          <h1 className="text-3xl md:text-5xl font-bold">Find a local pro</h1>
-          <p className="mt-3 text-muted-foreground max-w-2xl">
-            Browse {BUSINESSES.length}+ trusted Tasmanian businesses. Filter by service or location.
-          </p>
+      {/* ── Hero Banner ── */}
+      <section className="relative bg-navy-gradient pt-28 pb-16 overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #E4EAF1 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+        <div className="absolute top-0 right-1/4 w-[400px] h-[300px] bg-[#097DDD]/15 rounded-full blur-[80px] pointer-events-none" />
+
+        <div className="container-app relative z-10">
+          <motion.span
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="section-label-dark mb-4 block"
+          >
+            {BUSINESSES.length}+ Verified Professionals
+          </motion.span>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-3xl md:text-5xl font-black text-white leading-tight mb-3"
+          >
+            Find a{" "}
+            <span className="text-[#097DDD]">Local Pro</span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18 }}
+            className="text-[#E4EAF1]/60 max-w-xl text-base"
+          >
+            Browse {BUSINESSES.length}+ trusted Australian businesses. Filter by service or location to find the right match.
+          </motion.p>
+        </div>
+
+        {/* Wave */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+            <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="white" />
+          </svg>
         </div>
       </section>
 
-      <section className="container-app -mt-6 relative z-10">
-        <div className="rounded-2xl bg-card border border-border shadow-card p-3 grid md:grid-cols-[1fr_1fr_1fr_auto] gap-2 items-center">
-          <label className="flex items-center gap-2 px-3">
-            <Search className="h-4 w-4 text-primary" />
+      {/* ── Search / Filter Bar ── */}
+      <section className="container-app -mt-1 relative z-10 py-6">
+        <div className="rounded-2xl bg-white border border-[#cdd6e3] shadow-[0_4px_32px_rgb(10,24,48,0.1)] p-3 grid md:grid-cols-[1fr_1fr_1fr_auto] gap-2 items-center">
+          <label className="flex items-center gap-2.5 px-3 py-1 rounded-xl hover:bg-[#E4EAF1]/50 transition-colors">
+            <Search className="h-4 w-4 text-[#097DDD] shrink-0" />
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by name or keyword"
-              className="w-full bg-transparent py-2.5 outline-none text-sm"
+              placeholder="Search by name or keyword..."
+              className="w-full bg-transparent py-2 outline-none text-sm text-[#0A1830] placeholder:text-[#5a7089]/60 font-medium"
             />
           </label>
-          <label className="flex items-center gap-2 px-3 md:border-l md:border-border">
-            <SlidersHorizontal className="h-4 w-4 text-primary" />
-            <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full bg-transparent py-2.5 outline-none text-sm">
-              <option value="">All services</option>
-              {CATEGORIES.map((c) => (<option key={c.slug} value={c.slug}>{c.name}</option>))}
-            </select>
+
+          <label className="flex flex-col gap-0.5 px-3 py-1 md:border-l md:border-[#E4EAF1] rounded-xl hover:bg-[#E4EAF1]/50 transition-colors">
+            <span className="text-[8px] uppercase tracking-[0.2em] text-[#097DDD] font-black">Service</span>
+            <div className="flex items-center gap-2">
+              <SlidersHorizontal className="h-3.5 w-3.5 text-[#097DDD] shrink-0" />
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="w-full bg-transparent py-1.5 outline-none text-sm text-[#0A1830] font-medium cursor-pointer"
+              >
+                <option value="">All services</option>
+                {CATEGORIES.map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}
+              </select>
+            </div>
           </label>
-          <label className="flex items-center gap-2 px-3 md:border-l md:border-border">
-            <MapPin className="h-4 w-4 text-primary" />
-            <select value={location} onChange={(e) => setLocation(e.target.value)} className="w-full bg-transparent py-2.5 outline-none text-sm">
-              <option value="">All locations</option>
-              {LOCATIONS.map((l) => (<option key={l} value={l}>{l}</option>))}
-            </select>
+
+          <label className="flex flex-col gap-0.5 px-3 py-1 md:border-l md:border-[#E4EAF1] rounded-xl hover:bg-[#E4EAF1]/50 transition-colors">
+            <span className="text-[8px] uppercase tracking-[0.2em] text-[#097DDD] font-black">Location</span>
+            <div className="flex items-center gap-2">
+              <MapPin className="h-3.5 w-3.5 text-[#097DDD] shrink-0" />
+              <select
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="w-full bg-transparent py-1.5 outline-none text-sm text-[#0A1830] font-medium cursor-pointer"
+              >
+                <option value="">All locations</option>
+                {LOCATIONS.map((l) => <option key={l} value={l}>{l}</option>)}
+              </select>
+            </div>
           </label>
-          <button
-            type="button"
-            onClick={() => { setCategory(""); setLocation(""); setQuery(""); }}
-            className="rounded-xl px-4 py-2.5 text-sm font-semibold text-muted-foreground hover:text-foreground"
-          >
-            Clear
-          </button>
+
+          {hasFilters ? (
+            <button
+              type="button"
+              onClick={() => { setCategory(""); setLocation(""); setQuery(""); }}
+              className="flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-[10px] font-black uppercase tracking-widest text-[#097DDD] hover:bg-[#097DDD]/10 transition-colors"
+            >
+              <X className="h-3.5 w-3.5" />
+              Clear
+            </button>
+          ) : (
+            <div className="w-[72px]" />
+          )}
         </div>
       </section>
 
-      <section className="container-app py-[50px]">
-        <p className="text-sm text-muted-foreground mb-6">{results.length} {results.length === 1 ? "result" : "results"}</p>
+      {/* ── Results ── */}
+      <section className="container-app pb-20">
+        <div className="flex items-center justify-between mb-6">
+          <p className="text-sm font-semibold text-[#5a7089]">
+            <span className="text-[#0A1830] font-black">{results.length}</span>{" "}
+            {results.length === 1 ? "result" : "results"} found
+          </p>
+          {hasFilters && (
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#097DDD] bg-[#097DDD]/8 rounded-full px-3 py-1">
+              Filtered
+            </span>
+          )}
+        </div>
+
         {results.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-border p-12 text-center">
-            <h3 className="text-lg font-semibold">No matches found</h3>
-            <p className="mt-2 text-sm text-muted-foreground">Try clearing your filters or browse all categories.</p>
-            <Link to="/categories" className="mt-4 inline-block text-sm font-semibold text-primary hover:underline">
+          <div className="rounded-3xl border-2 border-dashed border-[#cdd6e3] bg-[#E4EAF1]/40 p-16 text-center">
+            <div className="h-16 w-16 rounded-2xl bg-[#097DDD]/10 flex items-center justify-center mx-auto mb-4">
+              <Search className="h-7 w-7 text-[#097DDD]" />
+            </div>
+            <h3 className="text-xl font-black text-[#0A1830] mb-2">No matches found</h3>
+            <p className="text-sm text-[#5a7089] mb-6">Try clearing your filters or browse all categories.</p>
+            <Link
+              to="/categories"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#097DDD] px-6 py-3 text-[10px] font-black uppercase tracking-widest text-white hover:bg-[#0a8ef0] transition-colors"
+            >
               Browse all categories
             </Link>
           </div>
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {results.map((b) => (<BusinessCard key={b.id} business={b} />))}
+            {results.map((b, i) => (
+              <motion.div
+                key={b.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05 }}
+              >
+                <BusinessCard business={b} />
+              </motion.div>
+            ))}
           </div>
         )}
       </section>

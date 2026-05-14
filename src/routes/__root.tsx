@@ -15,21 +15,20 @@ import { Footer } from "@/components/layout/Footer";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
+    <div className="flex min-h-screen items-center justify-center bg-navy-gradient px-4">
+      <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #E4EAF1 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+      <div className="relative z-10 max-w-md text-center">
+        <div className="text-8xl font-black text-[#097DDD]/30 mb-2">404</div>
+        <h1 className="text-3xl font-black text-white mb-3">Page not found</h1>
+        <p className="text-[#E4EAF1]/55 mb-8">
           The page you're looking for doesn't exist or has been moved.
         </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:opacity-90"
-          >
-            Go home
-          </Link>
-        </div>
+        <Link
+          to="/"
+          className="shine-btn inline-flex items-center justify-center gap-2 rounded-xl bg-[#097DDD] px-7 py-3.5 text-[11px] font-black uppercase tracking-widest text-white shadow-[0_4px_20px_rgb(9,125,221,0.4)] hover:bg-[#0a8ef0] transition-all"
+        >
+          Go Home
+        </Link>
       </div>
     </div>
   );
@@ -89,7 +88,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap",
       },
     ],
   }),
@@ -125,7 +124,7 @@ function RootComponent() {
       ) : (
         <div className="flex min-h-screen flex-col">
           <Navbar />
-          <main className={`flex-1 ${pathname === "/" ? "" : "pt-24 md:pt-32"}`}>
+          <main className={`flex-1 ${pathname === "/" ? "" : "pt-[72px]"}`}>
             <Outlet />
           </main>
           <Footer />

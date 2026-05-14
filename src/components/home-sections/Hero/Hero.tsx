@@ -1,176 +1,195 @@
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle2, MapPin, Search, Shield, Sparkles, Star, ChevronDown } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ArrowRight, CheckCircle, MapPin, Star, Users } from "lucide-react";
 import heroImg from "@/assets/hero-tradie.jpg";
-import { CATEGORIES, LOCATIONS } from "@/lib/mock-data";
+import { motion } from "framer-motion";
+
+const stats = [
+  { value: "500+", label: "Local Pros" },
+  { value: "19", label: "Service Types" },
+  { value: "4.9★", label: "Avg Rating" },
+  { value: "Free", label: "For Customers" },
+];
 
 export function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % 2);
-    }, 10000);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
-    <section className="relative h-screen min-h-[700px] w-full overflow-hidden bg-[#0A121E]">
-      {/* Background Slides */}
-      <div className="absolute inset-0 z-0">
-        <div
-          className="flex h-full w-full transition-transform duration-1000 ease-in-out"
-          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-        >
-          {/* Slide 1 */}
-          <div className="relative h-full w-full flex-shrink-0">
-            <img src={heroImg} className="absolute inset-0 h-full w-full object-cover" alt="Background" />
-            <div className="absolute inset-0 bg-black/35" />
-          </div>
-          {/* Slide 2 */}
-          <div className="relative h-full w-full flex-shrink-0">
-            <div className="absolute inset-0 bg-[#0A121E]" />
-            <img src={heroImg} className="absolute inset-0 h-full w-full object-cover opacity-40" alt="Background" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          </div>
-        </div>
-      </div>
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-navy-gradient">
+      {/* Background image with dark overlay */}
+      <img
+        src={heroImg}
+        alt="Local tradie at work"
+        className="absolute inset-0 h-full w-full object-cover opacity-20"
+      />
 
-      {/* Content Container */}
-      <div className="relative z-10 container-app h-full flex flex-col items-center justify-center text-center px-4">
-        <div key={currentSlide} className="animate-fade-up space-y-8 max-w-4xl">
-          <div className="space-y-6">
-            <span className="inline-flex items-center gap-2 rounded-full bg-primary text-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] shadow-lg animate-fade-in delay-100">
-              <Sparkles className="h-3 w-3" /> Tasmania's #1 Tradie Network
-            </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] tracking-tight uppercase animate-fade-up delay-200">
-              {currentSlide === 0 ? (
-                <>Find a <span className="text-primary">trusted local pro</span> in minutes</>
-              ) : (
-                <>Your go-to platform for hiring <span className="text-primary">skilled tradies</span></>
-              )}
-            </h1>
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed animate-fade-up delay-300">
-              Plumbers, cleaners, gardeners, sparkies and more — all genuinely local to Tasmania. No accounts. No fuss.
-            </p>
-          </div>
+      {/* Layered gradient overlays */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0A1830] via-[#0A1830]/90 to-[#0A1830]/70" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0A1830] via-transparent to-transparent" />
 
-          <div className="flex flex-col items-center gap-8 animate-fade-up delay-500">
-            <div className="flex flex-wrap items-center justify-center gap-4">
+      {/* Decorative blue glow blobs */}
+      <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#097DDD]/12 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#097DDD]/8 rounded-full blur-[80px] pointer-events-none" />
+
+      {/* Grid dot pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: "radial-gradient(circle, #097DDD 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }}
+      />
+
+      <div className="relative z-10 container-app pt-32 pb-20 w-full">
+        <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] items-center">
+
+          {/* ── Left Content ── */}
+          <div className="space-y-8 text-center lg:text-left">
+            {/* Label pill */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55 }}
+            >
+              <span className="section-label-dark">
+                <MapPin className="h-2.5 w-2.5" />
+                Trusted Local Services — Australia
+              </span>
+            </motion.div>
+
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: 0.1 }}
+              className="text-4xl md:text-5xl lg:text-[3.4rem] font-black leading-[1.08] text-white"
+            >
+              Find Trusted{" "}
+              <span className="relative inline-block">
+                <span className="text-[#097DDD]">Local Pros</span>
+                <span className="absolute -bottom-1 left-0 right-0 h-[3px] bg-gradient-to-r from-[#097DDD] to-[#097DDD]/0 rounded-full" />
+              </span>
+              <br />
+              Near You — Fast.
+            </motion.h1>
+
+            {/* Sub-text */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-[#E4EAF1]/70 text-base md:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0"
+            >
+              Search by service and location, connect directly with verified
+              tradies, and get the job done. Free for customers — always.
+            </motion.p>
+
+            {/* Trust badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.28 }}
+              className="flex flex-wrap gap-3 justify-center lg:justify-start"
+            >
+              {[
+                "Verified Professionals",
+                "No Hidden Fees",
+                "Instant Contact",
+              ].map((badge) => (
+                <span
+                  key={badge}
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#E4EAF1]/80"
+                >
+                  <CheckCircle className="h-3.5 w-3.5 text-[#097DDD]" />
+                  {badge}
+                </span>
+              ))}
+            </motion.div>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+            >
               <Link
                 to="/businesses"
-                className="group relative inline-flex items-center gap-3 rounded-md bg-primary px-8 py-4 text-sm font-black uppercase tracking-widest text-white shadow-[0_15px_40px_rgba(0,87,225,0.3)] hover:opacity-90 transition-all duration-300 hover:scale-105"
+                className="shine-btn inline-flex items-center justify-center gap-2 rounded-xl bg-[#097DDD] px-8 py-4 text-sm font-black uppercase tracking-[0.15em] text-white shadow-[0_6px_30px_rgb(9,125,221,0.45)] hover:shadow-[0_8px_40px_rgb(9,125,221,0.6)] hover:bg-[#0a8ef0] transition-all duration-300 group"
               >
-                Get Started <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                Find a Local Pro
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 to="/list-business"
-                className="inline-flex items-center gap-3 rounded-md bg-white/10 backdrop-blur-md border border-white/20 px-8 py-4 text-sm font-black uppercase tracking-widest text-white hover:bg-white/20 transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/6 px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-white/90 hover:bg-white/12 hover:border-white/25 transition-all duration-300 backdrop-blur-sm"
               >
-                Join as a Pro
+                List Your Business
               </Link>
-            </div>
+            </motion.div>
 
-            <div className="w-full max-w-4xl transform">
-              <SearchSection />
-            </div>
+            {/* Stats row */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.45 }}
+              className="flex flex-wrap gap-6 justify-center lg:justify-start pt-2"
+            >
+              {stats.map((stat) => (
+                <div key={stat.label} className="text-center lg:text-left">
+                  <div className="text-xl font-black text-white">{stat.value}</div>
+                  <div className="text-[10px] uppercase tracking-[0.18em] text-white/45 font-semibold">{stat.label}</div>
+                </div>
+              ))}
+            </motion.div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-8 pt-4 text-white/60 animate-fade-in delay-700">
-            <div className="flex items-center gap-2 font-bold uppercase tracking-widest text-[10px]">
-              <Shield className="h-4 w-4 text-primary" /> Verified locals
+          {/* ── Right — Hero Image Card ── */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="hidden lg:block relative"
+          >
+            {/* Glowing border frame */}
+            <div className="absolute -inset-1 bg-gradient-to-br from-[#097DDD]/50 to-transparent rounded-[2.5rem] blur-xl" />
+            <div className="relative rounded-[2.2rem] overflow-hidden border border-white/12 shadow-[0_30px_80px_rgb(0,0,0,0.5)]">
+              <img
+                src={heroImg}
+                alt="Tradie at work"
+                className="h-[520px] w-full object-cover"
+              />
+              {/* Image overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A1830]/60 to-transparent" />
+
+              {/* Floating stat card */}
+              <div className="absolute bottom-6 left-6 right-6 glass-dark rounded-2xl p-4 flex items-center gap-4">
+                <div className="h-10 w-10 rounded-xl bg-[#097DDD] flex items-center justify-center shrink-0">
+                  <Star className="h-5 w-5 text-white fill-white" />
+                </div>
+                <div>
+                  <div className="text-white font-bold text-sm">Top-Rated Pros</div>
+                  <div className="text-white/50 text-xs">Verified & reviewed by real customers</div>
+                </div>
+                <div className="ml-auto flex -space-x-2">
+                  {[...Array(4)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="h-7 w-7 rounded-full border-2 border-[#0A1830] bg-gradient-to-br from-[#097DDD] to-[#0a8ef0] flex items-center justify-center text-[9px] font-bold text-white"
+                    >
+                      {["J", "S", "M", "A"][i]}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-2 font-bold uppercase tracking-widest text-[10px]">
-              <Star className="h-4 w-4 text-primary fill-primary" /> Real reviews
-            </div>
-            <div className="flex items-center gap-2 font-bold uppercase tracking-widest text-[10px]">
-              <CheckCircle2 className="h-4 w-4 text-primary" /> Free to use
-            </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
-      {/* Slide Indicators */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-3">
-        {[0, 1].map((i) => (
-          <button
-            key={i}
-            onClick={() => setCurrentSlide(i)}
-            className={`h-1 transition-all duration-500 rounded-full ${i === currentSlide ? 'w-16 ' : 'w-8 hover:bg-white/40'
-              }`}
-          />
-        ))}
+      {/* Bottom wave separator */}
+      <div className="absolute bottom-0 left-0 right-0">
+        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+          <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="white" />
+        </svg>
       </div>
     </section>
-  );
-}
-
-function SearchSection() {
-  const navigate = useNavigate();
-  const [category, setCategory] = useState("");
-  const [location, setLocation] = useState("");
-
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    navigate({
-      to: "/businesses",
-      search: { category: category || undefined, location: location || undefined } as never,
-    });
-  };
-
-  return (
-    <div className="relative group w-full max-w-5xl mx-auto px-4">
-      <div className="absolute -inset-1 bg-primary/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition duration-1000"></div>
-
-      <section className="relative rounded-2xl md:rounded-full bg-white p-2 shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100">
-        <form onSubmit={submit} className="flex flex-col md:flex-row items-stretch md:items-center gap-1">
-          <label className="relative flex flex-[1.2] items-center gap-3 rounded-xl md:rounded-full px-6 py-3 hover:bg-slate-50 transition-all cursor-pointer group/field">
-            <Search className="h-5 w-5 text-primary shrink-0 transition-transform group-focus-within/field:scale-110" />
-            <div className="flex flex-col flex-1 items-start text-left overflow-hidden">
-              <span className="text-[9px] font-black uppercase tracking-[0.15em] text-slate-400 mb-0.5">Service</span>
-              <select
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                className="w-full bg-transparent text-base font-bold outline-none appearance-none pr-6 text-slate-900 cursor-pointer truncate"
-              >
-                <option value="">What do you need?</option>
-                {CATEGORIES.map((c) => (
-                  <option key={c.slug} value={c.slug}>{c.name}</option>
-                ))}
-              </select>
-            </div>
-            <ChevronDown className="absolute right-5 h-4 w-4 text-slate-300 pointer-events-none group-hover/field:text-primary transition-colors" />
-          </label>
-
-          <div className="hidden md:block w-px h-10 bg-slate-100 mx-1" />
-
-          <label className="relative flex flex-1 items-center gap-3 rounded-xl md:rounded-full px-6 py-3 hover:bg-slate-50 transition-all cursor-pointer group/field">
-            <MapPin className="h-5 w-5 text-primary shrink-0 transition-transform group-focus-within/field:scale-110" />
-            <div className="flex flex-col flex-1 items-start text-left overflow-hidden">
-              <span className="text-[9px] font-black uppercase tracking-[0.15em] text-slate-400 mb-0.5">Location</span>
-              <select
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                className="w-full bg-transparent text-base font-bold outline-none appearance-none pr-6 text-slate-900 cursor-pointer truncate"
-              >
-                <option value="">Choose location</option>
-                {LOCATIONS.map((l) => (
-                  <option key={l} value={l}>{l}</option>
-                ))}
-              </select>
-            </div>
-            <ChevronDown className="absolute right-5 h-4 w-4 text-slate-300 pointer-events-none group-hover/field:text-primary transition-colors" />
-          </label>
-
-          <button
-            type="submit"
-            className="md:ml-2 rounded-xl md:rounded-full bg-primary text-white font-black px-10 py-4 hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/25 flex items-center justify-center gap-3 text-base group/btn"
-          >
-            Search
-            <ArrowRight className="h-5 w-5 group-hover/btn:translate-x-1 transition-transform" />
-          </button>
-        </form>
-      </section>
-    </div>
   );
 }
