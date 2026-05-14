@@ -46,8 +46,19 @@ export function Navbar() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
+
+    if (isHomePage && !localStorage.getItem("locationPopupShown")) {
+      setOpen(true);
+      localStorage.setItem("locationPopupShown", "true");
+      const timeout = window.setTimeout(() => setOpen(false), 5000);
+      return () => {
+        window.clearTimeout(timeout);
+        window.removeEventListener("scroll", onScroll);
+      };
+    }
+
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isHomePage]);
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
@@ -74,7 +85,7 @@ export function Navbar() {
           </Link>
 
           {/* ── Location Picker ── */}
-          <Dialog>
+          <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
               <button
                 type="button"

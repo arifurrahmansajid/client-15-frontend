@@ -12,6 +12,8 @@ import {
 import appCss from "../styles.css?url";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { SplashLoader } from "@/components/layout/SplashLoader";
+import { PageTransition } from "@/components/layout/PageTransition";
 
 function NotFoundComponent() {
   return (
@@ -119,13 +121,20 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      {/* Splash screen — shows once on initial load */}
+      <SplashLoader />
+
       {isAdmin ? (
-        <Outlet />
+        <PageTransition>
+          <Outlet />
+        </PageTransition>
       ) : (
         <div className="flex min-h-screen flex-col">
           <Navbar />
           <main className={`flex-1 ${pathname === "/" ? "" : "pt-[72px]"}`}>
-            <Outlet />
+            <PageTransition>
+              <Outlet />
+            </PageTransition>
           </main>
           <Footer />
         </div>

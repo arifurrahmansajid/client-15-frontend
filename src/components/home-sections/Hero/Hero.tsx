@@ -1,9 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle, MapPin, Star, Users } from "lucide-react";
-import heroImg from "@/assets/hero-tradie.jpg";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { CATEGORIES, LOCATIONS } from "@/lib/mock-data";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const stats = [
   { value: "500+", label: "Local Pros" },
@@ -12,18 +11,57 @@ const stats = [
   { value: "Free", label: "For Customers" },
 ];
 
+const heroSlides = [
+  {
+    src: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&h=520&fit=crop",
+    alt: "Electrician at work",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1504148455328-4adc7f820df4?w=800&h=520&fit=crop",
+    alt: "Plumber working",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&h=520&fit=crop",
+    alt: "Lawn mowing and gardening",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1589939705384-5185138a04b9?w=800&h=520&fit=crop",
+    alt: "Professional painter",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1541888941259-792739460572?w=800&h=520&fit=crop",
+    alt: "Builder at construction site",
+  },
+];
+
 export function Hero() {
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
+  const [slideIdx, setSlideIdx] = useState(0);
+
+  // Auto-advance every 3.5 s
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSlideIdx((prev) => (prev + 1) % heroSlides.length);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-navy-gradient">
       {/* Background image with dark overlay */}
-      <img
-        src={heroImg}
-        alt="Local tradie at work"
-        className="absolute inset-0 h-full w-full object-cover opacity-20"
-      />
+      <AnimatePresence mode="sync">
+        <motion.img
+          key={slideIdx + "-bg"}
+          src={heroSlides[slideIdx].src}
+          alt="background"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.12 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2 }}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      </AnimatePresence>
 
       {/* Layered gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0A1830] via-[#0A1830]/90 to-[#0A1830]/70" />
@@ -166,7 +204,7 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* ── Right — Hero Image Card ── */}
+          {/* ── Right — Hero Image Slider Card ── */}
           <motion.div
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -176,32 +214,60 @@ export function Hero() {
             {/* Glowing border frame */}
             <div className="absolute -inset-1 bg-gradient-to-br from-[#097DDD]/50 to-transparent rounded-[2.5rem] blur-xl" />
             <div className="relative rounded-[2.2rem] overflow-hidden border border-white/12 shadow-[0_30px_80px_rgb(0,0,0,0.5)]">
-              <img
-                src={heroImg}
-                alt="Tradie at work"
-                className="h-[520px] w-full object-cover"
-              />
-              {/* Image overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A1830]/60 to-transparent" />
 
-              {/* Floating stat card */}
-              <div className="absolute bottom-6 left-6 right-6 glass-dark rounded-2xl p-4 flex items-center gap-4">
-                <div className="h-10 w-10 rounded-xl bg-[#097DDD] flex items-center justify-center shrink-0">
-                  <Star className="h-5 w-5 text-white fill-white" />
-                </div>
-                <div>
-                  <div className="text-white font-bold text-sm">Top-Rated Pros</div>
-                  <div className="text-white/50 text-xs">Verified & reviewed by real customers</div>
-                </div>
-                <div className="ml-auto flex -space-x-2">
-                  {[...Array(4)].map((_, i) => (
-                    <div
+              {/* Sliding images */}
+              <div className="relative h-[520px] w-full">
+                <AnimatePresence mode="sync">
+                  <motion.img
+                    key={slideIdx}
+                    src={heroSlides[slideIdx].src}
+                    alt={heroSlides[slideIdx].alt}
+                    initial={{ opacity: 0, scale: 1.04 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.9, ease: "easeInOut" }}
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                </AnimatePresence>
+
+                {/* Image overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A1830]/70 via-transparent to-transparent" />
+
+                {/* Slide dots */}
+                <div className="absolute top-5 right-5 flex gap-1.5 z-20">
+                  {heroSlides.map((_, i) => (
+                    <button
                       key={i}
-                      className="h-7 w-7 rounded-full border-2 border-[#0A1830] bg-gradient-to-br from-[#097DDD] to-[#0a8ef0] flex items-center justify-center text-[9px] font-bold text-white"
-                    >
-                      {["J", "S", "M", "A"][i]}
-                    </div>
+                      onClick={() => setSlideIdx(i)}
+                      className={`transition-all duration-300 rounded-full ${
+                        i === slideIdx
+                          ? "w-6 h-2 bg-[#097DDD]"
+                          : "w-2 h-2 bg-white/40 hover:bg-white/70"
+                      }`}
+                      aria-label={`Slide ${i + 1}`}
+                    />
                   ))}
+                </div>
+
+                {/* Floating stat card */}
+                <div className="absolute bottom-6 left-6 right-6 glass-dark rounded-2xl p-4 flex items-center gap-4 z-20">
+                  <div className="h-10 w-10 rounded-xl bg-[#097DDD] flex items-center justify-center shrink-0">
+                    <Star className="h-5 w-5 text-white fill-white" />
+                  </div>
+                  <div>
+                    <div className="text-white font-bold text-sm">Top-Rated Pros</div>
+                    <div className="text-white/50 text-xs">Verified & reviewed by real customers</div>
+                  </div>
+                  <div className="ml-auto flex -space-x-2">
+                    {[...Array(4)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="h-7 w-7 rounded-full border-2 border-[#0A1830] bg-gradient-to-br from-[#097DDD] to-[#0a8ef0] flex items-center justify-center text-[9px] font-bold text-white"
+                      >
+                        {["J", "S", "M", "A"][i]}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

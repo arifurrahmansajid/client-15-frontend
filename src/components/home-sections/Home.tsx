@@ -1,5 +1,6 @@
 import { Hero } from "./Hero/Hero";
-import { TradeCategories } from "./TradeCategories/TradeCategories";
+import { JobSlider } from "./JobSlider/JobSlider";
+import { WhyChooseUs } from "./WhyChooseUs/WhyChooseUs";
 import { HowItWorks } from "./HowItWorks/HowItWorks";
 import { CTASection } from "./CTASection/CTASection";
 
@@ -7,9 +8,10 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <TradeCategories />
-      <HowItWorks />
+      <JobSlider />
+      <WhyChooseUs />
       <CTASection />
+      <HowItWorks />
     </>
   );
 }
