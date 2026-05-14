@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { CheckCircle2, ArrowRight } from "lucide-react";
+import tradieImg from "@/assets/section images/tradie-3.png";
 
 const reasons = [
   "Verify tradie licenses and insurances.",
@@ -89,8 +90,8 @@ export function WhyChooseUs() {
 
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-[0_20px_60px_rgb(10,24,48,0.14)] border border-slate-100">
               <img
-                src="https://images.unsplash.com/photo-1504148455328-4adc7f820df4?w=800&h=600&fit=crop"
-                alt="Professional tradie drilling into a wall"
+                src={tradieImg}
+                alt="Professional tradie working"
                 className="w-full h-[420px] md:h-[500px] object-cover hover:scale-105 transition-transform duration-700"
               />
               {/* Subtle dark gradient on bottom */}

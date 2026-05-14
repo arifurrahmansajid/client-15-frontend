@@ -4,6 +4,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CATEGORIES, LOCATIONS } from "@/lib/mock-data";
 import { useState, useEffect } from "react";
 
+import hero1 from "@/assets/section images/hero-tradie.jpg";
+import hero2 from "@/assets/section images/electrician-installing-laying-electrical-cables-ceiling-inside-house.jpg";
+import hero3 from "@/assets/section images/handsome-woodworker-posing-photography.jpg";
+import hero4 from "@/assets/section images/jamie-street-qWYvQMIJyfE-unsplash.jpg";
+import hero5 from "@/assets/section images/marco-xu-ToUPBCO62Lw-unsplash.jpg";
+
 const stats = [
   { value: "500+", label: "Local Pros" },
   { value: "19", label: "Service Types" },
@@ -13,24 +19,24 @@ const stats = [
 
 const heroSlides = [
   {
-    src: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&h=520&fit=crop",
+    src: hero1,
+    alt: "Professional tradie",
+  },
+  {
+    src: hero2,
     alt: "Electrician at work",
   },
   {
-    src: "https://images.unsplash.com/photo-1504148455328-4adc7f820df4?w=800&h=520&fit=crop",
-    alt: "Plumber working",
+    src: hero3,
+    alt: "Master builder",
   },
   {
-    src: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&h=520&fit=crop",
-    alt: "Lawn mowing and gardening",
+    src: hero4,
+    alt: "Home maintenance",
   },
   {
-    src: "https://images.unsplash.com/photo-1589939705384-5185138a04b9?w=800&h=520&fit=crop",
-    alt: "Professional painter",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1541888941259-792739460572?w=800&h=520&fit=crop",
-    alt: "Builder at construction site",
+    src: hero5,
+    alt: "Cleaning professional",
   },
 ];
 

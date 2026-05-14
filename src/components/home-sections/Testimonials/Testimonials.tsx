@@ -3,7 +3,7 @@ import { TESTIMONIALS } from "@/lib/mock-data";
 
 export function Testimonials() {
   return (
-    <section className="container-app py-[50px] md:py-[50px]">
+    <section className="container-app py-[70px] md:py-[100px]">
       <div className="text-center max-w-2xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold">Loved by locals</h2>
         <p className="mt-3 text-muted-foreground">What Tasmanians are saying about MyLocalPro.</p>

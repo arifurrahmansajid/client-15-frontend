@@ -21,7 +21,7 @@ const SERVICE_FEATURES: { label: string; Icon: LucideIcon }[] = [
 
 export function ServiceShowcase() {
   return (
-    <section className="bg-[#f0f4ff] py-[50px] md:py-[50px] px-4">
+    <section className="bg-[#f0f4ff] py-[70px] md:py-[100px] px-4">
       <div className="mx-auto max-w-4xl text-center">
         <h2 className="text-4xl md:text-5xl font-medium tracking-tight text-slate-900">
           Popular Services

@@ -10,6 +10,7 @@ import {
   MessageSquare,
   BarChart3,
   Settings,
+  FileText,
 } from "lucide-react";
 import {
   Sidebar,
@@ -29,6 +30,7 @@ const items = [
   { title: "Overview", url: "/admin", icon: LayoutDashboard, exact: true },
   { title: "Business Listings", url: "/admin/businesses", icon: Building2 },
   { title: "Pending Approvals", url: "/admin/approvals", icon: Clock },
+  { title: "Blog Manager", url: "/admin/blogs", icon: FileText },
   { title: "Categories", url: "/admin/categories", icon: Tags },
   { title: "Locations", url: "/admin/locations", icon: MapPin },
   { title: "Users / Traders", url: "/admin/users", icon: Users },

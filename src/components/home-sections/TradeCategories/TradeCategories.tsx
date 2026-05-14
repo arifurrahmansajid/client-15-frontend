@@ -14,7 +14,7 @@ export function TradeCategories() {
   };
 
   return (
-    <section className="py-[70px] md:py-[90px] overflow-hidden bg-white">
+    <section className="py-[70px] md:py-[100px] overflow-hidden bg-white">
       <div className="container-app">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
           <div className="space-y-4">

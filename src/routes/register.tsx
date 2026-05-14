@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { User, HardHat, ArrowLeft, ChevronRight, Mail, Lock, Phone, Upload, Eye, EyeOff, MapPin, CheckCircle2 } from "lucide-react";
-import heroImg from "@/assets/hero-tradie.jpg";
+import heroImg from "@/assets/section images/hero-tradie.jpg";
 import { motion, AnimatePresence } from "framer-motion";
 import logoImg from "@/assets/WhatsApp Image 2026-05-14 at 11.37.20 AM (1).jpeg";
 import { CATEGORIES, LOCATIONS } from "@/lib/mock-data";

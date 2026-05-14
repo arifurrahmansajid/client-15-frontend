@@ -13,7 +13,6 @@ import appCss from "../styles.css?url";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SplashLoader } from "@/components/layout/SplashLoader";
-import { PageTransition } from "@/components/layout/PageTransition";
 
 function NotFoundComponent() {
   return (
@@ -125,16 +124,12 @@ function RootComponent() {
       <SplashLoader />
 
       {isAdmin ? (
-        <PageTransition>
-          <Outlet />
-        </PageTransition>
+        <Outlet />
       ) : (
         <div className="flex min-h-screen flex-col">
           <Navbar />
           <main className={`flex-1 ${pathname === "/" ? "" : "pt-[72px]"}`}>
-            <PageTransition>
-              <Outlet />
-            </PageTransition>
+            <Outlet />
           </main>
           <Footer />
         </div>

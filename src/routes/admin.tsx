@@ -16,9 +16,9 @@ export const Route = createFileRoute("/admin")({
 function AdminLayout() {
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen w-full bg-muted/30">
+      <div className="flex min-h-screen w-full bg-[#f8fafc]">
         <AdminSidebar />
-        <SidebarInset className="bg-muted/30">
+        <SidebarInset className="bg-[#f8fafc]">
           <AdminTopbar />
           <main className="flex-1 p-4 md:p-6">
             <Outlet />

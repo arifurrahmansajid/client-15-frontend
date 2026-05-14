@@ -72,8 +72,10 @@ export function AdminTopbar() {
                 <ExternalLink className="h-4 w-4" /> View Live Site
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-bold text-red-600 hover:bg-red-50 cursor-pointer mt-1">
-              <LogOut className="h-4 w-4" /> Sign Out
+            <DropdownMenuItem asChild>
+              <Link to="/login" className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-bold text-red-600 hover:bg-red-50 cursor-pointer mt-1">
+                <LogOut className="h-4 w-4" /> Sign Out
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

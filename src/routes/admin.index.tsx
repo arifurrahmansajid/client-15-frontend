@@ -39,7 +39,7 @@ export const Route = createFileRoute("/admin/")({
   component: AdminOverview,
 });
 
-const PIE_COLORS = ["#0057E1", "#3b82f6", "#60a5fa", "#93c5fd", "#bfdbfe", "#dbeafe"];
+const PIE_COLORS = ["#0A1830", "#097DDD", "#3b82f6", "#60a5fa", "#93c5fd", "#dbeafe"];
 
 const ACTIVITY_ICONS = {
   listing: Building,
@@ -52,7 +52,7 @@ function AdminOverview() {
   return (
     <div className="space-y-6">
       <div className="mb-8">
-        <p className="text-primary text-[10px] font-black uppercase tracking-[0.3em] mb-2">Access Granted</p>
+        <p className="text-[#097DDD] text-[10px] font-black uppercase tracking-[0.3em] mb-2">Access Granted</p>
         <h1 className="text-3xl font-black text-slate-900 tracking-tight leading-tight">Super Admin Dashboard</h1>
         <p className="text-slate-500 text-xs font-medium uppercase tracking-widest mt-1">Welcome back — Overview of the Tasmania Tradie Network</p>
       </div>
@@ -74,15 +74,15 @@ function AdminOverview() {
                 <AreaChart data={SIGNUPS_OVER_TIME}>
                   <defs>
                     <linearGradient id="signups" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#0057E1" stopOpacity={0.35} />
-                      <stop offset="100%" stopColor="#0057E1" stopOpacity={0} />
+                      <stop offset="0%" stopColor="#097DDD" stopOpacity={0.35} />
+                      <stop offset="100%" stopColor="#097DDD" stopOpacity={0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
-                  <XAxis dataKey="month" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
-                  <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
-                  <Tooltip contentStyle={{ borderRadius: 8, border: "1px solid #e2e8f0", fontSize: 12 }} />
-                  <Area type="monotone" dataKey="signups" stroke="#0057E1" strokeWidth={2.5} fill="url(#signups)" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#E4EAF1" vertical={false} />
+                  <XAxis dataKey="month" stroke="#5a7089" fontSize={12} tickLine={false} axisLine={false} />
+                  <YAxis stroke="#5a7089" fontSize={12} tickLine={false} axisLine={false} />
+                  <Tooltip contentStyle={{ borderRadius: 8, border: "1px solid #E4EAF1", fontSize: 12 }} />
+                  <Area type="monotone" dataKey="signups" stroke="#097DDD" strokeWidth={2.5} fill="url(#signups)" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
@@ -95,7 +95,7 @@ function AdminOverview() {
               const Icon = ACTIVITY_ICONS[a.type as keyof typeof ACTIVITY_ICONS];
               return (
                 <li key={i} className="flex items-start gap-3">
-                  <div className="rounded-md bg-primary/10 p-2 text-primary">
+                  <div className="rounded-md bg-[#097DDD]/10 p-2 text-[#097DDD]">
                     <Icon className="h-4 w-4" />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -137,11 +137,11 @@ function AdminOverview() {
           <div className="h-[260px]">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={LOCATION_DISTRIBUTION}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
-                <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
-                <Tooltip contentStyle={{ borderRadius: 8, border: "1px solid #e2e8f0", fontSize: 12 }} />
-                <Bar dataKey="value" fill="#0057E1" radius={[6, 6, 0, 0]} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#E4EAF1" vertical={false} />
+                <XAxis dataKey="name" stroke="#5a7089" fontSize={12} tickLine={false} axisLine={false} />
+                <YAxis stroke="#5a7089" fontSize={12} tickLine={false} axisLine={false} />
+                <Tooltip contentStyle={{ borderRadius: 8, border: "1px solid #E4EAF1", fontSize: 12 }} />
+                <Bar dataKey="value" fill="#097DDD" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

@@ -2,7 +2,7 @@ import { STATS } from "@/lib/mock-data";
 
 export function Statistics() {
   return (
-    <section className="container-app py-[50px] md:py-[50px]">
+    <section className="container-app py-[70px] md:py-[100px]">
       <div className="rounded-3xl bg-foreground text-background py-12 px-6 md:px-12 grid grid-cols-2 md:grid-cols-4 gap-6">
         {STATS.map((s) => (
           <div key={s.label} className="text-center">
