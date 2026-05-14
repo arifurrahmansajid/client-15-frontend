@@ -10,8 +10,6 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 // @cloudflare/vite-plugin builds from this — wrangler.jsonc main alone is insufficient.
 export default defineConfig({
   tanstackStart: {
-    server: { 
-      preset: "netlify" 
-    },
+    // Default server build settings are sufficient for Render static/node deployments
   },
 });
