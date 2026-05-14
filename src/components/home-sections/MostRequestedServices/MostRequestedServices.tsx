@@ -10,7 +10,7 @@ export function MostRequestedServices() {
   ];
 
   return (
-    <section className="bg-[#FFF0E5] py-24 md:py-32">
+    <section className="bg-[#FFF0E5] py-[50px] md:py-[50px]">
       <div className="container-app">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
           <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight">

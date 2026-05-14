@@ -17,12 +17,12 @@ function ContactPage() {
   return (
     <>
       <section className="bg-surface border-b border-border">
-        <div className="container-app py-12 md:py-16 max-w-3xl">
+        <div className="container-app py-[50px] md:py-[50px] max-w-3xl">
           <h1 className="text-3xl md:text-5xl font-bold">Contact us</h1>
           <p className="mt-3 text-muted-foreground text-lg">We're here to help — usually replying within a few hours.</p>
         </div>
       </section>
-      <section className="container-app py-12 md:py-16 grid lg:grid-cols-[1fr_1.4fr] gap-10">
+      <section className="container-app py-[50px] md:py-[50px] grid lg:grid-cols-[1fr_1.4fr] gap-10">
         <div className="space-y-4">
           {[
             { icon: Mail, label: "Email", value: "hello@mylocalpro.com.au" },

@@ -33,7 +33,7 @@ function ListBusinessPage() {
 
   if (submitted) {
     return (
-      <section className="container-app py-20 md:py-28 max-w-2xl text-center">
+      <section className="container-app py-[50px] md:py-[50px] max-w-2xl text-center">
         <div className="grid h-16 w-16 mx-auto place-items-center rounded-full bg-primary-soft text-primary">
           <CheckCircle2 className="h-8 w-8" />
         </div>
@@ -48,7 +48,7 @@ function ListBusinessPage() {
   return (
     <>
       <section className="bg-surface border-b border-border">
-        <div className="container-app py-12 md:py-16 max-w-3xl">
+        <div className="container-app py-[50px] md:py-[50px] max-w-3xl">
           <span className="inline-flex items-center gap-2 rounded-full bg-primary-soft text-primary px-3 py-1 text-xs font-semibold">For tradies</span>
           <h1 className="mt-4 text-3xl md:text-5xl font-bold">List your business</h1>
           <p className="mt-3 text-muted-foreground text-lg">
@@ -57,7 +57,7 @@ function ListBusinessPage() {
         </div>
       </section>
 
-      <section className="container-app py-12 md:py-16 max-w-3xl">
+      <section className="container-app py-[50px] md:py-[50px] max-w-3xl">
         <form onSubmit={submit} className="space-y-8 rounded-3xl bg-card border border-border shadow-soft p-6 md:p-10">
           <Field label="Business name" required>
             <input required type="text" placeholder="e.g. Tassie Plumb Co." className={inputCls} />

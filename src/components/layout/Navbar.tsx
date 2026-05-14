@@ -21,26 +21,30 @@ const links = [
 ] as const;
 
 const AUSTRALIA_LOCATIONS = [
-  "Australia",
-  "Perth",
-  "Melbourne",
-  "Sydney",
-  "Brisbane",
-  "Adelaide",
-  "Hobart",
-  "Northern Rivers",
-  "Albury, Wodonga & Surrounds",
-  "Tasmania",
-  "Townsville",
-  "Northern Territory",
-  "Illawarra & Surrounds",
-  "Gippsland",
-  "Dubbo & Surrounds",
-  "Portland, Port Fairy, Warrnambool & Surrounds",
-  "Sunshine Coast",
-  "Melbourne Peninsula",
-  "Bendigo, Ballarat, Echuca & Surrounds",
-  "Western Suburbs Melbourne",
+  // "Australia",
+  // "Perth",
+  // "Melbourne",
+  // "Sydney",
+  // "Brisbane",
+  // "Adelaide",
+  // "Hobart",
+  // "Northern Rivers",
+  // "Albury, Wodonga & Surrounds",
+  // "Tasmania",
+  // "Townsville",
+  // "Northern Territory",
+  // "Illawarra & Surrounds",
+  // "Gippsland",
+  // "Dubbo & Surrounds",
+  // "Portland, Port Fairy, Warrnambool & Surrounds",
+  // "Sunshine Coast",
+  // "Melbourne Peninsula",
+  // "Bendigo, Ballarat, Echuca & Surrounds",
+  // "Western Suburbs Melbourne",
+  "Greater Hobart",
+  "Greater Launceston",
+  "Greater Devonport",
+  "Greater Burnie"
 ] as const;
 
 export function Navbar() {
@@ -48,7 +52,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [locationQuery, setLocationQuery] = useState("");
-  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("Australia");
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isHomePage = pathname === "/";
 
@@ -115,9 +119,7 @@ export function Navbar() {
                 }`}>
                   Location
                 </span>
-                <span className={`text-sm font-semibold ${selectedLocation ? "text-slate-900" : "text-slate-400"}`}>
-                  {selectedLocation || "Select Location"}
-                </span>
+                <span className="text-sm font-semibold">{selectedLocation}</span>
               </div>
             </button>
           </DialogTrigger>

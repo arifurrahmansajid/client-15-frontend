@@ -38,7 +38,7 @@ function BusinessesPage() {
   return (
     <>
       <section className="bg-surface border-b border-border">
-        <div className="container-app py-12 md:py-16">
+        <div className="container-app py-[50px] md:py-[50px]">
           <h1 className="text-3xl md:text-5xl font-bold">Find a local pro</h1>
           <p className="mt-3 text-muted-foreground max-w-2xl">
             Browse {BUSINESSES.length}+ trusted Tasmanian businesses. Filter by service or location.
@@ -81,7 +81,7 @@ function BusinessesPage() {
         </div>
       </section>
 
-      <section className="container-app py-12">
+      <section className="container-app py-[50px]">
         <p className="text-sm text-muted-foreground mb-6">{results.length} {results.length === 1 ? "result" : "results"}</p>
         {results.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-border p-12 text-center">

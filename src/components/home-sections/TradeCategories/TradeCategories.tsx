@@ -14,7 +14,7 @@ export function TradeCategories() {
   };
 
   return (
-    <section className="container-app py-24 md:py-32 overflow-hidden">
+    <section className="container-app py-[50px] md:py-[50px] overflow-hidden">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
         <div className="space-y-4">
           <motion.span

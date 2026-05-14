@@ -4,7 +4,7 @@ import { BusinessCard } from "@/components/cards/BusinessCard";
 
 export function FeaturedBusinesses() {
   return (
-    <section className="container-app py-24 md:py-32">
+    <section className="container-app py-[50px] md:py-[50px]">
       <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
         <div className="max-w-xl">
           <h2 className="text-3xl md:text-4xl font-bold">Featured local pros</h2>

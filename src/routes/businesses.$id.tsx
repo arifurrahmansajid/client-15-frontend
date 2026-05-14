@@ -22,7 +22,7 @@ export const Route = createFileRoute("/businesses/$id")({
   errorComponent: ({ error, reset }) => {
     const router = useRouter();
     return (
-      <div className="container-app py-24 text-center">
+      <div className="container-app py-[50px] text-center">
         <h1 className="text-2xl font-semibold">Couldn't load this profile</h1>
         <p className="mt-2 text-muted-foreground">{error.message}</p>
         <button
@@ -35,7 +35,7 @@ export const Route = createFileRoute("/businesses/$id")({
     );
   },
   notFoundComponent: () => (
-    <div className="container-app py-24 text-center">
+    <div className="container-app py-[50px] text-center">
       <h1 className="text-2xl font-semibold">Business not found</h1>
       <Link to="/businesses" className="mt-4 inline-block text-primary font-semibold hover:underline">
         Back to all businesses
@@ -80,7 +80,7 @@ function ProfilePage() {
         </div>
       </section>
 
-      <section className="container-app py-12 md:py-16 grid lg:grid-cols-3 gap-10">
+      <section className="container-app py-[50px] md:py-[50px] grid lg:grid-cols-3 gap-10">
         <div className="lg:col-span-2 space-y-12">
           <div>
             <h2 className="text-2xl font-bold">About</h2>
