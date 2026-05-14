@@ -31,12 +31,11 @@ function BusinessesPage() {
     return BUSINESSES.filter((b) => {
       if (category && b.category !== category) return false;
       if (location && b.location !== location) return false;
-      if (query && !`${b.name} ${b.description} ${b.suburb}`.toLowerCase().includes(query.toLowerCase())) return false;
       return true;
     });
-  }, [category, location, query]);
+  }, [category, location]);
 
-  const hasFilters = category || location || query;
+  const hasFilters = category || location;
 
   return (
     <>
@@ -51,7 +50,7 @@ function BusinessesPage() {
             animate={{ opacity: 1, y: 0 }}
             className="section-label-dark mb-4 block"
           >
-            {BUSINESSES.length}+ Verified Professionals
+            {BUSINESSES.length}+ Verified Tasmanian Professionals
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -60,7 +59,7 @@ function BusinessesPage() {
             className="text-3xl md:text-5xl font-black text-white leading-tight mb-3"
           >
             Find Trusted <br />
-            <span className="text-[#097DDD]">Local Services</span> Near You
+            <span className="text-[#097DDD]">Local Services</span> in Tasmania
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -68,73 +67,59 @@ function BusinessesPage() {
             transition={{ delay: 0.18 }}
             className="text-[#E4EAF1]/60 max-w-xl text-base leading-relaxed"
           >
-            Looking for a local professional? MyLocalPro makes it easy to search for businesses in your area. Browse a wide range of categories and connect directly with local Tasmanian businesses ready to help.
+            Choose a service and your region to connect directly with local businesses ready to help.
           </motion.p>
         </div>
 
-        {/* Wave */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-            <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="white" />
-          </svg>
-        </div>
       </section>
 
       {/* ── Search / Filter Bar ── */}
-      <section className="container-app -mt-1 relative z-10 py-6">
-        <div className="rounded-2xl bg-white border border-[#cdd6e3] shadow-[0_4px_32px_rgb(10,24,48,0.1)] p-3 grid md:grid-cols-[1fr_1fr_1fr_auto] gap-2 items-center">
-          <label className="flex items-center gap-2.5 px-3 py-1 rounded-xl hover:bg-[#E4EAF1]/50 transition-colors">
-            <Search className="h-4 w-4 text-[#097DDD] shrink-0" />
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by name or keyword..."
-              className="w-full bg-transparent py-2 outline-none text-sm text-[#0A1830] placeholder:text-[#5a7089]/60 font-medium"
-            />
-          </label>
-
-          <label className="flex flex-col gap-0.5 px-3 py-1 md:border-l md:border-[#E4EAF1] rounded-xl hover:bg-[#E4EAF1]/50 transition-colors">
-            <span className="text-[8px] uppercase tracking-[0.2em] text-[#097DDD] font-black">Service</span>
-            <div className="flex items-center gap-2">
-              <SlidersHorizontal className="h-3.5 w-3.5 text-[#097DDD] shrink-0" />
+      <section className="container-app -mt-8 relative z-10 py-6">
+        <div className="rounded-2xl bg-white border border-[#cdd6e3] shadow-[0_12px_48px_rgb(10,24,48,0.12)] p-4 grid md:grid-cols-2 lg:grid-cols-[1fr_1fr_auto] gap-4 items-center">
+          <label className="flex flex-col gap-1 px-4 py-2 bg-[#E4EAF1]/30 rounded-xl hover:bg-[#E4EAF1]/50 transition-colors border border-transparent hover:border-[#097DDD]/20">
+            <span className="text-[9px] uppercase tracking-[0.25em] text-[#097DDD] font-black">Type of Business</span>
+            <div className="flex items-center gap-3">
+              <SlidersHorizontal className="h-4 w-4 text-[#097DDD] shrink-0" />
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full bg-transparent py-1.5 outline-none text-sm text-[#0A1830] font-medium cursor-pointer"
+                className="w-full bg-transparent py-1.5 outline-none text-sm text-[#0A1830] font-black cursor-pointer appearance-none"
               >
-                <option value="">All services</option>
+                <option value="">Select Service...</option>
                 {CATEGORIES.map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}
               </select>
             </div>
           </label>
 
-          <label className="flex flex-col gap-0.5 px-3 py-1 md:border-l md:border-[#E4EAF1] rounded-xl hover:bg-[#E4EAF1]/50 transition-colors">
-            <span className="text-[8px] uppercase tracking-[0.2em] text-[#097DDD] font-black">Location</span>
-            <div className="flex items-center gap-2">
-              <MapPin className="h-3.5 w-3.5 text-[#097DDD] shrink-0" />
+          <label className="flex flex-col gap-1 px-4 py-2 bg-[#E4EAF1]/30 rounded-xl hover:bg-[#E4EAF1]/50 transition-colors border border-transparent hover:border-[#097DDD]/20">
+            <span className="text-[9px] uppercase tracking-[0.25em] text-[#097DDD] font-black">Location</span>
+            <div className="flex items-center gap-3">
+              <MapPin className="h-4 w-4 text-[#097DDD] shrink-0" />
               <select
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="w-full bg-transparent py-1.5 outline-none text-sm text-[#0A1830] font-medium cursor-pointer"
+                className="w-full bg-transparent py-1.5 outline-none text-sm text-[#0A1830] font-black cursor-pointer appearance-none"
               >
-                <option value="">All locations</option>
+                <option value="">Select Region...</option>
                 {LOCATIONS.map((l) => <option key={l} value={l}>{l}</option>)}
               </select>
             </div>
           </label>
 
-          {hasFilters ? (
+          <div className="flex items-center gap-3">
             <button
-              type="button"
-              onClick={() => { setCategory(""); setLocation(""); setQuery(""); }}
-              className="flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-[10px] font-black uppercase tracking-widest text-[#097DDD] hover:bg-[#097DDD]/10 transition-colors"
+              disabled={!hasFilters}
+              onClick={() => { setCategory(""); setLocation(""); }}
+              className="flex items-center gap-2 px-6 py-4 text-[10px] font-black uppercase tracking-widest text-[#5a7089] hover:text-[#0A1830] disabled:opacity-30 transition-colors"
             >
-              <X className="h-3.5 w-3.5" />
-              Clear
+              Reset
             </button>
-          ) : (
-            <div className="w-[72px]" />
-          )}
+            <div className="h-10 w-[1px] bg-[#cdd6e3] hidden lg:block" />
+            <div className="px-6 py-4 hidden lg:flex flex-col">
+              <span className="text-[10px] font-black text-[#0A1830] leading-none">{results.length}</span>
+              <span className="text-[8px] font-black uppercase tracking-widest text-[#5a7089]">Found</span>
+            </div>
+          </div>
         </div>
       </section>
 

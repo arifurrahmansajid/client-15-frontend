@@ -76,23 +76,34 @@ function ProfilePage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="rounded-3xl bg-white border border-[#cdd6e3] shadow-[0_8px_48px_rgb(10,24,48,0.14)] p-6 md:p-10 flex flex-col md:flex-row md:items-center gap-6 md:justify-between"
+              className="rounded-3xl bg-white border border-[#cdd6e3] shadow-[0_8px_48px_rgb(10,24,48,0.14)] p-6 md:p-10 flex flex-col md:flex-row md:items-center gap-8 md:justify-between"
             >
-              <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#097DDD]/10 text-[#097DDD] px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em]">
-                  {b.categoryName}
-                </span>
-                <h1 className="mt-3 text-2xl md:text-3xl font-black text-[#0A1830]">{b.name}</h1>
-                <div className="mt-3 flex flex-wrap items-center gap-4">
-                  <span className="inline-flex items-center gap-1.5 text-sm text-[#5a7089]">
-                    <MapPin className="h-4 w-4 text-[#097DDD]" />
-                    {b.suburb}, {b.location}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 text-sm text-[#5a7089]">
-                    <Star className="h-4 w-4 fill-amber-500 text-amber-500" />
-                    <span className="text-[#0A1830] font-bold">{b.rating}</span>
-                    <span>({b.reviews} reviews)</span>
-                  </span>
+              <div className="flex items-start gap-6">
+                {/* Logo Placeholder */}
+                <div className="h-20 w-20 rounded-2xl bg-[#E4EAF1] border border-[#cdd6e3] flex items-center justify-center shrink-0">
+                  <Building2 className="h-10 w-10 text-[#097DDD]/30" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-3">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#097DDD]/10 text-[#097DDD] px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em]">
+                      {b.categoryName}
+                    </span>
+                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-[#5a7089] bg-[#E4EAF1]/50 px-3 py-1 rounded-full border border-[#cdd6e3]/50">
+                      ABN: {b.abn}
+                    </span>
+                  </div>
+                  <h1 className="mt-3 text-2xl md:text-3xl font-black text-[#0A1830]">{b.name}</h1>
+                  <div className="mt-3 flex flex-wrap items-center gap-4">
+                    <span className="inline-flex items-center gap-1.5 text-sm text-[#5a7089]">
+                      <MapPin className="h-4 w-4 text-[#097DDD]" />
+                      {b.suburb ? `${b.suburb}, ` : ""}{b.location}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 text-sm text-[#5a7089]">
+                      <Star className="h-4 w-4 fill-amber-500 text-amber-500" />
+                      <span className="text-[#0A1830] font-bold">{b.rating}</span>
+                      <span>({b.reviews} reviews)</span>
+                    </span>
+                  </div>
                 </div>
               </div>
 
@@ -107,7 +118,7 @@ function ProfilePage() {
                   href={`mailto:${b.email}`}
                   className="inline-flex items-center gap-2 rounded-xl border border-[#cdd6e3] bg-white px-6 py-3.5 text-[11px] font-black uppercase tracking-widest text-[#0A1830] hover:border-[#097DDD]/40 hover:bg-[#097DDD]/5 hover:text-[#097DDD] transition-all"
                 >
-                  <Mail className="h-4 w-4" /> Email
+                  <Mail className="h-4 w-4" /> Email Enquiry
                 </a>
               </div>
             </motion.div>

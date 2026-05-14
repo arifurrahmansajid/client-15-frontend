@@ -4,6 +4,7 @@ import { User, HardHat, ArrowLeft, ChevronRight, Mail, Lock, Phone, Upload, Eye,
 import heroImg from "@/assets/hero-tradie.jpg";
 import { motion, AnimatePresence } from "framer-motion";
 import logoImg from "@/assets/WhatsApp Image 2026-05-14 at 11.37.20 AM (1).jpeg";
+import { CATEGORIES, LOCATIONS } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/register")({
   component: RegisterPage,
@@ -163,18 +164,30 @@ function RegisterPage() {
                     {step === "tradie_form" && (
                       <>
                         <div className="space-y-1.5">
-                          <label className={labelCls}>Business Name</label>
-                          <input type="text" placeholder="e.g. Smith Plumbing" className={inputCls} />
+                          <label className={labelCls}>Business Name <span className="text-[#097DDD]">*</span></label>
+                          <input type="text" required placeholder="e.g. Smith Plumbing" className={inputCls} />
                         </div>
                         <div className="space-y-1.5">
-                          <label className={labelCls}>Primary Trade <span className="text-[#097DDD]">*</span></label>
+                          <label className={labelCls}>Primary Category <span className="text-[#097DDD]">*</span></label>
                           <select required className={inputCls}>
-                            <option value="">Select...</option>
-                            <option>Plumbing</option>
-                            <option>Electrical</option>
-                            <option>Landscaping</option>
-                            <option>Carpentry</option>
+                            <option value="">Select Category...</option>
+                            {CATEGORIES.map(c => (
+                              <option key={c.slug} value={c.slug}>{c.name}</option>
+                            ))}
                           </select>
+                        </div>
+                        <div className="space-y-1.5">
+                          <label className={labelCls}>Service Location <span className="text-[#097DDD]">*</span></label>
+                          <select required className={inputCls}>
+                            <option value="">Select Region...</option>
+                            {LOCATIONS.map(loc => (
+                              <option key={loc} value={loc}>{loc}</option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className="space-y-1.5">
+                          <label className={labelCls}>ABN <span className="text-[#097DDD]">*</span></label>
+                          <input type="text" required placeholder="11 digits" className={inputCls} maxLength={11} />
                         </div>
                       </>
                     )}
@@ -208,10 +221,44 @@ function RegisterPage() {
                     </div>
                   </div>
 
+                  {step === "tradie_form" && (
+                    <div className="grid grid-cols-1 gap-5 mt-5">
+                      <div className="space-y-1.5">
+                        <label className={labelCls}>Business Description <span className="text-[#097DDD]">*</span></label>
+                        <textarea rows={3} required placeholder="Describe your business and experience..." className={inputCls + " resize-none py-3"} />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className={labelCls}>Services Offered (Comma separated) <span className="text-[#097DDD]">*</span></label>
+                        <input type="text" required placeholder="e.g. Emergency repairs, Hot water, Gas fitting" className={inputCls} />
+                      </div>
+                      <div className="grid md:grid-cols-2 gap-5">
+                        <div className="space-y-1.5">
+                          <label className={labelCls}>Website / Facebook</label>
+                          <input type="url" placeholder="https://" className={inputCls} />
+                        </div>
+                        <div className="space-y-1.5">
+                          <label className={labelCls}>Card Details (Stripe integration) <span className="text-[#097DDD]">*</span></label>
+                          <input type="text" required placeholder="•••• •••• •••• ••••" className={inputCls} />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="mt-8">
+                    <label className={labelCls}>Images of your work / Logo</label>
+                    <div className="mt-2 grid grid-cols-2 md:grid-cols-4 gap-3">
+                      <label className="aspect-square rounded-xl border-2 border-dashed border-white/10 hover:border-[#097DDD]/50 hover:bg-[#097DDD]/5 flex flex-col items-center justify-center gap-2 cursor-pointer transition-all group">
+                        <Upload className="h-5 w-5 text-white/30 group-hover:text-[#097DDD]" />
+                        <span className="text-[8px] font-black uppercase tracking-widest text-white/20 group-hover:text-white/40">Upload</span>
+                        <input type="file" multiple className="hidden" />
+                      </label>
+                    </div>
+                  </div>
+
                   <label className="flex items-start gap-3 group cursor-pointer mt-8">
                     <input type="checkbox" required className="mt-0.5 rounded border-[#cdd6e3] text-[#097DDD] focus:ring-[#097DDD]/20 h-4 w-4" />
                     <span className="text-[10px] font-bold text-[#5a7089] uppercase tracking-widest leading-relaxed">
-                      I agree to the <span className="text-[#097DDD] hover:underline">Terms</span> and <span className="text-[#097DDD] hover:underline">Privacy Policy</span>
+                      I agree to the <Link to="/terms" className="text-[#097DDD] hover:underline">Terms</Link> and <Link to="/privacy-policy" className="text-[#097DDD] hover:underline">Privacy Policy</Link>
                     </span>
                   </label>
 

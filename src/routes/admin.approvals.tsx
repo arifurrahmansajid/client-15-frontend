@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Check, X, MessageSquareWarning, MapPin, Phone, Star } from "lucide-react";
+import { Check, X, MessageSquareWarning, MapPin, Phone, Star, Mail } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -34,18 +34,25 @@ function Approvals() {
                     Pending
                   </Badge>
                 </div>
-                <div className="mt-2 space-y-1 text-xs text-muted-foreground">
+                <div className="mt-2 space-y-1.5 text-xs text-muted-foreground">
                   <p className="flex items-center gap-1.5">
-                    <MapPin className="h-3 w-3" /> {l.suburb}, {l.location}
+                    <MapPin className="h-3.5 w-3.5 text-[#097DDD]" /> {l.location}
                   </p>
+                  <div className="flex items-center gap-4">
+                    <p className="flex items-center gap-1.5 font-bold text-slate-700">
+                      ABN: {l.abn}
+                    </p>
+                    <p className="flex items-center gap-1.5">
+                      <Mail className="h-3 w-3" /> {l.ownerEmail}
+                    </p>
+                  </div>
                   <p className="flex items-center gap-1.5">
                     <Phone className="h-3 w-3" /> {l.phone}
                   </p>
-                  <p className="flex items-center gap-1.5">
-                    <Star className="h-3 w-3" /> {l.rating} · {l.reviews} reviews
-                  </p>
                 </div>
-                <p className="mt-2 line-clamp-2 text-xs text-muted-foreground">{l.description}</p>
+                <p className="mt-3 line-clamp-2 text-[11px] leading-relaxed text-muted-foreground bg-slate-50 p-2 rounded-lg border border-slate-100">
+                  {l.description}
+                </p>
               </div>
             </div>
             <CardContent className="flex flex-wrap gap-2 border-t bg-muted/30 p-3">

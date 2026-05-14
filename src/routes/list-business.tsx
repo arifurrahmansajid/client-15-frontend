@@ -97,11 +97,6 @@ function ListBusinessPage() {
           </motion.p>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 60" fill="none" className="w-full">
-            <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="white" />
-          </svg>
-        </div>
       </section>
 
       <section className="container-app py-12 pb-20">
@@ -170,6 +165,14 @@ function ListBusinessPage() {
 
             <Field label="Business description" required>
               <textarea required rows={4} placeholder="Tell customers what you do and why they should choose you." className={`${inputCls} resize-y`} />
+            </Field>
+
+            <Field label="Services Offered (Comma separated)" required>
+              <input required type="text" placeholder="e.g. Emergency repairs, Hot water, Gas fitting" className={inputCls} />
+            </Field>
+
+            <Field label="ABN (Australian Business Number)" required>
+              <input required type="text" placeholder="11 digits" maxLength={11} className={inputCls} />
             </Field>
 
             {/* Image upload */}

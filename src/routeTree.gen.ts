@@ -9,7 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ListBusinessRouteImport } from './routes/list-business'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -29,9 +31,19 @@ import { Route as AdminBusinessesRouteImport } from './routes/admin.businesses'
 import { Route as AdminApprovalsRouteImport } from './routes/admin.approvals'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -133,7 +145,9 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/list-business': typeof ListBusinessRoute
   '/login': typeof LoginRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/register': typeof RegisterRoute
+  '/terms': typeof TermsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/businesses': typeof AdminBusinessesRoute
@@ -153,7 +167,9 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/list-business': typeof ListBusinessRoute
   '/login': typeof LoginRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/register': typeof RegisterRoute
+  '/terms': typeof TermsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/businesses': typeof AdminBusinessesRoute
@@ -175,7 +191,9 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/list-business': typeof ListBusinessRoute
   '/login': typeof LoginRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/register': typeof RegisterRoute
+  '/terms': typeof TermsRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/businesses': typeof AdminBusinessesRoute
@@ -198,7 +216,9 @@ export interface FileRouteTypes {
     | '/contact'
     | '/list-business'
     | '/login'
+    | '/privacy-policy'
     | '/register'
+    | '/terms'
     | '/admin/analytics'
     | '/admin/approvals'
     | '/admin/businesses'
@@ -218,7 +238,9 @@ export interface FileRouteTypes {
     | '/contact'
     | '/list-business'
     | '/login'
+    | '/privacy-policy'
     | '/register'
+    | '/terms'
     | '/admin/analytics'
     | '/admin/approvals'
     | '/admin/businesses'
@@ -239,7 +261,9 @@ export interface FileRouteTypes {
     | '/contact'
     | '/list-business'
     | '/login'
+    | '/privacy-policy'
     | '/register'
+    | '/terms'
     | '/admin/analytics'
     | '/admin/approvals'
     | '/admin/businesses'
@@ -261,16 +285,32 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ListBusinessRoute: typeof ListBusinessRoute
   LoginRoute: typeof LoginRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   RegisterRoute: typeof RegisterRoute
+  TermsRoute: typeof TermsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/register': {
       id: '/register'
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -450,7 +490,9 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ListBusinessRoute: ListBusinessRoute,
   LoginRoute: LoginRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   RegisterRoute: RegisterRoute,
+  TermsRoute: TermsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

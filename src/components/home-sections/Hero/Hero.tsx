@@ -2,6 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle, MapPin, Star, Users } from "lucide-react";
 import heroImg from "@/assets/hero-tradie.jpg";
 import { motion } from "framer-motion";
+import { CATEGORIES, LOCATIONS } from "@/lib/mock-data";
+import { useState } from "react";
 
 const stats = [
   { value: "500+", label: "Local Pros" },
@@ -11,6 +13,9 @@ const stats = [
 ];
 
 export function Hero() {
+  const [category, setCategory] = useState("");
+  const [location, setLocation] = useState("");
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-navy-gradient">
       {/* Background image with dark overlay */}
@@ -103,26 +108,46 @@ export function Hero() {
               ))}
             </motion.div>
 
-            {/* CTA Buttons */}
+            {/* Search Bar */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.35 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 md:p-5 shadow-2xl"
             >
-              <Link
-                to="/businesses"
-                className="shine-btn inline-flex items-center justify-center gap-2 rounded-xl bg-[#097DDD] px-8 py-4 text-sm font-black uppercase tracking-[0.15em] text-white shadow-[0_6px_30px_rgb(9,125,221,0.45)] hover:shadow-[0_8px_40px_rgb(9,125,221,0.6)] hover:bg-[#0a8ef0] transition-all duration-300 group"
-              >
-                Find a Local Pro
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                to="/list-business"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/6 px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-white/90 hover:bg-white/12 hover:border-white/25 transition-all duration-300 backdrop-blur-sm"
-              >
-                List Your Business
-              </Link>
+              <div className="grid md:grid-cols-[1fr_1fr_auto] gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-[9px] font-black uppercase tracking-[0.2em] text-[#097DDD] px-1">Service Type</label>
+                  <select 
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    className="w-full bg-[#0A1830]/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white font-bold outline-none focus:border-[#097DDD] transition-all cursor-pointer appearance-none"
+                  >
+                    <option value="" className="bg-[#0A1830]">What do you need?</option>
+                    {CATEGORIES.map(c => <option key={c.slug} value={c.slug} className="bg-[#0A1830]">{c.name}</option>)}
+                  </select>
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[9px] font-black uppercase tracking-[0.2em] text-[#097DDD] px-1">Location</label>
+                  <select 
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    className="w-full bg-[#0A1830]/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white font-bold outline-none focus:border-[#097DDD] transition-all cursor-pointer appearance-none"
+                  >
+                    <option value="" className="bg-[#0A1830]">Where?</option>
+                    {LOCATIONS.map(l => <option key={l} value={l} className="bg-[#0A1830]">{l}</option>)}
+                  </select>
+                </div>
+                <div className="flex items-end">
+                  <Link
+                    to="/businesses"
+                    search={{ category: category || undefined, location: location || undefined }}
+                    className="shine-btn w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#097DDD] px-8 py-3.5 text-[11px] font-black uppercase tracking-[0.2em] text-white shadow-[0_6px_24px_rgb(9,125,221,0.4)] hover:shadow-[0_8px_32px_rgb(9,125,221,0.55)] transition-all"
+                  >
+                    Search
+                  </Link>
+                </div>
+              </div>
             </motion.div>
 
             {/* Stats row */}
@@ -130,7 +155,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.45 }}
-              className="flex flex-wrap gap-6 justify-center lg:justify-start pt-2"
+              className="flex flex-wrap gap-6 justify-center lg:justify-start pt-4"
             >
               {stats.map((stat) => (
                 <div key={stat.label} className="text-center lg:text-left">

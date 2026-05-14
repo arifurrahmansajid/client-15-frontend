@@ -43,6 +43,7 @@ function BusinessListings() {
         const matchesQuery =
           !q ||
           l.name.toLowerCase().includes(q) ||
+          l.abn.includes(q) ||
           l.categoryName.toLowerCase().includes(q) ||
           l.location.toLowerCase().includes(q);
         const matchesStatus = status === "all" || l.status === status;
@@ -94,6 +95,7 @@ function BusinessListings() {
           <TableHeader>
             <TableRow className="bg-muted/40">
               <TableHead>Business</TableHead>
+              <TableHead>ABN</TableHead>
               <TableHead>Category</TableHead>
               <TableHead>Location</TableHead>
               <TableHead>Status</TableHead>
@@ -113,6 +115,7 @@ function BusinessListings() {
                     </div>
                   </div>
                 </TableCell>
+                <TableCell className="text-xs font-mono font-bold">{l.abn}</TableCell>
                 <TableCell className="text-sm">{l.categoryName}</TableCell>
                 <TableCell className="text-sm">{l.location}</TableCell>
                 <TableCell>

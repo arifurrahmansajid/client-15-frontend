@@ -22,10 +22,10 @@ const links = [
 ] as const;
 
 const AUSTRALIA_LOCATIONS = [
-  "Greater Hobart",
-  "Greater Launceston",
-  "Greater Devonport",
-  "Greater Burnie",
+  "Hobart Region",
+  "Launceston Region",
+  "Devonport Region",
+  "Burnie Region",
 ] as const;
 
 export function Navbar() {

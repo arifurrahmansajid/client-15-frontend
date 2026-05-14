@@ -1,152 +1,166 @@
 import { Link } from "@tanstack/react-router";
-import { Facebook, Instagram, Mail, MapPin, Phone, ArrowRight } from "lucide-react";
+import { Facebook, Instagram, Mail, MapPin, Phone, ArrowRight, ShieldCheck, Star } from "lucide-react";
 import logoImg from "@/assets/WhatsApp Image 2026-05-14 at 11.37.20 AM (1).jpeg";
+import { LOCATIONS } from "@/lib/mock-data";
 
 export function Footer() {
   return (
-    <footer className="bg-[#0A1830] relative overflow-hidden">
-      {/* Glow blobs */}
-      <div className="absolute top-0 right-0 w-[500px] h-[300px] bg-[#097DDD]/8 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[300px] bg-[#097DDD]/5 rounded-full blur-[80px] pointer-events-none" />
-
-      {/* Dot grid */}
+    <footer className="bg-[#0A1830] relative overflow-visible mt-12">
+      {/* Background Decor */}
+      <div className="absolute top-0 right-1/3 w-[600px] h-[400px] bg-[#097DDD]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-[#E4EAF1]/3 rounded-full blur-[100px] pointer-events-none" />
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: "radial-gradient(circle, #E4EAF1 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
+          backgroundImage: "radial-gradient(circle, #E4EAF1 1.5px, transparent 1.5px)",
+          backgroundSize: "48px 48px",
         }}
       />
 
-      <div className="container-app relative z-10">
-        {/* ── Top CTA Banner ── */}
-        <div className="border-b border-white/8 py-12">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-              <h3 className="text-2xl md:text-3xl font-black text-white leading-tight">
-                Ready to find a{" "}
-                <span className="text-[#097DDD]">local pro?</span>
+      <div className="container-app relative z-10 pt-16">
+        {/* ── Top Floating CTA Banner ── */}
+        <div className="relative -mt-28 mb-16 rounded-[2rem] bg-gradient-to-r from-[#0A1830] to-[#0d2244] border border-[#097DDD]/30 shadow-[0_20px_60px_rgb(9,125,221,0.15)] p-8 md:p-12 overflow-hidden group">
+          <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[#097DDD]/10 rounded-full blur-[60px] group-hover:bg-[#097DDD]/20 transition-all duration-700" />
+          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div className="max-w-xl">
+              <h3 className="text-3xl md:text-4xl font-black text-white leading-tight mb-3">
+                Grow your business in <span className="text-[#097DDD]">Tasmania</span>
               </h3>
-              <p className="mt-2 text-[#E4EAF1]/50 text-sm max-w-md">
-                Browse trusted Australian businesses or list your own — it only takes a minute.
+              <p className="text-[#E4EAF1]/70 text-sm md:text-base leading-relaxed">
+                Join Tasmania’s premium local services platform. Connect directly with customers searching for businesses like yours across Hobart, Launceston, Devonport, and Burnie.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                to="/businesses"
-                className="shine-btn inline-flex items-center gap-2 rounded-xl bg-[#097DDD] px-6 py-3 text-[10px] font-black uppercase tracking-[0.18em] text-white shadow-[0_4px_20px_rgb(9,125,221,0.4)] hover:shadow-[0_6px_28px_rgb(9,125,221,0.55)] hover:bg-[#0a8ef0] transition-all duration-300 group"
-              >
-                Find a Pro
-                <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+            <div className="flex flex-col sm:flex-row gap-4 shrink-0">
               <Link
                 to="/list-business"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/15 px-6 py-3 text-[10px] font-black uppercase tracking-[0.18em] text-white/75 hover:bg-white/8 hover:border-white/25 transition-all duration-300"
+                className="shine-btn flex items-center justify-center gap-2 rounded-xl bg-[#097DDD] px-8 py-4 text-[11px] font-black uppercase tracking-[0.18em] text-white shadow-[0_8px_32px_rgb(9,125,221,0.4)] hover:bg-[#0a8ef0] hover:-translate-y-1 transition-all duration-300"
               >
-                List Your Business
+                List For Free
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/businesses"
+                className="flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 px-8 py-4 text-[11px] font-black uppercase tracking-[0.18em] text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300 backdrop-blur-sm"
+              >
+                Find a Pro
               </Link>
             </div>
           </div>
         </div>
 
         {/* ── Main Footer Grid ── */}
-        <div className="py-14 grid gap-10 md:grid-cols-4">
-          {/* Brand Column */}
-          <div className="md:col-span-1">
-            <Link to="/" className="flex items-center group mb-5 w-fit">
-              <img src={logoImg} alt="MyLocalPro" className="h-10 w-auto object-contain brightness-110" />
+        <div className="grid gap-12 md:gap-8 lg:grid-cols-12 pb-16">
+          {/* Brand Column (Span 4) */}
+          <div className="lg:col-span-4 lg:pr-8">
+            <Link to="/" className="inline-block mb-6">
+              <img src={logoImg} alt="MyLocalPro" className="h-12 w-auto object-contain brightness-110 drop-shadow-lg" />
             </Link>
-            <p className="text-sm text-[#E4EAF1]/45 leading-relaxed max-w-xs">
-              The simple way to find trusted local trades and services across Australia.
+            <p className="text-sm text-[#E4EAF1]/50 leading-relaxed mb-8">
+              MyLocalPro is Tasmania's trusted directory connecting local residents with verified professionals. No middlemen, no hidden fees.
             </p>
-          </div>
-
-          {/* Explore Links */}
-          <div>
-            <h4 className="text-[10px] font-black uppercase tracking-[0.22em] text-[#E4EAF1]/35 mb-5">
-              Explore
-            </h4>
-            <ul className="space-y-3">
-              {[
-                { to: "/", label: "Home" },
-                { to: "/businesses", label: "Find a Pro" },
-                { to: "/categories", label: "Categories" },
-                { to: "/list-business", label: "List Your Business" },
-              ].map((link) => (
-                <li key={link.to}>
-                  <Link
-                    to={link.to}
-                    className="text-sm text-[#E4EAF1]/55 hover:text-white transition-colors duration-200 flex items-center gap-1.5 group"
-                  >
-                    <span className="h-[1px] w-3 bg-[#097DDD]/0 group-hover:bg-[#097DDD]/80 group-hover:w-4 transition-all duration-300" />
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="text-[10px] font-black uppercase tracking-[0.22em] text-[#E4EAF1]/35 mb-5">
-              Contact
-            </h4>
-            <ul className="space-y-3">
-              <li className="flex items-center gap-2.5 text-sm text-[#E4EAF1]/55">
-                <div className="h-7 w-7 rounded-lg bg-[#097DDD]/12 flex items-center justify-center shrink-0">
-                  <Mail className="h-3.5 w-3.5 text-[#097DDD]" />
-                </div>
-                hello@mylocalpro.com.au
-              </li>
-              <li className="flex items-center gap-2.5 text-sm text-[#E4EAF1]/55">
-                <div className="h-7 w-7 rounded-lg bg-[#097DDD]/12 flex items-center justify-center shrink-0">
-                  <Phone className="h-3.5 w-3.5 text-[#097DDD]" />
-                </div>
-                1300 555 010
-              </li>
-              <li className="flex items-center gap-2.5 text-sm text-[#E4EAF1]/55">
-                <div className="h-7 w-7 rounded-lg bg-[#097DDD]/12 flex items-center justify-center shrink-0">
-                  <MapPin className="h-3.5 w-3.5 text-[#097DDD]" />
-                </div>
-                Hobart, TAS, Australia
-              </li>
-            </ul>
-          </div>
-
-          {/* Social */}
-          <div>
-            <h4 className="text-[10px] font-black uppercase tracking-[0.22em] text-[#E4EAF1]/35 mb-5">
-              Follow Us
-            </h4>
-            <div className="flex gap-3 mb-6">
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="h-10 w-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#E4EAF1]/50 hover:bg-[#097DDD]/15 hover:border-[#097DDD]/40 hover:text-[#097DDD] transition-all duration-300"
-              >
-                <Facebook className="h-4 w-4" />
-              </a>
-              <a
-                href="#"
-                aria-label="Instagram"
-                className="h-10 w-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#E4EAF1]/50 hover:bg-[#097DDD]/15 hover:border-[#097DDD]/40 hover:text-[#097DDD] transition-all duration-300"
-              >
-                <Instagram className="h-4 w-4" />
-              </a>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2">
+                <ShieldCheck className="h-4 w-4 text-[#097DDD]" />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-white">Verified Pros</span>
+              </div>
+              <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2">
+                <Star className="h-4 w-4 text-amber-400" />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-white">Real Reviews</span>
+              </div>
             </div>
-            <div className="rounded-xl bg-[#097DDD]/10 border border-[#097DDD]/20 p-4">
-              <p className="text-[11px] font-bold text-[#E4EAF1]/60 mb-1 uppercase tracking-widest">Free for 2026</p>
-              <p className="text-xs text-[#E4EAF1]/40 leading-relaxed">
-                List your business free through 2026 — no credit card required.
-              </p>
+          </div>
+
+          {/* Links Grid (Span 8) */}
+          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-8">
+            {/* Regions */}
+            <div>
+              <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-white mb-6">Regions</h4>
+              <ul className="space-y-4">
+                {LOCATIONS.map((loc) => (
+                  <li key={loc}>
+                    <Link
+                      to="/businesses"
+                      search={{ location: loc }}
+                      className="text-sm text-[#E4EAF1]/60 hover:text-[#097DDD] transition-colors duration-200"
+                    >
+                      {loc}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-white mb-6">Company</h4>
+              <ul className="space-y-4">
+                {[
+                  { to: "/", label: "Home" },
+                  { to: "/categories", label: "All Categories" },
+                  { to: "/list-business", label: "For Businesses" },
+                  { to: "/terms", label: "Terms of Service" },
+                  { to: "/privacy-policy", label: "Privacy Policy" },
+                ].map((link) => (
+                  <li key={link.to}>
+                    <Link
+                      to={link.to}
+                      className="text-sm text-[#E4EAF1]/60 hover:text-white transition-colors duration-200"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact & Social */}
+            <div className="col-span-2 md:col-span-1">
+              <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-white mb-6">Get in Touch</h4>
+              <ul className="space-y-4 mb-8">
+                <li>
+                  <a href="mailto:hello@mylocalpro.com.au" className="flex items-center gap-3 text-sm text-[#E4EAF1]/60 hover:text-white transition-colors group">
+                    <div className="h-8 w-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#097DDD]/20 transition-colors">
+                      <Mail className="h-3.5 w-3.5" />
+                    </div>
+                    hello@mylocalpro.com.au
+                  </a>
+                </li>
+                <li className="flex items-center gap-3 text-sm text-[#E4EAF1]/60">
+                  <div className="h-8 w-8 rounded-full bg-white/5 flex items-center justify-center">
+                    <MapPin className="h-3.5 w-3.5" />
+                  </div>
+                  Tasmania, Australia
+                </li>
+              </ul>
+              <div className="flex gap-3">
+                <a
+                  href="#"
+                  aria-label="Facebook"
+                  className="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center text-[#E4EAF1]/60 hover:bg-[#097DDD] hover:text-white transition-all duration-300 hover:-translate-y-1"
+                >
+                  <Facebook className="h-4 w-4" />
+                </a>
+                <a
+                  href="#"
+                  aria-label="Instagram"
+                  className="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center text-[#E4EAF1]/60 hover:bg-[#097DDD] hover:text-white transition-all duration-300 hover:-translate-y-1"
+                >
+                  <Instagram className="h-4 w-4" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
         {/* ── Bottom Bar ── */}
-        <div className="border-t border-white/8 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] text-[#E4EAF1]/30">
-          <p>© {new Date().getFullYear()} MyLocalPro Australia. All rights reserved.</p>
-          <p>Proudly Tasmanian owned and operated.</p>
+        <div className="border-t border-white/10 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-[11px] font-medium tracking-wide text-[#E4EAF1]/40">
+            © {new Date().getFullYear()} MyLocalPro Australia. All rights reserved.
+          </p>
+          <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[#E4EAF1]/30">
+            <MapPin className="h-3 w-3" />
+            Proudly Tasmanian
+          </div>
         </div>
       </div>
     </footer>

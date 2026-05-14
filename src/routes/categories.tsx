@@ -50,11 +50,6 @@ function CategoriesPage() {
           </motion.p>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 60" fill="none" className="w-full">
-            <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="white" />
-          </svg>
-        </div>
       </section>
 
       {/* ── Grid ── */}
