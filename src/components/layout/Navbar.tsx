@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { MapPin, Menu, X, ChevronDown, Home2, Briefcase, Grid, PlusCircle, PhoneCall } from "lucide-react";
+import { MapPin, Menu, X, ChevronDown, Home, Briefcase, Grid, PlusCircle, PhoneCall } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   Dialog,
@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { MapPin as LucideMapPin } from "lucide-react";
+import logoImg from "@/assets/WhatsApp Image 2026-05-14 at 11.37.20 AM (1).jpeg";
 
 const links = [
   { to: "/", label: "Home" },
@@ -58,33 +58,19 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${scrolled
           ? "bg-[#0A1830]/96 backdrop-blur-xl shadow-[0_4px_32px_rgb(0,0,0,0.3)] border-b border-white/8"
           : isHomePage
-          ? "bg-transparent"
-          : "bg-[#0A1830]/95 backdrop-blur-md border-b border-white/10"
-      }`}
+            ? "bg-transparent"
+            : "bg-[#0A1830]/95 backdrop-blur-md border-b border-white/10"
+        }`}
     >
       <div className="container-app">
         <div className="flex items-center justify-between h-[72px] gap-6">
 
           {/* ── Logo ── */}
-          <Link to="/" className="flex items-center gap-3 group shrink-0">
-            <div className="relative h-9 w-9 flex items-center justify-center">
-              <div className="absolute inset-0 bg-[#097DDD] rounded-xl rotate-12 group-hover:rotate-6 transition-transform duration-300" />
-              <div className="absolute inset-0 bg-[#0A1830] rounded-xl border-2 border-[#097DDD]/60 flex items-center justify-center">
-                <LucideMapPin className="h-4 w-4 text-[#097DDD] fill-[#097DDD]/20" />
-              </div>
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="text-white font-black text-[15px] tracking-tight whitespace-nowrap">
-                My<span className="text-[#097DDD]">Local</span>Pro
-              </span>
-              <span className="text-white/40 text-[9px] tracking-[0.18em] uppercase font-medium">
-                Local Services Made Easy
-              </span>
-            </div>
+          <Link to="/" className="flex items-center group shrink-0">
+            <img src={logoImg} alt="MyLocalPro" className="h-10 md:h-12 w-auto object-contain brightness-110" />
           </Link>
 
           {/* ── Location Picker ── */}

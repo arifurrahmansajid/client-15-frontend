@@ -3,6 +3,7 @@ import { useState } from "react";
 import { User, HardHat, ArrowLeft, ChevronRight, Mail, Lock, Phone, Upload, Eye, EyeOff, MapPin, CheckCircle2 } from "lucide-react";
 import heroImg from "@/assets/hero-tradie.jpg";
 import { motion, AnimatePresence } from "framer-motion";
+import logoImg from "@/assets/WhatsApp Image 2026-05-14 at 11.37.20 AM (1).jpeg";
 
 export const Route = createFileRoute("/register")({
   component: RegisterPage,
@@ -45,28 +46,23 @@ function RegisterPage() {
           >
             {/* Logo */}
             <Link to="/" className="inline-flex items-center gap-3 mb-6 group mx-auto">
-              <div className="relative h-10 w-10">
-                <div className="absolute inset-0 bg-[#097DDD] rounded-xl rotate-12 group-hover:rotate-6 transition-transform duration-300" />
-                <div className="absolute inset-0 bg-[#0A1830] border-2 border-[#097DDD]/60 rounded-xl flex items-center justify-center">
-                  <MapPin className="h-4.5 w-4.5 text-[#097DDD]" />
-                </div>
-              </div>
-              <div className="flex flex-col leading-none text-left">
-                <span className="text-[#0A1830] font-black text-[17px] tracking-tight">
-                  My<span className="text-[#097DDD]">Local</span>Pro
-                </span>
-                <span className="text-[#5a7089] text-[9px] tracking-[0.18em] uppercase font-semibold">
-                  Local Services Made Easy
-                </span>
-              </div>
+              <img src={logoImg} alt="MyLocalPro" className="h-12 w-auto object-contain" />
             </Link>
 
-            <h1 className="text-3xl font-black text-[#0A1830] tracking-tight leading-tight mb-2">
-              Join the Network
-            </h1>
-            <p className="text-[#5a7089] text-[9px] font-black uppercase tracking-[0.2em]">
-              {step === "selection" ? "Choose your account type" : "Complete your profile details"}
-            </p>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-3xl font-black text-[#0A1830] tracking-tight leading-tight mb-2"
+            >
+              {role === "tradie" ? "Grow Your Business" : "Join the Network"}
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-[#5a7089] text-[9px] font-black uppercase tracking-[0.2em]"
+            >
+              {step === "selection" ? "Choose your account type" : role === "tradie" ? "Connect with Tasmanian Customers" : "Complete your profile details"}
+            </motion.p>
           </motion.div>
 
           <AnimatePresence mode="wait">
@@ -81,15 +77,13 @@ function RegisterPage() {
                 <div className="grid grid-cols-2 gap-4 md:gap-6 w-full">
                   <button
                     onClick={() => setRole("user")}
-                    className={`group relative flex flex-col items-center justify-center p-6 md:p-8 rounded-[2rem] border-2 transition-all duration-400 ${
-                      role === "user"
-                      ? "bg-[#0A1830] border-[#097DDD] text-white shadow-[0_12px_40px_rgb(10,24,48,0.25)] scale-[1.02]"
-                      : "bg-white border-[#E4EAF1] text-[#0A1830] hover:border-[#097DDD]/30 hover:shadow-[0_4px_24px_rgb(10,24,48,0.08)]"
-                    }`}
+                    className={`group relative flex flex-col items-center justify-center p-6 md:p-8 rounded-[2rem] border-2 transition-all duration-400 ${role === "user"
+                        ? "bg-[#0A1830] border-[#097DDD] text-white shadow-[0_12px_40px_rgb(10,24,48,0.25)] scale-[1.02]"
+                        : "bg-white border-[#E4EAF1] text-[#0A1830] hover:border-[#097DDD]/30 hover:shadow-[0_4px_24px_rgb(10,24,48,0.08)]"
+                      }`}
                   >
-                    <div className={`h-14 w-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-400 ${
-                      role === "user" ? "bg-[#097DDD]" : "bg-[#E4EAF1]"
-                    }`}>
+                    <div className={`h-14 w-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-400 ${role === "user" ? "bg-[#097DDD]" : "bg-[#E4EAF1]"
+                      }`}>
                       <User className={`h-6 w-6 ${role === "user" ? "text-white" : "text-[#097DDD]"}`} />
                     </div>
                     <span className="text-[10px] font-black uppercase tracking-[0.2em] mb-2">As Customer</span>
@@ -101,15 +95,13 @@ function RegisterPage() {
 
                   <button
                     onClick={() => setRole("tradie")}
-                    className={`group relative flex flex-col items-center justify-center p-6 md:p-8 rounded-[2rem] border-2 transition-all duration-400 ${
-                      role === "tradie"
-                      ? "bg-[#0A1830] border-[#097DDD] text-white shadow-[0_12px_40px_rgb(10,24,48,0.25)] scale-[1.02]"
-                      : "bg-white border-[#E4EAF1] text-[#0A1830] hover:border-[#097DDD]/30 hover:shadow-[0_4px_24px_rgb(10,24,48,0.08)]"
-                    }`}
+                    className={`group relative flex flex-col items-center justify-center p-6 md:p-8 rounded-[2rem] border-2 transition-all duration-400 ${role === "tradie"
+                        ? "bg-[#0A1830] border-[#097DDD] text-white shadow-[0_12px_40px_rgb(10,24,48,0.25)] scale-[1.02]"
+                        : "bg-white border-[#E4EAF1] text-[#0A1830] hover:border-[#097DDD]/30 hover:shadow-[0_4px_24px_rgb(10,24,48,0.08)]"
+                      }`}
                   >
-                    <div className={`h-14 w-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-400 ${
-                      role === "tradie" ? "bg-[#097DDD]" : "bg-[#E4EAF1]"
-                    }`}>
+                    <div className={`h-14 w-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-400 ${role === "tradie" ? "bg-[#097DDD]" : "bg-[#E4EAF1]"
+                      }`}>
                       <HardHat className={`h-6 w-6 ${role === "tradie" ? "text-white" : "text-[#097DDD]"}`} />
                     </div>
                     <span className="text-[10px] font-black uppercase tracking-[0.2em] mb-2">As Tradie</span>
@@ -123,11 +115,10 @@ function RegisterPage() {
                 <button
                   onClick={handleContinue}
                   disabled={!role}
-                  className={`shine-btn w-full py-4.5 rounded-xl text-[11px] font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2.5 ${
-                    role
-                    ? "bg-[#097DDD] text-white shadow-[0_4px_24px_rgb(9,125,221,0.4)] hover:bg-[#0a8ef0] active:scale-[0.98]"
-                    : "bg-[#E4EAF1] text-[#5a7089]/50 cursor-not-allowed"
-                  }`}
+                  className={`shine-btn w-full py-4.5 rounded-xl text-[11px] font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2.5 ${role
+                      ? "bg-[#097DDD] text-white shadow-[0_4px_24px_rgb(9,125,221,0.4)] hover:bg-[#0a8ef0] active:scale-[0.98]"
+                      : "bg-[#E4EAF1] text-[#5a7089]/50 cursor-not-allowed"
+                    }`}
                 >
                   Continue <ChevronRight className="h-4 w-4" />
                 </button>
@@ -142,6 +133,11 @@ function RegisterPage() {
                 className="w-full space-y-6"
               >
                 <div className="rounded-3xl bg-white border border-[#cdd6e3] shadow-[0_8px_40px_rgb(10,24,48,0.10)] p-8">
+                  {role === "tradie" && (
+                    <p className="text-[11px] font-bold text-[#5a7089] mb-6 leading-relaxed">
+                      Join Tasmania’s local services platform and connect directly with customers searching for businesses like yours.
+                    </p>
+                  )}
                   <p className="text-[10px] font-bold text-[#5a7089]/60 uppercase tracking-widest mb-6">
                     Mandatory fields are marked with <span className="text-red-500">*</span>
                   </p>
@@ -251,15 +247,17 @@ function RegisterPage() {
         >
           <div className="flex items-center gap-3 mb-4">
             <div className="h-10 w-10 rounded-xl bg-[#097DDD] flex items-center justify-center">
-              <CheckCircle2 className="h-5 w-5 text-white" />
+              {role === "tradie" ? <HardHat className="h-5 w-5 text-white" /> : <CheckCircle2 className="h-5 w-5 text-white" />}
             </div>
             <div>
-              <p className="text-white text-3xl font-black tracking-tight leading-none">2,400+</p>
-              <p className="text-[#E4EAF1]/50 text-[8px] font-black uppercase tracking-widest mt-0.5">Verified Professionals</p>
+              <p className="text-white text-3xl font-black tracking-tight leading-none">{role === "tradie" ? "Join 2k+" : "2,400+"}</p>
+              <p className="text-[#E4EAF1]/50 text-[8px] font-black uppercase tracking-widest mt-0.5">{role === "tradie" ? "Tasmanian Partners" : "Verified Professionals"}</p>
             </div>
           </div>
           <p className="text-white/60 text-sm leading-relaxed font-medium">
-            Join Australia's fastest growing network of trusted local trades and services.
+            {role === "tradie"
+              ? "Connect directly with customers searching for businesses like yours. Showcase your services and receive local enquiries across Hobart, Launceston, Devonport and Burnie."
+              : "Join Australia's fastest growing network of trusted local trades and services."}
           </p>
         </motion.div>
       </div>

@@ -59,16 +59,16 @@ function BusinessesPage() {
             transition={{ delay: 0.1 }}
             className="text-3xl md:text-5xl font-black text-white leading-tight mb-3"
           >
-            Find a{" "}
-            <span className="text-[#097DDD]">Local Pro</span>
+            Find Trusted <br />
+            <span className="text-[#097DDD]">Local Services</span> Near You
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.18 }}
-            className="text-[#E4EAF1]/60 max-w-xl text-base"
+            className="text-[#E4EAF1]/60 max-w-xl text-base leading-relaxed"
           >
-            Browse {BUSINESSES.length}+ trusted Australian businesses. Filter by service or location to find the right match.
+            Looking for a local professional? MyLocalPro makes it easy to search for businesses in your area. Browse a wide range of categories and connect directly with local Tasmanian businesses ready to help.
           </motion.p>
         </div>
 

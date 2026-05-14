@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Mail, MapPin, Phone, ArrowRight } from "lucide-react";
+import logoImg from "@/assets/WhatsApp Image 2026-05-14 at 11.37.20 AM (1).jpeg";
 
 export function Footer() {
   return (
@@ -52,21 +53,8 @@ export function Footer() {
         <div className="py-14 grid gap-10 md:grid-cols-4">
           {/* Brand Column */}
           <div className="md:col-span-1">
-            <Link to="/" className="flex items-center gap-3 group mb-5 w-fit">
-              <div className="relative h-9 w-9">
-                <div className="absolute inset-0 bg-[#097DDD] rounded-xl rotate-12 group-hover:rotate-6 transition-transform duration-300" />
-                <div className="absolute inset-0 bg-[#0A1830] border-2 border-[#097DDD]/60 rounded-xl flex items-center justify-center">
-                  <MapPin className="h-4 w-4 text-[#097DDD] fill-[#097DDD]/20" />
-                </div>
-              </div>
-              <div className="flex flex-col leading-none">
-                <span className="text-white font-black text-[15px] tracking-tight">
-                  My<span className="text-[#097DDD]">Local</span>Pro
-                </span>
-                <span className="text-white/30 text-[8px] tracking-[0.18em] uppercase font-medium">
-                  Local Services Made Easy
-                </span>
-              </div>
+            <Link to="/" className="flex items-center group mb-5 w-fit">
+              <img src={logoImg} alt="MyLocalPro" className="h-10 w-auto object-contain brightness-110" />
             </Link>
             <p className="text-sm text-[#E4EAF1]/45 leading-relaxed max-w-xs">
               The simple way to find trusted local trades and services across Australia.

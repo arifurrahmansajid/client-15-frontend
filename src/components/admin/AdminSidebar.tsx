@@ -23,6 +23,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import logoImg from "@/assets/WhatsApp Image 2026-05-14 at 11.37.20 AM (1).jpeg";
 
 const items = [
   { title: "Overview", url: "/admin", icon: LayoutDashboard, exact: true },
@@ -49,18 +50,10 @@ export function AdminSidebar() {
     <Sidebar collapsible="icon" className="border-r border-[#E4EAF1] bg-[#0A1830] text-white">
       <SidebarHeader className="border-b border-white/10 p-4">
         <Link to="/admin" className="flex items-center gap-3 px-2 group">
-          <div className="relative h-9 w-9">
-            <div className="absolute inset-0 bg-[#097DDD] rounded-xl rotate-12 group-hover:rotate-6 transition-transform duration-300" />
-            <div className="absolute inset-0 bg-[#0A1830] border border-[#097DDD]/60 rounded-xl flex items-center justify-center">
-              <MapPin className="h-4 w-4 text-[#097DDD]" />
-            </div>
-          </div>
+          <img src={logoImg} alt="MyLocalPro" className={`h-8 w-auto object-contain ${collapsed ? "mx-auto" : ""}`} />
           {!collapsed && (
             <div className="flex flex-col leading-tight">
-              <span className="text-[14px] font-black tracking-tight text-white">
-                My<span className="text-[#097DDD]">Local</span>Pro
-              </span>
-              <span className="text-[9px] font-black uppercase tracking-[0.2em] text-[#097DDD]">Super Admin</span>
+              <span className="text-[12px] font-black uppercase tracking-[0.2em] text-[#097DDD]">Super Admin</span>
             </div>
           )}
         </Link>

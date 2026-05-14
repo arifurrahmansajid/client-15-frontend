@@ -2,6 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Lock, Mail, ArrowRight, ArrowLeft, ShieldCheck, MapPin } from "lucide-react";
 import heroImg from "@/assets/hero-tradie.jpg";
+import logoImg from "@/assets/WhatsApp Image 2026-05-14 at 11.37.20 AM (1).jpeg";
 import { motion } from "framer-motion";
 
 export const Route = createFileRoute("/login")({
@@ -54,21 +55,8 @@ function LoginPage() {
           className="max-w-md mx-auto w-full"
         >
           {/* Logo */}
-          <Link to="/" className="inline-flex items-center gap-3 mb-10 group">
-            <div className="relative h-10 w-10">
-              <div className="absolute inset-0 bg-[#097DDD] rounded-xl rotate-12 group-hover:rotate-6 transition-transform duration-300" />
-              <div className="absolute inset-0 bg-[#0A1830] border-2 border-[#097DDD]/60 rounded-xl flex items-center justify-center">
-                <MapPin className="h-4.5 w-4.5 text-[#097DDD]" />
-              </div>
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="text-[#0A1830] font-black text-[17px] tracking-tight">
-                My<span className="text-[#097DDD]">Local</span>Pro
-              </span>
-              <span className="text-[#5a7089] text-[9px] tracking-[0.18em] uppercase font-semibold">
-                Local Services Made Easy
-              </span>
-            </div>
+          <Link to="/" className="inline-flex items-center mb-10 group">
+            <img src={logoImg} alt="MyLocalPro" className="h-12 w-auto object-contain" />
           </Link>
 
           <h1 className="text-3xl font-black text-[#0A1830] tracking-tight mb-1">Welcome Back</h1>
