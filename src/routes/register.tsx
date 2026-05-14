@@ -28,12 +28,16 @@ function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2">
+    <div className="min-h-screen grid lg:grid-cols-2 bg-[#0A1830]">
       {/* ── Left Column: Form Panel ── */}
-      <div className="relative flex flex-col bg-white p-6 pt-24 md:p-12 md:pt-24 lg:p-16 lg:pt-20 overflow-y-auto max-h-screen scrollbar-hide">
+      <div className="relative flex flex-col bg-[#0A1830] p-6 pt-24 md:p-12 md:pt-24 lg:p-16 lg:pt-20 overflow-y-auto max-h-screen scrollbar-hide">
+        {/* Glow Effects */}
+        <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-[#097DDD]/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-[#097DDD]/5 rounded-full blur-[100px] pointer-events-none" />
+
         <button
           onClick={() => step !== "selection" ? setStep("selection") : navigate({ to: "/" })}
-          className="absolute top-6 left-6 flex items-center gap-1.5 text-[#5a7089] hover:text-[#0A1830] transition-colors text-[9px] font-black uppercase tracking-widest"
+          className="absolute top-6 left-6 flex items-center gap-1.5 text-white/50 hover:text-white transition-colors text-[9px] font-black uppercase tracking-widest z-10"
         >
           <ArrowLeft className="h-3.5 w-3.5" /> {step === "selection" ? "Back to Home" : "Back"}
         </button>
@@ -46,20 +50,20 @@ function RegisterPage() {
           >
             {/* Logo */}
             <Link to="/" className="inline-flex items-center gap-3 mb-6 group mx-auto">
-              <img src={logoImg} alt="MyLocalPro" className="h-12 w-auto object-contain" />
+              <img src={logoImg} alt="MyLocalPro" className="h-12 w-auto object-contain brightness-110" />
             </Link>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-3xl font-black text-[#0A1830] tracking-tight leading-tight mb-2"
+              className="text-3xl font-black text-white tracking-tight leading-tight mb-2"
             >
               {role === "tradie" ? "Grow Your Business" : "Join the Network"}
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-[#5a7089] text-[9px] font-black uppercase tracking-[0.2em]"
+              className="text-white/40 text-[9px] font-black uppercase tracking-[0.2em]"
             >
               {step === "selection" ? "Choose your account type" : role === "tradie" ? "Connect with Tasmanian Customers" : "Complete your profile details"}
             </motion.p>
@@ -75,37 +79,37 @@ function RegisterPage() {
                 className="w-full space-y-8"
               >
                 <div className="grid grid-cols-2 gap-4 md:gap-6 w-full">
-                  <button
-                    onClick={() => setRole("user")}
-                    className={`group relative flex flex-col items-center justify-center p-6 md:p-8 rounded-[2rem] border-2 transition-all duration-400 ${role === "user"
-                        ? "bg-[#0A1830] border-[#097DDD] text-white shadow-[0_12px_40px_rgb(10,24,48,0.25)] scale-[1.02]"
-                        : "bg-white border-[#E4EAF1] text-[#0A1830] hover:border-[#097DDD]/30 hover:shadow-[0_4px_24px_rgb(10,24,48,0.08)]"
-                      }`}
-                  >
-                    <div className={`h-14 w-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-400 ${role === "user" ? "bg-[#097DDD]" : "bg-[#E4EAF1]"
-                      }`}>
-                      <User className={`h-6 w-6 ${role === "user" ? "text-white" : "text-[#097DDD]"}`} />
-                    </div>
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] mb-2">As Customer</span>
-                    <p className={`text-[9px] text-center font-bold leading-relaxed uppercase opacity-50 ${role === "user" ? "text-white/80" : "text-[#5a7089]"}`}>
-                      Find trusted local pros for any job.
-                    </p>
-                    {role === "user" && <CheckCircle2 className="absolute top-4 right-4 h-4 w-4 text-[#097DDD]" />}
-                  </button>
+                    <button
+                      onClick={() => setRole("user")}
+                      className={`group relative flex flex-col items-center justify-center p-6 md:p-8 rounded-[2rem] border-2 transition-all duration-400 ${role === "user"
+                          ? "bg-[#0A1830] border-[#097DDD] text-white shadow-[0_12px_40px_rgb(0,0,0,0.4)] scale-[1.02]"
+                          : "bg-white/5 border-white/10 text-white hover:border-[#097DDD]/30 hover:shadow-[0_4px_24px_rgb(0,0,0,0.2)]"
+                        }`}
+                    >
+                      <div className={`h-14 w-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-400 ${role === "user" ? "bg-[#097DDD]" : "bg-white/10"
+                        }`}>
+                        <User className={`h-6 w-6 ${role === "user" ? "text-white" : "text-[#097DDD]"}`} />
+                      </div>
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em] mb-2">As Customer</span>
+                      <p className={`text-[9px] text-center font-bold leading-relaxed uppercase opacity-50 ${role === "user" ? "text-white/80" : "text-white/40"}`}>
+                        Find trusted local pros for any job.
+                      </p>
+                      {role === "user" && <CheckCircle2 className="absolute top-4 right-4 h-4 w-4 text-[#097DDD]" />}
+                    </button>
 
-                  <button
-                    onClick={() => setRole("tradie")}
-                    className={`group relative flex flex-col items-center justify-center p-6 md:p-8 rounded-[2rem] border-2 transition-all duration-400 ${role === "tradie"
-                        ? "bg-[#0A1830] border-[#097DDD] text-white shadow-[0_12px_40px_rgb(10,24,48,0.25)] scale-[1.02]"
-                        : "bg-white border-[#E4EAF1] text-[#0A1830] hover:border-[#097DDD]/30 hover:shadow-[0_4px_24px_rgb(10,24,48,0.08)]"
-                      }`}
-                  >
-                    <div className={`h-14 w-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-400 ${role === "tradie" ? "bg-[#097DDD]" : "bg-[#E4EAF1]"
+                    <button
+                      onClick={() => setRole("tradie")}
+                      className={`group relative flex flex-col items-center justify-center p-6 md:p-8 rounded-[2rem] border-2 transition-all duration-400 ${role === "tradie"
+                          ? "bg-[#0A1830] border-[#097DDD] text-white shadow-[0_12px_40px_rgb(0,0,0,0.4)] scale-[1.02]"
+                          : "bg-white/5 border-white/10 text-white hover:border-[#097DDD]/30 hover:shadow-[0_4px_24px_rgb(0,0,0,0.2)]"
+                        }`}
+                    >
+                    <div className={`h-14 w-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-400 ${role === "tradie" ? "bg-[#097DDD]" : "bg-white/10"
                       }`}>
                       <HardHat className={`h-6 w-6 ${role === "tradie" ? "text-white" : "text-[#097DDD]"}`} />
                     </div>
                     <span className="text-[10px] font-black uppercase tracking-[0.2em] mb-2">As Tradie</span>
-                    <p className={`text-[9px] text-center font-bold leading-relaxed uppercase opacity-50 ${role === "tradie" ? "text-white/80" : "text-[#5a7089]"}`}>
+                    <p className={`text-[9px] text-center font-bold leading-relaxed uppercase opacity-50 ${role === "tradie" ? "text-white/80" : "text-white/40"}`}>
                       List your business & get more work.
                     </p>
                     {role === "tradie" && <CheckCircle2 className="absolute top-4 right-4 h-4 w-4 text-[#097DDD]" />}
@@ -117,7 +121,7 @@ function RegisterPage() {
                   disabled={!role}
                   className={`shine-btn w-full py-4.5 rounded-xl text-[11px] font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2.5 ${role
                       ? "bg-[#097DDD] text-white shadow-[0_4px_24px_rgb(9,125,221,0.4)] hover:bg-[#0a8ef0] active:scale-[0.98]"
-                      : "bg-[#E4EAF1] text-[#5a7089]/50 cursor-not-allowed"
+                      : "bg-white/5 text-white/20 cursor-not-allowed border border-white/5"
                     }`}
                 >
                   Continue <ChevronRight className="h-4 w-4" />
@@ -132,14 +136,14 @@ function RegisterPage() {
                 onSubmit={handleCreateAccount}
                 className="w-full space-y-6"
               >
-                <div className="rounded-3xl bg-white border border-[#cdd6e3] shadow-[0_8px_40px_rgb(10,24,48,0.10)] p-8">
+                <div className="rounded-3xl bg-white/5 border border-white/10 shadow-[0_24px_80px_rgb(0,0,0,0.4)] p-8 backdrop-blur-xl">
                   {role === "tradie" && (
-                    <p className="text-[11px] font-bold text-[#5a7089] mb-6 leading-relaxed">
+                    <p className="text-[11px] font-bold text-white/60 mb-6 leading-relaxed">
                       Join Tasmania’s local services platform and connect directly with customers searching for businesses like yours.
                     </p>
                   )}
-                  <p className="text-[10px] font-bold text-[#5a7089]/60 uppercase tracking-widest mb-6">
-                    Mandatory fields are marked with <span className="text-red-500">*</span>
+                  <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-6">
+                    Mandatory fields are marked with <span className="text-[#097DDD]">*</span>
                   </p>
 
                   <div className="grid md:grid-cols-2 gap-5">
@@ -222,8 +226,8 @@ function RegisterPage() {
             )}
           </AnimatePresence>
 
-          <p className="mt-8 text-center text-[10px] font-black uppercase tracking-widest text-[#5a7089]/60">
-            Already have an account? <Link to="/login" className="text-[#097DDD] hover:underline">Sign In</Link>
+          <p className="mt-8 text-center text-[10px] font-black uppercase tracking-widest text-white/30">
+            Already have an account? <Link to="/login" className="text-[#097DDD] hover:text-[#0a8ef0] hover:underline">Sign In</Link>
           </p>
         </div>
       </div>
@@ -265,5 +269,5 @@ function RegisterPage() {
   );
 }
 
-const labelCls = "text-[9px] font-black uppercase tracking-[0.22em] text-[#5a7089] ml-1";
-const inputCls = "w-full bg-[#E4EAF1]/30 border border-[#cdd6e3] rounded-xl py-3.5 px-4 outline-none focus:border-[#097DDD] focus:bg-white transition-all text-[#0A1830] font-medium text-sm placeholder:text-[#5a7089]/40";
+const labelCls = "text-[9px] font-black uppercase tracking-[0.22em] text-white/40 ml-1";
+const inputCls = "w-full bg-white/5 border border-white/10 rounded-xl py-3.5 px-4 outline-none focus:border-[#097DDD] focus:ring-4 focus:ring-[#097DDD]/10 focus:bg-white/10 transition-all text-white font-medium text-sm placeholder:text-white/20";

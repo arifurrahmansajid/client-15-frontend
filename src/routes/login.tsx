@@ -38,12 +38,15 @@ function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2">
+    <div className="min-h-screen grid lg:grid-cols-2 bg-[#0A1830]">
       {/* ── Left: Form Panel ── */}
-      <div className="relative flex flex-col bg-white p-8 pt-24 md:p-12 md:pt-24 lg:p-16 lg:pt-20 justify-center">
+      <div className="relative flex flex-col bg-[#0A1830] p-8 pt-24 md:p-12 md:pt-24 lg:p-16 lg:pt-20 justify-center overflow-hidden">
+        {/* Glow Effects */}
+        <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-[#097DDD]/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-[#097DDD]/5 rounded-full blur-[100px] pointer-events-none" />
         <Link
           to="/"
-          className="absolute top-6 left-6 flex items-center gap-1.5 text-[#5a7089] hover:text-[#0A1830] transition-colors text-[9px] font-black uppercase tracking-widest"
+          className="absolute top-6 left-6 flex items-center gap-1.5 text-white/50 hover:text-white transition-colors text-[9px] font-black uppercase tracking-widest z-10"
         >
           <ArrowLeft className="h-3.5 w-3.5" /> Back to Home
         </Link>
@@ -56,13 +59,12 @@ function LoginPage() {
         >
           {/* Logo */}
           <Link to="/" className="inline-flex items-center mb-10 group">
-            <img src={logoImg} alt="MyLocalPro" className="h-12 w-auto object-contain" />
+            <img src={logoImg} alt="MyLocalPro" className="h-12 w-auto object-contain brightness-110" />
           </Link>
+          <h1 className="text-3xl font-black text-white tracking-tight mb-1">Welcome Back</h1>
+          <p className="text-white/50 text-sm mb-8">Sign in to your account to continue.</p>
 
-          <h1 className="text-3xl font-black text-[#0A1830] tracking-tight mb-1">Welcome Back</h1>
-          <p className="text-[#5a7089] text-sm mb-8">Sign in to your account to continue.</p>
-
-          <div className="rounded-3xl bg-white border border-[#cdd6e3] shadow-[0_4px_40px_rgb(10,24,48,0.10)] p-8">
+          <div className="rounded-3xl bg-white/5 border border-white/10 shadow-[0_24px_80px_rgb(0,0,0,0.4)] p-8 backdrop-blur-xl">
             {error && (
               <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-[11px] font-bold uppercase tracking-widest text-center animate-fade-in">
                 {error}
@@ -71,40 +73,40 @@ function LoginPage() {
 
             <form onSubmit={handleLogin} className="space-y-5">
               <div className="space-y-1.5">
-                <label className="text-[9px] font-black uppercase tracking-[0.22em] text-[#5a7089]">
+                <label className="text-[9px] font-black uppercase tracking-[0.22em] text-white/40 ml-1">
                   Email Address
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#097DDD]/50" />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#097DDD]" />
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="admin@mylocalpro.au"
-                    className="w-full bg-[#E4EAF1]/40 border border-[#cdd6e3] rounded-xl py-3.5 pl-11 pr-4 outline-none focus:border-[#097DDD] focus:ring-2 focus:ring-[#097DDD]/15 focus:bg-white transition-all text-[#0A1830] font-medium text-sm"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3.5 pl-11 pr-4 outline-none focus:border-[#097DDD] focus:ring-4 focus:ring-[#097DDD]/10 focus:bg-white/10 transition-all text-white font-medium text-sm placeholder:text-white/20"
                   />
                 </div>
               </div>
 
               <div className="space-y-1.5">
                 <div className="flex justify-between items-center">
-                  <label className="text-[9px] font-black uppercase tracking-[0.22em] text-[#5a7089]">
+                  <label className="text-[9px] font-black uppercase tracking-[0.22em] text-white/40 ml-1">
                     Password
                   </label>
-                  <Link to="/" className="text-[9px] font-black uppercase tracking-widest text-[#097DDD] hover:underline">
+                  <Link to="/" className="text-[9px] font-black uppercase tracking-widest text-[#097DDD] hover:text-[#0a8ef0] hover:underline">
                     Forgot?
                   </Link>
                 </div>
                 <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#097DDD]/50" />
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#097DDD]" />
                   <input
                     type="password"
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full bg-[#E4EAF1]/40 border border-[#cdd6e3] rounded-xl py-3.5 pl-11 pr-4 outline-none focus:border-[#097DDD] focus:ring-2 focus:ring-[#097DDD]/15 focus:bg-white transition-all text-[#0A1830] font-medium text-sm"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3.5 pl-11 pr-4 outline-none focus:border-[#097DDD] focus:ring-4 focus:ring-[#097DDD]/10 focus:bg-white/10 transition-all text-white font-medium text-sm placeholder:text-white/20"
                   />
                 </div>
               </div>
@@ -122,23 +124,25 @@ function LoginPage() {
               </button>
             </form>
 
-            <div className="mt-7 pt-7 border-t border-[#E4EAF1] text-center">
-              <p className="text-sm text-[#5a7089]">
+            <div className="mt-8 pt-6 border-t border-white/10 text-center">
+              <p className="text-[10px] font-black uppercase tracking-widest text-white/30">
                 Don't have an account?{" "}
-                <Link to="/register" className="font-bold text-[#097DDD] hover:underline">
+                <Link to="/register" className="text-[#097DDD] hover:text-[#0a8ef0] hover:underline">
                   Join the network
                 </Link>
               </p>
             </div>
           </div>
 
-          <div className="mt-8 flex items-center justify-center gap-6 text-[#cdd6e3]">
-            <div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-widest text-[#5a7089]/60">
-              <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" /> Secure Login
+          <div className="mt-12 flex items-center justify-center gap-6 opacity-30">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="h-3 w-3 text-white" />
+              <span className="text-[8px] font-black uppercase tracking-widest text-white">Secure Login</span>
             </div>
-            <div className="h-1 w-1 bg-[#cdd6e3] rounded-full" />
-            <div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-widest text-[#5a7089]/60">
-              <MapPin className="h-3.5 w-3.5 text-[#097DDD]" /> Verified Pro Network
+            <div className="h-3 w-[1px] bg-white/20" />
+            <div className="flex items-center gap-2">
+              <MapPin className="h-3 w-3 text-white" />
+              <span className="text-[8px] font-black uppercase tracking-widest text-white">Verified Pro Network</span>
             </div>
           </div>
         </motion.div>
